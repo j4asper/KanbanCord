@@ -1,14 +1,26 @@
 # KanbanCord
-A simple Kanban board, but on Discord
+A simple Kanban board, but on Discord.
+
+## Table of Contents
+
+<!-- TOC -->
+* [KanbanCord](#kanbancord)
+  * [Table of Contents](#table-of-contents)
+  * [To-Do](#to-do)
+  * [Setup](#setup)
+    * [Docker](#docker)
+      * [Variables](#variables)
+      * [Database](#database)
+<!-- TOC -->
 
 ## To-Do
 
-- [ ] Add item to board, `/add` will open a modal with title for the item and long description.
+- [x] Add item to board, `/add` will open a modal with title for the item and long description.
 - [ ] View item by Id `/view <id>` or `/show <id>`
-- [ ] Show board `/board`
+- [x] Show board `/board`
 - [ ] Remove item by id `/remove <id>`
-- [ ] Start task `/start <id>` moves item from backlog to in-progress
-- [ ] Complete task `/complete <id>` moves item from in-progress to completed/done
+- [x] Start task `/start <id>` moves item from backlog to in-progress
+- [x] Complete task `/complete <id>` moves item from in-progress to completed/done
 - [ ] Clear board, deletes everything on the board. Should have a confirmation button
 - [ ] Move item to specified row `/move <id> <row>` where row could be "Backlog", "In Progress" and "Completed"
 - [ ] Status of item `/status <id>` to see which row it's in
@@ -17,6 +29,7 @@ A simple Kanban board, but on Discord
 - [ ] Search for items by keyword
 - [ ] Import/Export
 - [ ] Add comments to task
+- [x] Edit task `/edit <id>` with ability to edit title and description
 
 ## Setup
 
@@ -36,3 +49,10 @@ These variables are Environment variables
 #### Database
 
 A [MongoDB](https://www.mongodb.com/) is required for this bot to run. [A Docker image is available here](https://hub.docker.com/r/mongodb/mongodb-community-server).
+
+KanbanCord will automatically create the required collections on startup, if they are missing.
+
+| Collection Name |
+|-----------------|
+| Tasks           |
+| Settings        |
