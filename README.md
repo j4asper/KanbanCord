@@ -23,7 +23,6 @@ A simple Kanban board, but on Discord. The idea came from [seansylee](https://gi
 - [x] Complete task `/complete <id>` moves item from in-progress to completed/done
 - [ ] Clear board, deletes everything on the board. Should have a confirmation button
 - [ ] Move item to specified row `/move <id> <row>` where row could be "Backlog", "In Progress" and "Completed"
-- [ ] Status of item `/status <id>` to see which row it's in
 - [ ] Assign tasks to users
 - [ ] Add priorities
 - [ ] Search for items by keyword
