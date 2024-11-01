@@ -1,5 +1,12 @@
-# KanbanCord
-A simple Kanban board, but on Discord. The idea came from [seansylee](https://github.com/seansylee) who made [kanban-board-bot](https://github.com/seansylee/kanban-board-bot) which is no longer maintained.
+<p align="center">
+  <img width="150" src=".github/images/logo.png"/>
+</p>
+
+<h1 align="center">KanbanCord</h1>
+
+<p align="center">
+  A simple Kanban board, but on Discord. The idea came from <a href="https://github.com/seansylee" target="_blank">seansylee</a> who made <a href="https://github.com/seansylee/kanban-board-bot" target="_blank">kanban-board-bot</a> which is no longer maintained.
+</p>
 
 ## Table of Contents
 
