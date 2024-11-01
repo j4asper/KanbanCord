@@ -3,6 +3,7 @@ using DSharpPlus.Commands;
 using DSharpPlus.Commands.Processors.SlashCommands;
 using DSharpPlus.Extensions;
 using DSharpPlus.Interactivity.Extensions;
+using KanbanCord.EventHandlers;
 using KanbanCord.Helpers;
 using KanbanCord.Repositories;
 using Microsoft.Extensions.DependencyInjection;
@@ -62,7 +63,8 @@ public static class ServiceCollectionExtensions
             {
                 RegisterDefaultCommandProcessors = false,
                 UseDefaultCommandErrorHandler = false
-            });
+            })
+            .ConfigureEventHandlers(eventHandlingBuilder => eventHandlingBuilder.AddEventHandlers<GuildDeletedEventHandler>());
         
         return services;
     }
