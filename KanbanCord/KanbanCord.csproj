@@ -6,6 +6,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+        <InvariantGlobalization>true</InvariantGlobalization>
         <RepositoryUrl>https://github.com/j4asper/KanbanCord</RepositoryUrl>
     </PropertyGroup>
 
