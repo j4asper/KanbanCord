@@ -56,6 +56,6 @@ public class BoardCommand
             id++;
         }
         
-        return $"```{(taskStrings.Any() ? string.Join('\n', taskStrings) : " ")}```";
+        return $"```bash\n{(taskStrings.Any() ? string.Join('\n', taskStrings) : " ")}```";
     }
 }
