@@ -16,7 +16,7 @@ A simple Kanban board, but on Discord. The idea came from [seansylee](https://gi
 ## To-Do
 
 - [x] Add item to board, `/add` will open a modal with title for the item and long description.
-- [ ] View item by Id `/view <id>` or `/show <id>`
+- [x] View item by Id `/view <id>` or `/show <id>`
 - [x] Show board `/board`
 - [x] Remove item by id `/delete <id>`
 - [x] Start task `/start <id>` moves item from backlog to in-progress
