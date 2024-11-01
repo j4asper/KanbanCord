@@ -44,7 +44,7 @@ partial class TaskCommandGroup
         var embed = new DiscordEmbedBuilder()
             .WithDefaultColor()
             .WithDescription(
-                $"The task has been started and moved to the In Progress column. View it using {commands.GetMention(["board"])}.");
+                $"The task has been started and moved to the **In Progress** column. View it using {commands.GetMention(["board"])}.");
         
         await context.RespondAsync(embed);
     }

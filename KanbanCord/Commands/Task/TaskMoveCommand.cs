@@ -44,7 +44,7 @@ partial class TaskCommandGroup
         var embed = new DiscordEmbedBuilder()
             .WithDefaultColor()
             .WithDescription(
-                $"The task has been moved from {((BoardStatus)from).ToFormattedString()} to {((BoardStatus)to).ToFormattedString()}.");
+                $"The task has been moved from **{((BoardStatus)from).ToFormattedString()}** to **{((BoardStatus)to).ToFormattedString()}**.");
         
         await context.RespondAsync(embed);
     }
