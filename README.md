@@ -1,5 +1,5 @@
 # KanbanCord
-A simple Kanban board, but on Discord.
+A simple Kanban board, but on Discord. The idea came from [seansylee](https://github.com/seansylee) who made [kanban-board-bot](https://github.com/seansylee/kanban-board-bot) which is no longer maintained.
 
 ## Table of Contents
 
