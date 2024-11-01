@@ -2,7 +2,9 @@ using DSharpPlus;
 using DSharpPlus.Commands;
 using DSharpPlus.Commands.Processors.SlashCommands;
 using DSharpPlus.Extensions;
+using DSharpPlus.Interactivity.Extensions;
 using KanbanCord.Helpers;
+using KanbanCord.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using MongoDB.Driver;
@@ -21,6 +23,9 @@ public static class ServiceCollectionExtensions
                 options.TimestampFormat = "[MMM dd yyyy - HH:mm:ss UTC] ";
             });
         });
+        
+        services.AddScoped<ITaskItemRepository, TaskItemRepository>();
+        services.AddScoped<ISettingsRepository, SettingsRepository>();
 
         return services;
     }
@@ -47,6 +52,7 @@ public static class ServiceCollectionExtensions
                 discordConfiguration.LogUnknownEvents = false;
                 discordConfiguration.AlwaysCacheMembers = false;
             })
+            .AddInteractivityExtension()
             .AddCommandsExtension((_, extension) =>
             {
                 extension.AddProcessor(new SlashCommandProcessor(new SlashCommandConfiguration()));
