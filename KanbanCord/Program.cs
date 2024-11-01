@@ -17,6 +17,9 @@ class Program
             .AddDatabase()
             .BuildServiceProvider();
         
+        // Create database collections if they are missing
+        await DatabaseSetupHelper.CreateRequiredCollectionsAsync(serviceProvider);
+        
         var discordClient = serviceProvider.GetRequiredService<DiscordClient>();
 
         DiscordActivity status = new("out for work", DiscordActivityType.Watching);
