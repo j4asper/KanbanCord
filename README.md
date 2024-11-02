@@ -11,7 +11,6 @@
 ## Table of Contents
 
 <!-- TOC -->
-* [KanbanCord](#kanbancord)
   * [Table of Contents](#table-of-contents)
   * [To-Do](#to-do)
   * [Setup](#setup)
@@ -28,7 +27,7 @@
 - [x] Remove item by id `/delete <id>`
 - [x] Start task `/start <id>` moves item from backlog to in-progress
 - [x] Complete task `/complete <id>` moves item from in-progress to completed/done
-- [ ] Clear board, deletes everything on the board. Should have a confirmation button
+- [x] Clear board, deletes everything on the board. Should have a confirmation button
 - [x] Move item to specified row `/move <id> <row>` where row could be "Backlog", "In Progress" and "Completed"
 - [ ] Assign tasks to users
 - [ ] Add priorities
