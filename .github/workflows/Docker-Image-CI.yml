@@ -19,6 +19,6 @@ jobs:
         run: docker build -f ./Dockerfile -t ${{ secrets.DOCKER_USERNAME }}/kanbancord:latest .
       - name: Push to Registry
         run: |
-          docker push ${{ secrets.REGISTRY_USERNAME }}/kanbancord:latest
-          docker tag ${{ secrets.REGISTRY_USERNAME }}/kanbancord:latest ${{ secrets.REGISTRY_USERNAME }}/kanbancord:${{ github.ref_name }}
-          docker push ${{ secrets.REGISTRY_USERNAME }}/kanbancord:${{ github.ref_name }}
+          docker push ${{ secrets.DOCKER_USERNAME }}/kanbancord:latest
+          docker tag ${{ secrets.DOCKER_USERNAME }}/kanbancord:latest ${{ secrets.DOCKER_USERNAME }}/kanbancord:${{ github.ref_name }}
+          docker push ${{ secrets.DOCKER_USERNAME }}/kanbancord:${{ github.ref_name }}
