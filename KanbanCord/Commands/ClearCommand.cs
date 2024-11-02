@@ -1,5 +1,6 @@
 using System.ComponentModel;
 using DSharpPlus.Commands;
+using DSharpPlus.Commands.ContextChecks;
 using DSharpPlus.Commands.Processors.SlashCommands;
 using DSharpPlus.Entities;
 using DSharpPlus.Interactivity.Extensions;
@@ -20,6 +21,7 @@ public class ClearCommand
     
     [Command("clear")]
     [Description("Clear the kanban board completely, this will delete all current and archived tasks.")]
+    [RequirePermissions(userPermissions: DiscordPermissions.ManageMessages, botPermissions: DiscordPermissions.None)]
     public async ValueTask ExecuteAsync(SlashCommandContext context)
     {
         var clearButton = new DiscordButtonComponent(DiscordButtonStyle.Danger, Guid.NewGuid().ToString(), "Clear");

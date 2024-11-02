@@ -2,6 +2,7 @@ using System.ComponentModel;
 using DSharpPlus;
 using DSharpPlus.Commands;
 using DSharpPlus.Commands.ArgumentModifiers;
+using DSharpPlus.Commands.ContextChecks;
 using DSharpPlus.Commands.Processors.SlashCommands;
 using DSharpPlus.Commands.Processors.SlashCommands.ArgumentModifiers;
 using DSharpPlus.Entities;
@@ -16,6 +17,7 @@ partial class TaskCommandGroup
 {
     [Command("view")]
     [Description("View a tasks details such as description, author and comments.")]
+    [RequirePermissions(userPermissions: DiscordPermissions.None, botPermissions: DiscordPermissions.None)]
     public async ValueTask TaskViewCommand(SlashCommandContext context, [SlashChoiceProvider<ColumnChoiceProvider>] int column, [Description("ID of the task to view")] [MinMaxValue(minValue: 1)] int id)
     {
         var taskItems = await _taskItemRepository.GetAllTaskItemsByGuildIdAsync(context.Guild!.Id);
