@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Login to Registry
-        run: echo ${{ secrets.REGISTRY_PASSWORD }} | docker login -u ${{ secrets.REGISTRY_USERNAME }} --password-stdin
+        run: echo ${{ secrets.REGISTRY_PASSWORD }} | docker login --username ${{ secrets.REGISTRY_USERNAME }} --password-stdin
       - name: Build Docker image
         run: docker build -f ./Dockerfile -t ${{ secrets.REGISTRY_USERNAME }}/kanbancord:latest .
       - name: Push to Registry
