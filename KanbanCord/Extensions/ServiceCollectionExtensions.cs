@@ -43,7 +43,8 @@ public static class ServiceCollectionExtensions
     
     public static ServiceCollection AddDiscordConfiguration(this ServiceCollection services)
     {
-        const DiscordIntents intents = DiscordIntents.None;
+        const DiscordIntents intents = DiscordIntents.None
+                                       | DiscordIntents.Guilds;
         
         services.AddDiscordClient(EnvironmentHelpers.GetBotToken(), intents)
             .Configure<DiscordConfiguration>(discordConfiguration =>
