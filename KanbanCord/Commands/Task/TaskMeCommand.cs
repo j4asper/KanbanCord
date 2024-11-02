@@ -5,7 +5,6 @@ using DSharpPlus.Entities;
 using KanbanCord.Extensions;
 using KanbanCord.Helpers;
 using KanbanCord.Models;
-using KanbanCord.Repositories;
 
 namespace KanbanCord.Commands.Task;
 
