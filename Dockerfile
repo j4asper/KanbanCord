@@ -1,7 +1,7 @@
 # https://hub.docker.com/r/microsoft/dotnet-sdk
 FROM mcr.microsoft.com/dotnet/sdk:8.0-alpine AS build-env
 
-WORKDIR /BumpBuddy
+WORKDIR /KanbanCord
 
 COPY ["KanbanCord/", "KanbanCord/"]
 
