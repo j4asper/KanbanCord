@@ -8,19 +8,17 @@
   A simple Kanban board, but on Discord. The idea came from <a href="https://github.com/seansylee" target="_blank">seansylee</a> who made <a href="https://github.com/seansylee/kanban-board-bot" target="_blank">kanban-board-bot</a> which is no longer maintained.
 </p>
 
-<p align="center">
-  If you don't want to self-host the bot, you can invite the official bot using this link: <a href="https://discord.com/oauth2/authorize?client_id=1301269207073165444" target="_blank">https://discord.com/oauth2/authorize?client_id=1301269207073165444</a>
-</p>
-
 [![Public Docker Image CI](https://github.com/j4asper/KanbanCord/actions/workflows/Docker-Image-CI.yml/badge.svg)](https://github.com/j4asper/KanbanCord/actions/workflows/Docker-Image-CI.yml)
+
+[![Invite Bot](https://img.shields.io/badge/Invite%20Bot-7289DA?style=for-the-badge&logo=discord&logoColor=white)](https://discord.com/oauth2/authorize?client_id=1301269207073165444)
 
 ## Table of Contents
 
 <!-- TOC -->
-  * [Table of Contents](#table-of-contents)
   * [To-Do](#to-do)
   * [Setup](#setup)
     * [Docker](#docker)
+      * [Image](#image)
       * [Variables](#variables)
       * [Database](#database)
 <!-- TOC -->
@@ -45,6 +43,10 @@
 ## Setup
 
 ### Docker
+
+#### Image
+
+Docker image for KanbanCord is available on the docker hub here: https://hub.docker.com/r/jazper/kanbancord
 
 #### Variables
 
