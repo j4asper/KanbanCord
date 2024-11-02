@@ -10,11 +10,9 @@ namespace KanbanCord.Commands.Task;
 partial class TaskCommandGroup
 {
     private readonly ITaskItemRepository _taskItemRepository;
-    private readonly ISettingsRepository _settingsRepository;
 
-    public TaskCommandGroup(ITaskItemRepository taskItemRepository, ISettingsRepository settingsRepository)
+    public TaskCommandGroup(ITaskItemRepository taskItemRepository)
     {
         _taskItemRepository = taskItemRepository;
-        _settingsRepository = settingsRepository;
     }
 }
