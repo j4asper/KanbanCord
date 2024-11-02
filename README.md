@@ -57,6 +57,7 @@ These variables are Environment variables
 | `TOKEN`                     | Your discord application token (bot token).                             | Yes      | None          |
 | `MONGODB_CONNECTION_STRING` | MongoDB Connection String eg. `mongodb://localhost:27017`.              | Yes      | None          |
 | `MONGODB_DATABASE_NAME`     | MongoDB Database Name, if you want to change it from the default value. | No       | `KanbanCord`  |
+| `SUPPORT_INVITE`            | Support discord server invite link. Not needed when self hosting.       | No       | None          |
 
 
 #### Database

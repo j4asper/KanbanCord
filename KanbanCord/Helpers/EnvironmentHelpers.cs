@@ -29,4 +29,6 @@ public static class EnvironmentHelpers
     public static string GetDatabaseConnectionString() => GetRequired<string>("MONGODB_CONNECTION_STRING");
     
     public static string GetDatabaseName() => GetOptionalOrDefault<string>("MONGODB_DATABASE_NAME") ?? "KanbanCord";
+    
+    public static string? GetSupportServerInvite() => GetOptionalOrDefault<string>("SUPPORT_INVITE");
 }

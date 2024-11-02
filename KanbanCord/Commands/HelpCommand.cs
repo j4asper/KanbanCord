@@ -51,6 +51,11 @@ public class HelpCommand
         }
 
         List<DiscordComponent> additionalComponents = [new DiscordLinkButtonComponent(BaseInviteUrl + context.Client.CurrentUser.Id, "Invite")];
+
+        var supportInvite = EnvironmentHelpers.GetSupportServerInvite();
+        
+        if (supportInvite is not null)
+            additionalComponents.Add(new DiscordLinkButtonComponent(supportInvite, "Support"));
         
         await context.SendSimplePaginatedMessage(pages, additionalComponents);
     }
