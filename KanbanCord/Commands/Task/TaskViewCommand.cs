@@ -36,6 +36,10 @@ partial class TaskCommandGroup
         }
         
         var author = await context.Client.GetUserAsync(taskItem.AuthorId);
+        
+        var assignee = taskItem.AssigneeId is not null
+            ? await context.Client.GetUserAsync(taskItem.AuthorId)
+            : null;
 
         var embed = new DiscordEmbedBuilder()
             .WithDefaultColor()
@@ -43,6 +47,7 @@ partial class TaskCommandGroup
             .AddField("Title:", taskItem.Title)
             .AddField("Description:", taskItem.Description)
             .AddField("Author:", author.Mention)
+            .AddField("Assigned To:", assignee is not null ? assignee.Mention : "None")
             .AddField("Current Column:", taskItem.Status.ToFormattedString())
             .AddField("Created At:", Formatter.Timestamp(taskItem.CreatedAt, TimestampFormat.LongDateTime))
             .AddField("Last Updated At:", Formatter.Timestamp(taskItem.LastUpdatedAt, TimestampFormat.LongDateTime));

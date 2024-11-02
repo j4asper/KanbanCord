@@ -15,7 +15,7 @@ public static class TaskItemHelper
         return columnTasks[taskId - 1];
     }
     
-    public static async Task<string> GetBoardTaskString(this IReadOnlyList<TaskItem> boardItems, DiscordClient client, BoardStatus boardStatus)
+    public static async Task<string> GetBoardTaskString(this IReadOnlyList<TaskItem> boardItems, DiscordClient client, BoardStatus boardStatus, ulong? assigneeId = null)
     {
         List<string> taskStrings = [];
         
@@ -23,9 +23,12 @@ public static class TaskItemHelper
         
         foreach (var boardItem in boardItems.Where(x => x.Status == boardStatus))
         {
-            var user = await client.GetUserAsync(boardItem.AuthorId);
+            if ((assigneeId.HasValue && boardItem.AssigneeId == assigneeId.Value) || !assigneeId.HasValue)
+            {
+                var user = await client.GetUserAsync(boardItem.AuthorId);
             
-            taskStrings.Add($"{id} - \"{boardItem.Title}\" added by: {user.Username}");
+                taskStrings.Add($"{id} - \"{boardItem.Title}\" added by: {user.Username}");
+            }
             
             id++;
         }
