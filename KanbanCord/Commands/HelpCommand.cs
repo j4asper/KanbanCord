@@ -31,7 +31,10 @@ public class HelpCommand
             (commands.GetMention(["task", "start"]), commands.GetDescription(["task", "start"])),
             (commands.GetMention(["task", "complete"]), commands.GetDescription(["task", "complete"])),
             (commands.GetMention(["task", "archive"]), commands.GetDescription(["task", "archive"])),
-            (commands.GetMention(["task", "move"]), commands.GetDescription(["task", "move"]))
+            (commands.GetMention(["task", "move"]), commands.GetDescription(["task", "move"])),
+            (commands.GetMention(["task", "assign"]), commands.GetDescription(["task", "assign"])),
+            (commands.GetMention(["task", "me"]), commands.GetDescription(["task", "me"])),
+            (commands.GetMention(["task", "user"]), commands.GetDescription(["task", "user"]))
         };
 
         var pages = new List<Page>();
