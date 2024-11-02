@@ -18,7 +18,7 @@ partial class TaskCommandGroup
     public async ValueTask TaskMoveCommand(
         SlashCommandContext context,
         [SlashChoiceProvider<ColumnChoiceProvider>] int from,
-        [Description("ID of the task to archive")] [MinMaxValue(minValue: 1)] int id,
+        [Description("ID of the task to move")] [MinMaxValue(minValue: 1)] int id,
         [SlashChoiceProvider<ColumnChoiceProvider>] int to)
     {
         var taskItems = await _taskItemRepository.GetAllTaskItemsByGuildIdAsync(context.Guild!.Id);
