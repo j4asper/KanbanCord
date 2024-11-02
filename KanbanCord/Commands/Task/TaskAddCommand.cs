@@ -37,7 +37,7 @@ partial class TaskCommandGroup
         
         var interaction = context.Client.ServiceProvider.GetRequiredService<InteractivityExtension>();
 
-        var response = await interaction.WaitForModalAsync(modal.CustomId, TimeSpan.FromMinutes(10));
+        var response = await interaction.WaitForModalAsync(modal.CustomId, TimeSpan.FromMinutes(5));
         
         if (!response.TimedOut)
         {
@@ -60,7 +60,10 @@ partial class TaskCommandGroup
                 .WithDescription(
                     $"The task has been added to the backlog. View it using {commands.GetMention(["board"])}.");
             
-            await response.Result.Interaction.CreateResponseAsync(DiscordInteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().AddEmbed(embed));
+            await response.Result.Interaction.CreateResponseAsync(
+                DiscordInteractionResponseType.ChannelMessageWithSource,
+                new DiscordInteractionResponseBuilder()
+                    .AddEmbed(embed));
         }
     }
 }
