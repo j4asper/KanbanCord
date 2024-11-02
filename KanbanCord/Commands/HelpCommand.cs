@@ -22,6 +22,7 @@ public class HelpCommand
         {
             (commands.GetMention(["board"]), commands.GetDescription(["board"])),
             (commands.GetMention(["archive"]), commands.GetDescription(["archive"])),
+            (commands.GetMention(["clear"]), commands.GetDescription(["clear"])),
             (commands.GetMention(["repository"]), commands.GetDescription(["repository"])),
             (commands.GetMention(["task", "add"]), commands.GetDescription(["task", "add"])),
             (commands.GetMention(["task", "edit"]), commands.GetDescription(["task", "edit"])),
