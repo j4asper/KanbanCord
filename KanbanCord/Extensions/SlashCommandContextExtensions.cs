@@ -22,10 +22,7 @@ public static class SlashCommandContextExtensions
         
         List<DiscordComponent> components = [backBtn, pageLabel, forwardBtn];
         
-        if (additionalComponents != null)
-            components.AddRange(additionalComponents);
-        
-        var message = await SendInitialResponseAsync(context, pageEmbeds, components);
+        var message = await SendInitialResponseAsync(context, pageEmbeds, components, additionalComponents);
         
         var timedOut = false;
         
@@ -70,11 +67,14 @@ public static class SlashCommandContextExtensions
         }
     }
 
-    private static async Task<DiscordMessage> SendInitialResponseAsync(SlashCommandContext context, DiscordEmbed[] embeds, List<DiscordComponent> components)
+    private static async Task<DiscordMessage> SendInitialResponseAsync(SlashCommandContext context, DiscordEmbed[] embeds, List<DiscordComponent> components, IReadOnlyList<DiscordComponent>? additionalComponents = null)
     {
         var responseBuilder = new DiscordInteractionResponseBuilder()
             .AddEmbed(embeds[0])
             .AddComponents(components);
+        
+        if (additionalComponents != null)
+            responseBuilder.AddComponents(additionalComponents);
         
         await context.Interaction.CreateResponseAsync(DiscordInteractionResponseType.ChannelMessageWithSource, responseBuilder);
         
