@@ -1,13 +1,11 @@
 using System.ComponentModel;
 using DSharpPlus.Commands;
-using DSharpPlus.Commands.ArgumentModifiers;
 using DSharpPlus.Commands.Processors.SlashCommands;
 using DSharpPlus.Commands.Processors.SlashCommands.ArgumentModifiers;
 using DSharpPlus.Entities;
 using KanbanCord.Extensions;
-using KanbanCord.Helpers;
-using KanbanCord.Models;
 using KanbanCord.Providers;
+using MongoDB.Bson;
 
 namespace KanbanCord.Commands.Task;
 
@@ -17,20 +15,17 @@ partial class TaskCommandGroup
     [Description("Assign a task to a user.")]
     public async ValueTask TaskAssignCommand(
         SlashCommandContext context,
-        [SlashChoiceProvider<ColumnChoiceProvider>] int from,
-        [Description("ID of the task")] [MinMaxValue(minValue: 1)] int id,
+        [SlashAutoCompleteProvider<AllTaskItemsAutoCompleteProvider>] string task,
         [Description("The user to assign this task to")] DiscordUser assignee)
     {
-        var taskItems = await _taskItemRepository.GetAllTaskItemsByGuildIdAsync(context.Guild!.Id);
-        
-        var taskItem = taskItems.GetTaskItemByIdOrDefault((BoardStatus)from, id);
+        var taskItem = await _taskItemRepository.GetTaskItemByObjectIdOrDefaultAsync(new ObjectId(task));
         
         if (taskItem is null)
         {
             var notFoundEmbed = new DiscordEmbedBuilder()
                 .WithDefaultColor()
                 .WithDescription(
-                    $"A task with the given ID `{id}` was not found.");
+                    "The selected task was not found, please try again.");
             
             await context.RespondAsync(notFoundEmbed);
             return;

@@ -1,13 +1,12 @@
 using System.ComponentModel;
 using DSharpPlus.Commands;
-using DSharpPlus.Commands.ArgumentModifiers;
 using DSharpPlus.Commands.Processors.SlashCommands;
 using DSharpPlus.Commands.Processors.SlashCommands.ArgumentModifiers;
 using DSharpPlus.Entities;
 using KanbanCord.Extensions;
-using KanbanCord.Helpers;
 using KanbanCord.Models;
 using KanbanCord.Providers;
+using MongoDB.Bson;
 
 namespace KanbanCord.Commands.Task;
 
@@ -17,25 +16,24 @@ partial class TaskCommandGroup
     [Description("Move a task from one column to another.")]
     public async ValueTask TaskMoveCommand(
         SlashCommandContext context,
-        [SlashChoiceProvider<ColumnChoiceProvider>] int from,
-        [Description("ID of the task to move")] [MinMaxValue(minValue: 1)] int id,
+        [SlashAutoCompleteProvider<AllTaskItemsAutoCompleteProvider>] string task,
         [SlashChoiceProvider<ColumnChoiceProvider>] int to)
     {
-        var taskItems = await _taskItemRepository.GetAllTaskItemsByGuildIdAsync(context.Guild!.Id);
-        
-        var taskItem = taskItems.GetTaskItemByIdOrDefault((BoardStatus)from, id);
+        var taskItem = await _taskItemRepository.GetTaskItemByObjectIdOrDefaultAsync(new ObjectId(task));
         
         if (taskItem is null)
         {
             var notFoundEmbed = new DiscordEmbedBuilder()
                 .WithDefaultColor()
                 .WithDescription(
-                    $"A task with the given ID `{id}` was not found.");
+                    "The selected task was not found, please try again.");
             
             await context.RespondAsync(notFoundEmbed);
             return;
         }
-
+        
+        var fromColumn = taskItem.Status;
+        
         taskItem.Status = (BoardStatus)to;
         taskItem.LastUpdatedAt = DateTime.UtcNow;
         
@@ -44,7 +42,7 @@ partial class TaskCommandGroup
         var embed = new DiscordEmbedBuilder()
             .WithDefaultColor()
             .WithDescription(
-                $"The task \"{taskItem.Title}\" has been moved from **{((BoardStatus)from).ToFormattedString()}** to **{((BoardStatus)to).ToFormattedString()}**.");
+                $"The task \"{taskItem.Title}\" has been moved from **{fromColumn.ToFormattedString()}** to **{((BoardStatus)to).ToFormattedString()}**.");
         
         await context.RespondAsync(embed);
     }

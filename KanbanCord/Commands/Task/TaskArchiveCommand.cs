@@ -8,6 +8,7 @@ using KanbanCord.Extensions;
 using KanbanCord.Helpers;
 using KanbanCord.Models;
 using KanbanCord.Providers;
+using MongoDB.Bson;
 
 namespace KanbanCord.Commands.Task;
 
@@ -15,23 +16,23 @@ partial class TaskCommandGroup
 {
     [Command("archive")]
     [Description("Archive a task and have it moved to the list of archived items.")]
-    public async ValueTask TaskArchiveCommand(SlashCommandContext context, [SlashChoiceProvider<ColumnChoiceProvider>] int column, [Description("ID of the task to archive")] [MinMaxValue(minValue: 1)] int id)
+    public async ValueTask TaskArchiveCommand(SlashCommandContext context, [SlashAutoCompleteProvider<AllTaskItemsAutoCompleteProvider>] string task)
     {
-        var taskItems = await _taskItemRepository.GetAllTaskItemsByGuildIdAsync(context.Guild!.Id);
-        
-        var taskItem = taskItems.GetTaskItemByIdOrDefault((BoardStatus)column, id);
+        var taskItem = await _taskItemRepository.GetTaskItemByObjectIdOrDefaultAsync(new ObjectId(task));
         
         if (taskItem is null)
         {
             var notFoundEmbed = new DiscordEmbedBuilder()
                 .WithDefaultColor()
                 .WithDescription(
-                    $"A task with the given ID `{id}` was not found.");
+                    "The selected task was not found, please try again.");
             
             await context.RespondAsync(notFoundEmbed);
             return;
         }
-
+        
+        var fromColumn = taskItem.Status;
+        
         taskItem.Status = BoardStatus.Archived;
         taskItem.LastUpdatedAt = DateTime.UtcNow;
         
@@ -42,7 +43,7 @@ partial class TaskCommandGroup
         var embed = new DiscordEmbedBuilder()
             .WithDefaultColor()
             .WithDescription(
-                $"The task \"{taskItem.Title}\" has been moved to the archive. View it using {commands.GetMention(["archive"])}.");
+                $"The task \"{taskItem.Title}\" has been moved from **{fromColumn.ToFormattedString()}** to **{BoardStatus.Archived.ToFormattedString()}**. View it using {commands.GetMention(["archive"])}.");
         
         await context.RespondAsync(embed);
     }

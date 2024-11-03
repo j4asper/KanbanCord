@@ -1,14 +1,12 @@
 using System.ComponentModel;
 using DSharpPlus.Commands;
-using DSharpPlus.Commands.ArgumentModifiers;
 using DSharpPlus.Commands.Processors.SlashCommands;
 using DSharpPlus.Commands.Processors.SlashCommands.ArgumentModifiers;
 using DSharpPlus.Entities;
 using DSharpPlus.Interactivity.Extensions;
 using KanbanCord.Extensions;
-using KanbanCord.Helpers;
-using KanbanCord.Models;
 using KanbanCord.Providers;
+using MongoDB.Bson;
 
 namespace KanbanCord.Commands.Task;
 
@@ -16,18 +14,16 @@ partial class TaskCommandGroup
 {
     [Command("delete")]
     [Description("Delete a task completely, this will skip the archive and never be accessible again.")]
-    public async ValueTask TaskDeleteCommand(SlashCommandContext context, [SlashChoiceProvider<ColumnChoiceProvider>] int column, [Description("ID of the task to delete")] [MinMaxValue(minValue: 1)] int id)
+    public async ValueTask TaskDeleteCommand(SlashCommandContext context, [SlashAutoCompleteProvider<AllTaskItemsAutoCompleteProvider>] string task)
     {
-        var taskItems = await _taskItemRepository.GetAllTaskItemsByGuildIdAsync(context.Guild!.Id);
-        
-        var taskItem = taskItems.GetTaskItemByIdOrDefault((BoardStatus)column, id);
+        var taskItem = await _taskItemRepository.GetTaskItemByObjectIdOrDefaultAsync(new ObjectId(task));
         
         if (taskItem is null)
         {
             var notFoundEmbed = new DiscordEmbedBuilder()
                 .WithDefaultColor()
                 .WithDescription(
-                    $"A task with the given ID `{id}` was not found.");
+                    "The selected task was not found, please try again.");
             
             await context.RespondAsync(notFoundEmbed);
             return;

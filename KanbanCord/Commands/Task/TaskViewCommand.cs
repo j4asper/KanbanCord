@@ -1,15 +1,14 @@
 using System.ComponentModel;
 using DSharpPlus;
 using DSharpPlus.Commands;
-using DSharpPlus.Commands.ArgumentModifiers;
 using DSharpPlus.Commands.ContextChecks;
 using DSharpPlus.Commands.Processors.SlashCommands;
 using DSharpPlus.Commands.Processors.SlashCommands.ArgumentModifiers;
 using DSharpPlus.Entities;
 using KanbanCord.Extensions;
-using KanbanCord.Helpers;
 using KanbanCord.Models;
 using KanbanCord.Providers;
+using MongoDB.Bson;
 
 namespace KanbanCord.Commands.Task;
 
@@ -18,18 +17,16 @@ partial class TaskCommandGroup
     [Command("view")]
     [Description("View a tasks details such as description, author and comments.")]
     [RequirePermissions(userPermissions: DiscordPermissions.None, botPermissions: DiscordPermissions.None)]
-    public async ValueTask TaskViewCommand(SlashCommandContext context, [SlashChoiceProvider<ColumnChoiceProvider>] int column, [Description("ID of the task to view")] [MinMaxValue(minValue: 1)] int id)
+    public async ValueTask TaskViewCommand(SlashCommandContext context, [SlashAutoCompleteProvider<AllTaskItemsAutoCompleteProvider>] string task)
     {
-        var taskItems = await _taskItemRepository.GetAllTaskItemsByGuildIdAsync(context.Guild!.Id);
-        
-        var taskItem = taskItems.GetTaskItemByIdOrDefault((BoardStatus)column, id);
+        var taskItem = await _taskItemRepository.GetTaskItemByObjectIdOrDefaultAsync(new ObjectId(task));
         
         if (taskItem is null)
         {
             var notFoundEmbed = new DiscordEmbedBuilder()
                 .WithDefaultColor()
                 .WithDescription(
-                    $"A task with the given ID `{id}` was not found.");
+                    "The selected task was not found, please try again.");
             
             await context.RespondAsync(notFoundEmbed);
             return;

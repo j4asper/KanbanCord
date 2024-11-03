@@ -1,34 +1,30 @@
 using System.ComponentModel;
 using DSharpPlus.Commands;
-using DSharpPlus.Commands.ArgumentModifiers;
 using DSharpPlus.Commands.Processors.SlashCommands;
 using DSharpPlus.Commands.Processors.SlashCommands.ArgumentModifiers;
 using DSharpPlus.Entities;
-using DSharpPlus.Interactivity;
 using KanbanCord.Extensions;
 using KanbanCord.Helpers;
 using KanbanCord.Models;
 using KanbanCord.Providers;
-using Microsoft.Extensions.DependencyInjection;
+using MongoDB.Bson;
 
 namespace KanbanCord.Commands.Task;
 
 partial class TaskCommandGroup
 {
     [Command("start")]
-    [Description("Start a task and have it moved to the In-Progress column.")]
-    public async ValueTask TaskStartCommand(SlashCommandContext context, [Description("ID of the task to start")] [MinMaxValue(minValue: 1)] int id)
+    [Description("Start a task and have it moved from Backlog to the In-Progress column.")]
+    public async ValueTask TaskStartCommand(SlashCommandContext context, [SlashAutoCompleteProvider<BacklogTaskItemsAutoCompleteProvider>] string task)
     {
-        var taskItems = await _taskItemRepository.GetAllTaskItemsByGuildIdAsync(context.Guild!.Id);
-        
-        var taskItem = taskItems.GetTaskItemByIdOrDefault(BoardStatus.Backlog, id);
+        var taskItem = await _taskItemRepository.GetTaskItemByObjectIdOrDefaultAsync(new ObjectId(task));
         
         if (taskItem is null)
         {
             var notFoundEmbed = new DiscordEmbedBuilder()
                 .WithDefaultColor()
                 .WithDescription(
-                    $"A task with the given ID `{id}` was not found.");
+                    "The selected task was not found, please try again.");
             
             await context.RespondAsync(notFoundEmbed);
             return;
