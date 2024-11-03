@@ -14,7 +14,7 @@ partial class TaskCommandGroup
 {
     [Command("delete")]
     [Description("Delete a task completely, this will skip the archive and never be accessible again.")]
-    public async ValueTask TaskDeleteCommand(SlashCommandContext context, [SlashAutoCompleteProvider<AllTaskItemsAutoCompleteProvider>] string task)
+    public async ValueTask TaskDeleteCommand(SlashCommandContext context, [Description("Search for the task to select")] [SlashAutoCompleteProvider<AllTaskItemsAutoCompleteProvider>] string task)
     {
         var taskItem = await _taskItemRepository.GetTaskItemByObjectIdOrDefaultAsync(new ObjectId(task));
         

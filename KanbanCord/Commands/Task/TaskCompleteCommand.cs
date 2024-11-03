@@ -15,7 +15,7 @@ partial class TaskCommandGroup
 {
     [Command("complete")]
     [Description("Complete a task and have it moved from In-Progress to the Completed column.")]
-    public async ValueTask TaskCompleteCommand(SlashCommandContext context, [SlashAutoCompleteProvider<InProgressTaskItemsAutoCompleteProvider>] string task)
+    public async ValueTask TaskCompleteCommand(SlashCommandContext context, [Description("Search for the task to select")] [SlashAutoCompleteProvider<InProgressTaskItemsAutoCompleteProvider>] string task)
     {
         var taskItem = await _taskItemRepository.GetTaskItemByObjectIdOrDefaultAsync(new ObjectId(task));
         

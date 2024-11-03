@@ -16,7 +16,7 @@ partial class TaskCommandGroup
     [Description("Move a task from one column to another.")]
     public async ValueTask TaskMoveCommand(
         SlashCommandContext context,
-        [SlashAutoCompleteProvider<AllTaskItemsAutoCompleteProvider>] string task,
+        [Description("Search for the task to select")] [SlashAutoCompleteProvider<AllTaskItemsAutoCompleteProvider>] string task,
         [SlashChoiceProvider<ColumnChoiceProvider>] int to)
     {
         var taskItem = await _taskItemRepository.GetTaskItemByObjectIdOrDefaultAsync(new ObjectId(task));

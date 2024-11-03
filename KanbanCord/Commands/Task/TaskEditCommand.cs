@@ -16,7 +16,7 @@ partial class TaskCommandGroup
 {
     [Command("edit")]
     [Description("Edit a task title and or description.")]
-    public async ValueTask TaskEditCommand(SlashCommandContext context, [SlashAutoCompleteProvider<AllTaskItemsAutoCompleteProvider>] string task)
+    public async ValueTask TaskEditCommand(SlashCommandContext context, [Description("Search for the task to select")] [SlashAutoCompleteProvider<AllTaskItemsAutoCompleteProvider>] string task)
     {
         var taskItem = await _taskItemRepository.GetTaskItemByObjectIdOrDefaultAsync(new ObjectId(task));
         

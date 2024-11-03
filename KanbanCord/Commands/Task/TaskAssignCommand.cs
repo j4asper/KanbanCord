@@ -15,7 +15,7 @@ partial class TaskCommandGroup
     [Description("Assign a task to a user.")]
     public async ValueTask TaskAssignCommand(
         SlashCommandContext context,
-        [SlashAutoCompleteProvider<AllTaskItemsAutoCompleteProvider>] string task,
+        [Description("Search for the task to select")] [SlashAutoCompleteProvider<AllTaskItemsAutoCompleteProvider>] string task,
         [Description("The user to assign this task to")] DiscordUser assignee)
     {
         var taskItem = await _taskItemRepository.GetTaskItemByObjectIdOrDefaultAsync(new ObjectId(task));
