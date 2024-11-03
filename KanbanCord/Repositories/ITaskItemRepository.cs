@@ -1,10 +1,13 @@
 using KanbanCord.Models;
+using MongoDB.Bson;
 
 namespace KanbanCord.Repositories;
 
 public interface ITaskItemRepository
 {
     Task<IReadOnlyList<TaskItem>> GetAllTaskItemsByGuildIdAsync(ulong guildId);
+    
+    Task<TaskItem?> GetTaskItemByObjectIdOrDefaultAsync(ObjectId objectId);
     
     Task AddTaskItemAsync(TaskItem task);
     

@@ -1,5 +1,6 @@
 using KanbanCord.Helpers;
 using KanbanCord.Models;
+using MongoDB.Bson;
 using MongoDB.Driver;
 
 namespace KanbanCord.Repositories;
@@ -18,6 +19,13 @@ public class TaskItemRepository : ITaskItemRepository
         var tasks = await collection.Find(task => task.GuildId == guildId).ToListAsync() ?? [];
 
         return tasks;
+    }
+
+    public async Task<TaskItem?> GetTaskItemByObjectIdOrDefaultAsync(ObjectId objectId)
+    {
+        var task = await collection.Find(task => task.Id == objectId).FirstOrDefaultAsync();
+
+        return task;
     }
 
     public async Task AddTaskItemAsync(TaskItem task)
