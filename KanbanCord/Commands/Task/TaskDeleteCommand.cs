@@ -63,7 +63,7 @@ partial class TaskCommandGroup
             
                 var deletedEmbed = new DiscordEmbedBuilder()
                     .WithDefaultColor()
-                    .WithDescription("The task has been deleted.");
+                    .WithDescription($"The task \"{taskItem.Title}\" has been deleted.");
             
                 await response.Result.Interaction.CreateResponseAsync(
                     DiscordInteractionResponseType.UpdateMessage,

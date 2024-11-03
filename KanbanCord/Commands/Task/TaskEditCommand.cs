@@ -74,7 +74,7 @@ partial class TaskCommandGroup
             var embed = new DiscordEmbedBuilder()
                 .WithDefaultColor()
                 .WithDescription(
-                    $"The task has been edited. View it using {commands.GetMention(["board"])}.");
+                    $"The task \"{taskItem.Title}\" has been edited. View it using {commands.GetMention(["board"])}.");
             
             await response.Result.Interaction.CreateResponseAsync(DiscordInteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().AddEmbed(embed));
         }

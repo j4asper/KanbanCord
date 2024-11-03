@@ -44,7 +44,7 @@ partial class TaskCommandGroup
         var embed = new DiscordEmbedBuilder()
             .WithDefaultColor()
             .WithDescription(
-                $"The task has been assigned to {assignee.Mention}.");
+                $"The task \"{taskItem.Title}\" has been assigned to {assignee.Mention}.");
         
         await context.RespondAsync(embed);
     }

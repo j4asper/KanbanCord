@@ -44,7 +44,7 @@ partial class TaskCommandGroup
         var embed = new DiscordEmbedBuilder()
             .WithDefaultColor()
             .WithDescription(
-                $"The task has been completed and moved to the **Completed** column. View it using {commands.GetMention(["board"])}.");
+                $"The task \"{taskItem.Title}\" has been completed and moved to the **Completed** column. View it using {commands.GetMention(["board"])}.");
         
         await context.RespondAsync(embed);
     }

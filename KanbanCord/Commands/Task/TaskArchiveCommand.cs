@@ -42,7 +42,7 @@ partial class TaskCommandGroup
         var embed = new DiscordEmbedBuilder()
             .WithDefaultColor()
             .WithDescription(
-                $"The task has been moved to the archive. View it using {commands.GetMention(["archive"])}.");
+                $"The task \"{taskItem.Title}\" has been moved to the archive. View it using {commands.GetMention(["archive"])}.");
         
         await context.RespondAsync(embed);
     }

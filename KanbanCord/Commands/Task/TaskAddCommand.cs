@@ -58,7 +58,7 @@ partial class TaskCommandGroup
             var embed = new DiscordEmbedBuilder()
                 .WithDefaultColor()
                 .WithDescription(
-                    $"The task has been added to the backlog. View it using {commands.GetMention(["board"])}.");
+                    $"The task \"{newTask.Title}\" has been added to the backlog. View it using {commands.GetMention(["board"])}.");
             
             await response.Result.Interaction.CreateResponseAsync(
                 DiscordInteractionResponseType.ChannelMessageWithSource,
