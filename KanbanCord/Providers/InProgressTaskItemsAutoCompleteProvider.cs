@@ -23,6 +23,6 @@ public class InProgressTaskItemsAutoCompleteProvider : IAutoCompleteProvider
 
         var response = taskItems.GetAutoCompleteStrings(BoardStatus.InProgress);
         
-        return response;
+        return response.Where(x => context.UserInput == null || x.Name.Contains(context.UserInput));
     }
 }

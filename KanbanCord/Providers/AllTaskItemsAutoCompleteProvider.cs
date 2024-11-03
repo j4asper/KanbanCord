@@ -22,6 +22,6 @@ public class AllTaskItemsAutoCompleteProvider : IAutoCompleteProvider
 
         var response = taskItems.GetAutoCompleteStrings();
         
-        return response;
+        return response.Where(x => context.UserInput == null || x.Name.Contains(context.UserInput));
     }
 }
