@@ -25,5 +25,5 @@ public class TaskItem
     
     public BoardStatus Status { get; set; }
     
-    public Priority? Priority { get; set; }
+    public Priority? Priority { get; set; } = Models.Priority.Medium;
 }
