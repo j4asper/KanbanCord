@@ -16,10 +16,8 @@ partial class TaskCommandGroup
     [Description("Add a task to the backlog")]
     public async ValueTask TaskAddCommand(SlashCommandContext context)
     {
-        var modalId = Guid.NewGuid().ToString();
-        
         var modal = new DiscordInteractionResponseBuilder()
-            .WithCustomId(modalId)
+            .WithCustomId(Guid.NewGuid().ToString())
             .WithTitle("Add a new Task")
             .AddComponents(new DiscordTextInputComponent(
                 "Title:",
