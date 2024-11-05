@@ -23,6 +23,6 @@ public class BacklogTaskItemsAutoCompleteProvider : IAutoCompleteProvider
 
         var response = taskItems.GetAutoCompleteStrings(BoardStatus.Backlog);
         
-        return response.Where(x => context.UserInput == null || x.Name.Contains(context.UserInput));
+        return response.Where(x => context.UserInput == null || x.Name.ToLower().Contains(context.UserInput.ToLower()));
     }
 }
