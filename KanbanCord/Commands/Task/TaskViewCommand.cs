@@ -36,7 +36,7 @@ partial class TaskCommandGroup
         var author = await context.Client.GetUserAsync(taskItem.AuthorId);
         
         var assignee = taskItem.AssigneeId is not null
-            ? await context.Client.GetUserAsync(taskItem.AuthorId)
+            ? await context.Client.GetUserAsync(taskItem.AssigneeId.Value)
             : null;
 
         var priorityString = taskItem.Priority switch
