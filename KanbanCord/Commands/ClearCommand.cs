@@ -5,6 +5,7 @@ using DSharpPlus.Commands.Processors.SlashCommands;
 using DSharpPlus.Entities;
 using DSharpPlus.Interactivity.Extensions;
 using KanbanCord.Extensions;
+using KanbanCord.Models;
 using KanbanCord.Repositories;
 
 namespace KanbanCord.Commands;
@@ -20,7 +21,7 @@ public class ClearCommand
     
     
     [Command("clear")]
-    [Description("Clear the kanban board completely, this will delete all current and archived tasks.")]
+    [Description("Clear the kanban board completely, this will archive all current tasks.")]
     [RequirePermissions(userPermissions: DiscordPermissions.ManageMessages, botPermissions: DiscordPermissions.None)]
     public async ValueTask ExecuteAsync(SlashCommandContext context)
     {
@@ -29,7 +30,7 @@ public class ClearCommand
         var embed = new DiscordEmbedBuilder()
             .WithDefaultColor()
             .WithAuthor("Clear Board")
-            .WithDescription("Are you sure you want to clear the board? This can not be undone!");
+            .WithDescription("Are you sure you want to clear the board?");
         
         var responseMessage = new DiscordMessageBuilder()
             .AddEmbed(embed)
@@ -45,8 +46,15 @@ public class ClearCommand
         {
             case false when response.Result.Id == clearButton.CustomId && response.Result.User.Id == context.User.Id:
             {
-                await _repository.RemoveAllTaskItemsByIdAsync(context.Guild!.Id);
-            
+                var tasks = await _repository.GetAllTaskItemsByGuildIdAsync(context.Guild!.Id);
+
+                foreach (var task in tasks)
+                {
+                    task.Status = BoardStatus.Archived;
+
+                    await _repository.UpdateTaskItemAsync(task);
+                }
+                
                 var deletedEmbed = new DiscordEmbedBuilder()
                     .WithDefaultColor()
                     .WithDescription("The board has been cleared.");
