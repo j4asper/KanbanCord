@@ -25,6 +25,7 @@ public class HelpCommand
             (commands.GetMention(["clear"]), commands.GetDescription(["clear"])),
             (commands.GetMention(["reset"]), commands.GetDescription(["reset"])),
             (commands.GetMention(["repository"]), commands.GetDescription(["repository"])),
+            (commands.GetMention(["stats"]), commands.GetDescription(["stats"])),
             (commands.GetMention(["task", "add"]), commands.GetDescription(["task", "add"])),
             (commands.GetMention(["task", "edit"]), commands.GetDescription(["task", "edit"])),
             (commands.GetMention(["task", "delete"]), commands.GetDescription(["task", "delete"])),
