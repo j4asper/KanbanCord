@@ -25,7 +25,7 @@ partial class TaskCommandGroup
                 "Title:",
                 "titleField",
                 "Title of the task",
-                max_length: 30))
+                max_length: 40))
             .AddComponents(new DiscordTextInputComponent(
                 "Description:",
                 "descriptionField",
