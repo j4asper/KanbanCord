@@ -36,6 +36,7 @@ public class HelpCommand
             (commands.GetMention(["task", "assign"]), commands.GetDescription(["task", "assign"])),
             (commands.GetMention(["task", "me"]), commands.GetDescription(["task", "me"])),
             (commands.GetMention(["task", "user"]), commands.GetDescription(["task", "user"])),
+            (commands.GetMention(["task", "priority"]), commands.GetDescription(["task", "priority"])),
             (commands.GetMention(["task", "comment"]), commands.GetDescription(["task", "comment"]))
         };
 
