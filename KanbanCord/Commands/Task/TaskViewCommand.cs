@@ -39,6 +39,13 @@ partial class TaskCommandGroup
             ? await context.Client.GetUserAsync(taskItem.AuthorId)
             : null;
 
+        var priorityString = taskItem.Priority switch
+        {
+            Priority.Low => ":yellow_circle: Low",
+            Priority.High => ":red_circle: High",
+            _ => ":orange_circle: Medium"
+        };
+        
         var embed = new DiscordEmbedBuilder()
             .WithDefaultColor()
             .WithAuthor(author.Username, iconUrl: author.AvatarUrl)
@@ -47,6 +54,7 @@ partial class TaskCommandGroup
             .AddField("Author:", author.Mention)
             .AddField("Assigned To:", assignee is not null ? assignee.Mention : "None")
             .AddField("Current Column:", taskItem.Status.ToFormattedString())
+            .AddField("Priority:", priorityString)
             .AddField("Created At:", Formatter.Timestamp(taskItem.CreatedAt, TimestampFormat.LongDateTime))
             .AddField("Last Updated At:", Formatter.Timestamp(taskItem.LastUpdatedAt, TimestampFormat.LongDateTime));
         

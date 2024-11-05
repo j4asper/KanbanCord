@@ -36,7 +36,7 @@
 - [x] Clear board, deletes everything on the board. Should have a confirmation button
 - [x] Move item to specified row `/move <id> <row>` where row could be "Backlog", "In Progress" and "Completed"
 - [x] Assign tasks to users
-- [ ] Add priorities
+- [x] Add priorities
 - [ ] Search for items by keyword
 - [ ] Import/Export
 - [x] Add comments to task
