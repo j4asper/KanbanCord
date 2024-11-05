@@ -11,7 +11,7 @@ namespace KanbanCord.Commands;
 public class StatsCommand
 {
     [Command("stats")]
-    [Description("Displays the stats of the bot.")]
+    [Description("Displays some stats of the bot.")]
     public async ValueTask ExecuteAsync(SlashCommandContext context)
     {
         var botVersion = EnvironmentHelpers.GetApplicationVersion();
