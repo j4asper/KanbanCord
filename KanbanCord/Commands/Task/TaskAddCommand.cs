@@ -30,7 +30,7 @@ partial class TaskCommandGroup
                 "Description:",
                 "descriptionField",
                 "Description of the task",
-                max_length: 4000,
+                max_length: 600,
                 style: DiscordTextInputStyle.Paragraph));
         
         await context.Interaction.CreateResponseAsync(DiscordInteractionResponseType.Modal, modal);
