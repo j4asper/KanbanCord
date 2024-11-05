@@ -23,7 +23,7 @@ public class TaskItem
 
     public List<Comment> Comments { get; set; } = [];
     
-    public BoardStatus Status { get; set; }
+    public BoardStatus Status { get; set; } = BoardStatus.Backlog;
     
     public Priority? Priority { get; set; } = Models.Priority.Medium;
 }
