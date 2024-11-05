@@ -23,6 +23,7 @@ public class HelpCommand
             (commands.GetMention(["board"]), commands.GetDescription(["board"])),
             (commands.GetMention(["archive"]), commands.GetDescription(["archive"])),
             (commands.GetMention(["clear"]), commands.GetDescription(["clear"])),
+            (commands.GetMention(["reset"]), commands.GetDescription(["reset"])),
             (commands.GetMention(["repository"]), commands.GetDescription(["repository"])),
             (commands.GetMention(["task", "add"]), commands.GetDescription(["task", "add"])),
             (commands.GetMention(["task", "edit"]), commands.GetDescription(["task", "edit"])),
@@ -34,7 +35,8 @@ public class HelpCommand
             (commands.GetMention(["task", "move"]), commands.GetDescription(["task", "move"])),
             (commands.GetMention(["task", "assign"]), commands.GetDescription(["task", "assign"])),
             (commands.GetMention(["task", "me"]), commands.GetDescription(["task", "me"])),
-            (commands.GetMention(["task", "user"]), commands.GetDescription(["task", "user"]))
+            (commands.GetMention(["task", "user"]), commands.GetDescription(["task", "user"])),
+            (commands.GetMention(["task", "comment"]), commands.GetDescription(["task", "comment"]))
         };
 
         var pages = new List<Page>();
