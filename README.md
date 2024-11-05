@@ -39,7 +39,7 @@
 - [ ] Add priorities
 - [ ] Search for items by keyword
 - [ ] Import/Export
-- [ ] Add comments to task
+- [x] Add comments to task
 - [x] Edit task `/edit <id>` with ability to edit title and description
 
 ## Setup

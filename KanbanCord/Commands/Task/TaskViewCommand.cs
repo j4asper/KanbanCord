@@ -5,6 +5,7 @@ using DSharpPlus.Commands.ContextChecks;
 using DSharpPlus.Commands.Processors.SlashCommands;
 using DSharpPlus.Commands.Processors.SlashCommands.ArgumentModifiers;
 using DSharpPlus.Entities;
+using DSharpPlus.Interactivity;
 using KanbanCord.Extensions;
 using KanbanCord.Models;
 using KanbanCord.Providers;
@@ -48,6 +49,31 @@ partial class TaskCommandGroup
             .AddField("Current Column:", taskItem.Status.ToFormattedString())
             .AddField("Created At:", Formatter.Timestamp(taskItem.CreatedAt, TimestampFormat.LongDateTime))
             .AddField("Last Updated At:", Formatter.Timestamp(taskItem.LastUpdatedAt, TimestampFormat.LongDateTime));
-        await context.RespondAsync(embed);
+        
+        
+        if (!taskItem.Comments.Any())
+        {
+            await context.RespondAsync(embed);
+            return;
+        }
+
+        embed.WithFooter("View comments on the following pages");
+        
+        List<Page> pages = [new Page { Embed = embed }];
+
+        foreach (var comment in taskItem.Comments)
+        {
+            var commentor = await context.Client.GetUserAsync(comment.AuthorId);
+
+            var commentEmbed = new DiscordEmbedBuilder()
+                .WithDefaultColor()
+                .WithAuthor(commentor.Username, iconUrl: commentor.AvatarUrl)
+                .WithDescription(comment.Text)
+                .AddField("Comment Added:", Formatter.Timestamp(comment.CreatedAt, TimestampFormat.LongDateTime));
+            
+            pages.Add(new Page { Embed = commentEmbed });
+        }
+
+        await context.SendSimplePaginatedMessage(pages);
     }
 }
