@@ -6,5 +6,5 @@ public class Comment
     
     public required string Text { get; set; }
     
-    public required DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 }
