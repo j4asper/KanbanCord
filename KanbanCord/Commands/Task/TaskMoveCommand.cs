@@ -32,6 +32,17 @@ partial class TaskCommandGroup
             return;
         }
         
+        if (taskItem.Status == (BoardStatus)to)
+        {
+            var notFoundEmbed = new DiscordEmbedBuilder()
+                .WithDefaultColor()
+                .WithDescription(
+                    $"The selected task is already in column **{((BoardStatus)to).ToFormattedString()}**.");
+            
+            await context.RespondAsync(notFoundEmbed);
+            return;
+        }
+        
         var fromColumn = taskItem.Status;
         
         taskItem.Status = (BoardStatus)to;
