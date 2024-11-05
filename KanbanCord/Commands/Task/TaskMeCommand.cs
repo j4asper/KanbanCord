@@ -1,10 +1,6 @@
 using System.ComponentModel;
 using DSharpPlus.Commands;
 using DSharpPlus.Commands.Processors.SlashCommands;
-using DSharpPlus.Entities;
-using KanbanCord.Extensions;
-using KanbanCord.Helpers;
-using KanbanCord.Models;
 
 namespace KanbanCord.Commands.Task;
 
