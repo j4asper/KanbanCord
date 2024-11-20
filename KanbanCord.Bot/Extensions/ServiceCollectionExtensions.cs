@@ -64,8 +64,7 @@ public static class ServiceCollectionExtensions
             new CommandsConfiguration
             {
                 RegisterDefaultCommandProcessors = false,
-                DebugGuildId = 663447908334436370,
-                //UseDefaultCommandErrorHandler = false
+                UseDefaultCommandErrorHandler = false
             })
             .ConfigureEventHandlers(eventHandlingBuilder => eventHandlingBuilder.AddEventHandlers<GuildDeletedEventHandler>());
         
