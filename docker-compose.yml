@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  kanbancord:
+    image: jazper/kanbancord:latest
+    container_name: kanbancord
+    environment:
+      - TOKEN=y0ur-v3ry-s3cr3t-d1sc0rd.b0t.t0k3n  # Ensure you set your discord bot token
+      - MONGODB_CONNECTION_STRING=mongodb://mongo:27017
+      - MONGODB_DATABASE_NAME=KanbanCord  # You can change this to your preferred database name, remember to also change the mongodb environment variable MONGO_INITDB_DATABASE
+    depends_on:
+      - mongo
+    restart: always
+    networks:
+      - kanbancord_network
+
+  mongo:
+    image: mongo:latest
+    container_name: mongodb
+    environment:
+      - MONGO_INITDB_DATABASE=KanbanCord  # Default DB name
+    volumes:
+      - mongo_data:/data/db
+    networks:
+      - kanbancord_network
+    restart: always
+
+networks:
+  kanbancord_network:
+    driver: bridge
+
+volumes:
+  mongo_data:
+    driver: local
