@@ -26,7 +26,8 @@ public static class DatabaseSetupHelper
             createdCollections.Add(collectionName);
         }
         
-        logger.LogInformation($"Created missing mongodb collection(s): {string.Join(", ", createdCollections)}");
+        if (createdCollections.Count != 0)
+            logger.LogInformation($"Created missing mongodb collection(s): {string.Join(", ", createdCollections)}");
     }
 }
 
