@@ -26,4 +26,6 @@ jobs:
           dotnet-version: 8.0.x
 
       - name: Run Tests
-        run: dotnet test build/KanbanCord.Tests.dll
+        run: |
+          cd build
+          dotnet test build/KanbanCord.Tests.dll
