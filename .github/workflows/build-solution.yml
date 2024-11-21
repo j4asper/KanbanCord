@@ -5,8 +5,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  build_project:
-    name: Build Project
+  build_solution:
+    name: Build Solution
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code

@@ -5,14 +5,14 @@ on:
   workflow_dispatch:
 
 jobs:
-  build_project:
-    name: Build Project
-    uses: j4asper/KanbanCord/.github/workflows/build-project.yml@11-fix-pipelines
+  build_solution:
+    name: Build Solution
+    uses: j4asper/KanbanCord/.github/workflows/build-solution.yml@main
   
   unit_tests:
     name: Unit Tests
     runs-on: ubuntu-latest
-    needs: build_project
+    needs: build_solution
     steps:
       - name: Download build output
         uses: actions/download-artifact@v3
