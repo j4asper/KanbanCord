@@ -4,10 +4,7 @@ on:
   pull_request:
     branches:
       - main
-  workflow_run:
-    workflows: ["Publish KanbanCord Docker Image"]
-    types:
-      - requested
+  workflow_call:
 
 jobs:
   build_project:
