@@ -14,14 +14,11 @@ jobs:
     runs-on: ubuntu-latest
     needs: build_project
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
       - name: Download build output
         uses: actions/download-artifact@v3
         with:
           name: build-output
-          path: ./publish
+          path: ./build
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
@@ -29,4 +26,4 @@ jobs:
           dotnet-version: 8.0.x
 
       - name: Run Tests
-        run: ./publish/KanbanCord.Tests/kanbancord.tests --no-build
+        run: dotnet test ./build/KanbanCord.Tests.dll

@@ -23,16 +23,10 @@ jobs:
 
       - name: Build .NET solution
         run: |
-          dotnet build --no-restore --configuration Release
-
-      - name: Publish each project to a single file
-        run: |
-          dotnet publish ./KanbanCord.Bot/KanbanCord.Bot.csproj --configuration Release --runtime linux-x64 --output ./publish/KanbanCord.Bot --single-file
-          dotnet publish ./KanbanCord.Core/KanbanCord.Core.csproj --configuration Release --runtime linux-x64 --output ./publish/KanbanCord.Core --single-file
-          dotnet publish ./KanbanCord.Tests/KanbanCord.Tests.csproj --configuration Release --runtime linux-x64 --output ./publish/KanbanCord.Tests --single-file
+          dotnet build --no-restore --configuration Release --output ./build
 
       - name: Upload build output
         uses: actions/upload-artifact@v3
         with:
           name: build-output
-          path: ./publish/
+          path: ./build/
