@@ -28,4 +28,5 @@ jobs:
       - name: Run Tests
         run: |
           cd build
+          ls
           dotnet test KanbanCord.Tests.dll
