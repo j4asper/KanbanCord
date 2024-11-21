@@ -31,5 +31,5 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore
 
-      - name: Test
-        run: dotnet test --no-build --verbosity normal --output ./build-output
+      - name: Run Tests
+        run: dotnet test ./build-output/KanbanCord.Tests/bin/Release/net8.0/KanbanCord.Tests.dll --no-build --verbosity normal
