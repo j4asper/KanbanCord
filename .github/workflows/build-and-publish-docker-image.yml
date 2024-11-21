@@ -26,8 +26,8 @@ jobs:
       - name: Build Docker image
         run: docker build -f ./Dockerfile --build-arg application_version=${{ github.ref_name }} -t ${{ secrets.DOCKER_USERNAME }}/kanbancord:${{ github.ref_name }} .
 
-#      - name: Push to Registry
-#        run: |
-#          docker push ${{ secrets.DOCKER_USERNAME }}/kanbancord:${{ github.ref_name }}
-#          docker tag ${{ secrets.DOCKER_USERNAME }}/kanbancord:${{ github.ref_name }} ${{ secrets.DOCKER_USERNAME }}/kanbancord:latest
-#          docker push ${{ secrets.DOCKER_USERNAME }}/kanbancord:latest
+      - name: Push to Registry
+        run: |
+          docker push ${{ secrets.DOCKER_USERNAME }}/kanbancord:${{ github.ref_name }}
+          docker tag ${{ secrets.DOCKER_USERNAME }}/kanbancord:${{ github.ref_name }} ${{ secrets.DOCKER_USERNAME }}/kanbancord:latest
+          docker push ${{ secrets.DOCKER_USERNAME }}/kanbancord:latest
