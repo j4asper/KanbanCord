@@ -27,4 +27,5 @@ jobs:
 
       - name: Run Tests
         run: |
+          ls
           dotnet test --no-restore
