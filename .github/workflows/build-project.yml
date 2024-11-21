@@ -23,10 +23,10 @@ jobs:
 
       - name: Build .NET solution
         run: |
-          dotnet build --no-restore --configuration Release --output ./build
+          dotnet build --no-restore --configuration Release
 
       - name: Upload build output
         uses: actions/upload-artifact@v3
         with:
           name: build-output
-          path: ./build/
+          path: .

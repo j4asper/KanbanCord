@@ -18,7 +18,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: build-output
-          path: ./build
+          path: .
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
@@ -27,4 +27,4 @@ jobs:
 
       - name: Run Tests
         run: |
-          dotnet test ./build/KanbanCord.Tests/KanbanCord.Tests.csproj
+          dotnet test --no-restore
