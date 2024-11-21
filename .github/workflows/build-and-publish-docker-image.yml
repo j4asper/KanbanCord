@@ -8,7 +8,7 @@ on:
 jobs:
   test_project:
     name: Build Project
-    uses: j4asper/KanbanCord/.github/workflows/unit-tests.yml@11-fix-pipelines
+    uses: j4asper/KanbanCord/.github/workflows/unit-tests.yml@main
 
   build_and_publish_bot_docker_image:
     name: Build and Publish Bot Docker Image
