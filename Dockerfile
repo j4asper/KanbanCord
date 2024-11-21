@@ -3,15 +3,16 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0-alpine AS build-env
 
 WORKDIR /KanbanCord
 
-COPY ["KanbanCord/", "KanbanCord/"]
+COPY ["KanbanCord.Bot/", "KanbanCord.Bot/"]
+COPY ["KanbanCord.Core/", "KanbanCord.Core/"]
 
-RUN dotnet restore "KanbanCord/KanbanCord.csproj"
-RUN dotnet build "KanbanCord/KanbanCord.csproj" -c Release -o /build
+RUN dotnet restore "KanbanCord.Bot/KanbanCord.Bot.csproj"
+RUN dotnet build "KanbanCord.Bot/KanbanCord.Bot.csproj" -c Release -o /build
 
 
 FROM build-env AS publish
 
-RUN dotnet publish "KanbanCord/KanbanCord.csproj" -p:PublishSingleFile=true -r linux-musl-x64 --self-contained -c Release -o /publish
+RUN dotnet publish "KanbanCord.Bot/KanbanCord.Bot.csproj" -p:PublishSingleFile=true -r linux-musl-x64 --self-contained -c Release -o /publish
 
 
 FROM alpine:latest
@@ -27,4 +28,4 @@ WORKDIR /src
 
 COPY --from=publish /publish /src
 
-CMD ["./KanbanCord"]
+CMD ["./KanbanCord.Bot"]
