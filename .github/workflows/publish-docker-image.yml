@@ -7,7 +7,7 @@ on:
 jobs:
   build_and_test:
     name: Build and Test Project
-    uses: ./.github/workflows/build-and-test.yml
+    uses: j4asper/KanbanCord/.github/workflows/build-and-test.yml@main
 
   build_and_publish_bot_docker_image:
     name: Build and Publish Bot Docker Image
