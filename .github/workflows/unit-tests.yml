@@ -26,6 +26,4 @@ jobs:
           dotnet-version: 8.0.x
 
       - name: Run Tests
-        run: |
-          ls
-          dotnet test --no-restore
+        run: dotnet test
