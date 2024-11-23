@@ -11,7 +11,7 @@ public class SettingsRepository : ISettingsRepository
 
     public SettingsRepository(IMongoDatabase mongoDatabase)
     {
-        _collection = mongoDatabase.GetCollection<Settings>(RequiredCollections.Settings.ToString());
+        _collection = mongoDatabase.GetCollection<Settings>(nameof(RequiredCollections.Settings));
     }
     
     

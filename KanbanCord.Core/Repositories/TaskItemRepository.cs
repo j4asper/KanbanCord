@@ -12,7 +12,7 @@ public class TaskItemRepository : ITaskItemRepository
 
     public TaskItemRepository(IMongoDatabase mongoDatabase)
     {
-        _collection = mongoDatabase.GetCollection<TaskItem>(RequiredCollections.Tasks.ToString());
+        _collection = mongoDatabase.GetCollection<TaskItem>(nameof(RequiredCollections.Tasks));
     }
 
     public async Task<IReadOnlyList<TaskItem>> GetAllTaskItemsByGuildIdAsync(ulong guildId)
