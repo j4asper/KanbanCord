@@ -5,6 +5,7 @@ using DSharpPlus.Entities;
 using DSharpPlus.Interactivity;
 using KanbanCord.Bot.Extensions;
 using KanbanCord.Bot.Helpers;
+using KanbanCord.Core.Constants;
 using KanbanCord.Core.Models;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -23,12 +24,12 @@ partial class TaskCommandGroup
                 "Title:",
                 "titleField",
                 "Title of the task",
-                max_length: 40))
+                max_length: Limits.TaskTitleMaxLength))
             .AddComponents(new DiscordTextInputComponent(
                 "Description:",
                 "descriptionField",
                 "Description of the task",
-                max_length: 600,
+                max_length: Limits.TaskDescriptionMaxLength,
                 style: DiscordTextInputStyle.Paragraph));
         
         await context.Interaction.CreateResponseAsync(DiscordInteractionResponseType.Modal, modal);

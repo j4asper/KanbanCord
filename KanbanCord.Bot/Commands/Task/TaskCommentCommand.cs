@@ -7,6 +7,7 @@ using DSharpPlus.Interactivity;
 using KanbanCord.Bot.Providers;
 using KanbanCord.Bot.Extensions;
 using KanbanCord.Bot.Helpers;
+using KanbanCord.Core.Constants;
 using KanbanCord.Core.Models;
 using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Bson;
@@ -39,8 +40,8 @@ partial class TaskCommandGroup
                 "Comment:",
                 "commentField",
                 "Put your comment here",
-                max_length: 600,
-                min_length: 10,
+                max_length: Limits.TaskCommentMaxLength,
+                min_length: Limits.TaskCommentMinLength,
                 style: DiscordTextInputStyle.Paragraph));
         
         await context.Interaction.CreateResponseAsync(DiscordInteractionResponseType.Modal, modal);
