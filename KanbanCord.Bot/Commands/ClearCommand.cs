@@ -22,7 +22,7 @@ public class ClearCommand
     
     [Command("clear")]
     [Description("Clear the kanban board completely, this will archive all current tasks.")]
-    [RequirePermissions(userPermissions: DiscordPermissions.ManageMessages, botPermissions: DiscordPermissions.None)]
+    [RequirePermissions(userPermissions: [DiscordPermission.ManageMessages], botPermissions: [])]
     public async ValueTask ExecuteAsync(SlashCommandContext context)
     {
         var clearButton = new DiscordButtonComponent(DiscordButtonStyle.Danger, Guid.NewGuid().ToString(), "Clear");

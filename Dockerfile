@@ -1,5 +1,5 @@
 # https://hub.docker.com/r/microsoft/dotnet-sdk
-FROM mcr.microsoft.com/dotnet/sdk:8.0-alpine AS build-env
+FROM mcr.microsoft.com/dotnet/sdk:9.0-alpine AS build-env
 
 WORKDIR /KanbanCord
 
@@ -22,7 +22,7 @@ ARG application_version=Unknown
 ENV APPLICATION_VERSION=$application_version
 
 # Install required packages to make the compiled app work in alpine linux
-RUN apk upgrade --no-cache && apk add --no-cache libgcc icu-libs
+RUN apk upgrade --no-cache && apk add --no-cache icu-libs
 
 WORKDIR /src
 

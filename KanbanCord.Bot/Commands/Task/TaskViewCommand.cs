@@ -17,7 +17,7 @@ partial class TaskCommandGroup
 {
     [Command("view")]
     [Description("View a tasks details such as description, author and comments.")]
-    [RequirePermissions(userPermissions: DiscordPermissions.None, botPermissions: DiscordPermissions.None)]
+    [RequirePermissions(userPermissions: [], botPermissions: [])]
     public async ValueTask TaskViewCommand(SlashCommandContext context, [Description("Search for the task to select")] [SlashAutoCompleteProvider<AllTaskItemsAutoCompleteProvider>] string task)
     {
         var taskItem = await _taskItemRepository.GetTaskItemByObjectIdOrDefaultAsync(new ObjectId(task));

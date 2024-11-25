@@ -21,7 +21,7 @@ public class ResetCommand
     
     [Command("reset")]
     [Description("Resets the kanban board completely, this will delete all current and archived tasks.")]
-    [RequirePermissions(userPermissions: DiscordPermissions.ManageMessages, botPermissions: DiscordPermissions.None)]
+    [RequirePermissions(userPermissions: [DiscordPermission.ManageMessages], botPermissions: [])]
     public async ValueTask ExecuteAsync(SlashCommandContext context)
     {
         var clearButton = new DiscordButtonComponent(DiscordButtonStyle.Danger, Guid.NewGuid().ToString(), "Reset");
