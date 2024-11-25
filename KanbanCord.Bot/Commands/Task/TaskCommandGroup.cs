@@ -6,7 +6,7 @@ using KanbanCord.Core.Interfaces;
 namespace KanbanCord.Bot.Commands.Task;
 
 [Command("task")]
-[RequirePermissions(userPermissions: DiscordPermissions.ManageMessages, botPermissions: DiscordPermissions.None)]
+[RequirePermissions(userPermissions: [DiscordPermission.ManageMessages], botPermissions: [])]
 partial class TaskCommandGroup
 {
     private readonly ITaskItemRepository _taskItemRepository;
