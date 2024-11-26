@@ -64,12 +64,13 @@ public static class ServiceCollectionExtensions
             new CommandsConfiguration
             {
                 RegisterDefaultCommandProcessors = false,
-                UseDefaultCommandErrorHandler = false
+                UseDefaultCommandErrorHandler = true
             })
             .ConfigureEventHandlers(eventHandlingBuilder =>
             {
                 eventHandlingBuilder.AddEventHandlers<GuildDeletedEventHandler>();
                 eventHandlingBuilder.AddEventHandlers<ComponentInteractionCreatedEventHandler>();
+                eventHandlingBuilder.AddEventHandlers<GuildDownloadCompletedEventHandler>();
             });
         
         return services;
