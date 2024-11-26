@@ -16,6 +16,8 @@ public class StatsCommand
     {
         var botVersion = EnvironmentHelpers.GetApplicationVersion();
         
+        var guildCount = context.Client.Guilds.Count;
+        
         GC.Collect(GC.MaxGeneration, GCCollectionMode.Aggressive, true, true);
         var heapMemory = $"{GC.GetTotalMemory(true) / 1024 / 1024:n0} MB";
 
@@ -30,6 +32,7 @@ public class StatsCommand
             .WithDefaultColor()
             .WithThumbnail(context.Client.CurrentUser.AvatarUrl)
             .AddField("Latency:", latency == 0 ? "waiting for heartbeat..." : $"{latency} ms")
+            .AddField("Servers:", guildCount.ToString())
             .AddField("Memory Usage:", heapMemory)
             .AddField("Uptime:", $"{uptimeDays} days, {remainingHours} hours")
             .AddField("Bot Version:", botVersion);
