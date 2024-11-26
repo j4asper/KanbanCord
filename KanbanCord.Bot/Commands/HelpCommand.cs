@@ -66,6 +66,6 @@ public class HelpCommand
         if (supportInvite is not null)
             additionalComponents.Add(new DiscordLinkButtonComponent(supportInvite, "Support"));
         
-        await context.SendBetterPaginatedMessageAsync(pages, additionalComponents);
+        await context.SendBetterPaginatedMessageAsync(pages, additionalComponents, allowUsageByAnyone: true);
     }
 }

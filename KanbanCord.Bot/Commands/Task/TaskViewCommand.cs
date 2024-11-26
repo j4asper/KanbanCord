@@ -93,6 +93,6 @@ partial class TaskCommandGroup
             pages.Add(new Page { Embed = commentEmbed });
         }
 
-        await context.SendBetterPaginatedMessageAsync(pages, [addCommentButton]);
+        await context.SendBetterPaginatedMessageAsync(pages, [addCommentButton], allowUsageByAnyone: true);
     }
 }
