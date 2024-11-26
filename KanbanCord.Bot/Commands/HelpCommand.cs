@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using DSharpPlus.BetterPagination.Extensions;
 using DSharpPlus.Commands;
 using DSharpPlus.Commands.Processors.SlashCommands;
 using DSharpPlus.Entities;
@@ -65,6 +66,6 @@ public class HelpCommand
         if (supportInvite is not null)
             additionalComponents.Add(new DiscordLinkButtonComponent(supportInvite, "Support"));
         
-        await context.SendSimplePaginatedMessage(pages, additionalComponents);
+        await context.SendBetterPaginatedMessageAsync(pages, additionalComponents);
     }
 }

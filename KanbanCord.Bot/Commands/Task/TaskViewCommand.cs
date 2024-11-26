@@ -1,5 +1,6 @@
 using System.ComponentModel;
 using DSharpPlus;
+using DSharpPlus.BetterPagination.Extensions;
 using DSharpPlus.Commands;
 using DSharpPlus.Commands.ContextChecks;
 using DSharpPlus.Commands.Processors.SlashCommands;
@@ -92,6 +93,6 @@ partial class TaskCommandGroup
             pages.Add(new Page { Embed = commentEmbed });
         }
 
-        await context.SendSimplePaginatedMessage(pages, [addCommentButton]);
+        await context.SendBetterPaginatedMessageAsync(pages, [addCommentButton]);
     }
 }
