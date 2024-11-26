@@ -17,30 +17,12 @@
 ## Table of Contents
 
 <!-- TOC -->
-  * [To-Do](#to-do)
   * [Setup](#setup)
     * [Docker](#docker)
       * [Image](#image)
       * [Variables](#variables)
       * [Database](#database)
 <!-- TOC -->
-
-## To-Do
-
-- [x] Add item to board, `/add` will open a modal with title for the item and long description.
-- [x] View item by Id `/view <id>` or `/show <id>`
-- [x] Show board `/board`
-- [x] Remove item by id `/delete <id>`
-- [x] Start task `/start <id>` moves item from backlog to in-progress
-- [x] Complete task `/complete <id>` moves item from in-progress to completed/done
-- [x] Clear board, deletes everything on the board. Should have a confirmation button
-- [x] Move item to specified row `/move <id> <row>` where row could be "Backlog", "In Progress" and "Completed"
-- [x] Assign tasks to users
-- [x] Add priorities
-- [ ] Search for items by keyword
-- [ ] Import/Export
-- [x] Add comments to task
-- [x] Edit task `/edit <id>` with ability to edit title and description
 
 ## Setup
 
