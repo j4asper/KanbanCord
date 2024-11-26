@@ -22,6 +22,8 @@
       * [Image](#image)
       * [Variables](#variables)
       * [Database](#database)
+    * [Docker Compose](#docker-compose)
+    * [Build from source](#build-from-source)
 <!-- TOC -->
 
 ## Setup
@@ -54,3 +56,27 @@ KanbanCord will automatically create the required collections on startup, if the
 |-----------------|
 | Tasks           |
 | Settings        |
+
+### Docker Compose
+
+A docker-compose file is available here: [docker-compose.yml](docker-compose.yml). This will setup the bot and a MongoDB database, the only thing you have to do, is to update the bot token.
+
+### Build from source
+
+You will need to clone the repository first:
+
+```console
+git clone https://github.com/j4asper/KanbanCord
+```
+
+Then you need to build the docker image, you need to be in the same directory as the [Dockerfile](Dockerfile):
+
+```console
+docker build -t kanbancord .
+```
+
+Now you can run the bot, and add the required environment variables:
+
+```console
+docker run -d -e TOKEN=your-bot-token -e MONGODB_CONNECTION_STRING=your-mongodb-connection-string kanbancord
+```
