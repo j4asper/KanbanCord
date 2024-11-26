@@ -66,7 +66,11 @@ public static class ServiceCollectionExtensions
                 RegisterDefaultCommandProcessors = false,
                 UseDefaultCommandErrorHandler = false
             })
-            .ConfigureEventHandlers(eventHandlingBuilder => eventHandlingBuilder.AddEventHandlers<GuildDeletedEventHandler>());
+            .ConfigureEventHandlers(eventHandlingBuilder =>
+            {
+                eventHandlingBuilder.AddEventHandlers<GuildDeletedEventHandler>();
+                eventHandlingBuilder.AddEventHandlers<ComponentInteractionCreatedEventHandler>();
+            });
         
         return services;
     }

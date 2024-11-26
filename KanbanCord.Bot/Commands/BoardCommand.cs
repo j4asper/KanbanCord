@@ -25,19 +25,23 @@ public class BoardCommand
     {
         var boardItems = await _repository.GetAllTaskItemsByGuildIdAsync(context.Guild!.Id);
         
-        var embed = new DiscordEmbedBuilder()
-            .WithDefaultColor()
-            .WithAuthor("KanbanCord Board");
+        var embed = await BoardHelper.GetBoardEmbed(context.Client, boardItems);
         
-        var backlogString = await boardItems.GetBoardTaskString(context.Client, BoardStatus.Backlog);
-        embed.AddField("Backlog", backlogString);
+        await context.Interaction.CreateResponseAsync(DiscordInteractionResponseType.DeferredChannelMessageWithSource);
         
-        var inProgressString = await boardItems.GetBoardTaskString(context.Client, BoardStatus.InProgress);
-        embed.AddField("In Progress", inProgressString);
-        
-        var compltedString = await boardItems.GetBoardTaskString(context.Client, BoardStatus.Completed);
-        embed.AddField("Completed", compltedString);
+        var refreshButton = new DiscordButtonComponent(
+            DiscordButtonStyle.Secondary,
+            "refresh",
+            "Refresh",
+            false,
+            new DiscordComponentEmoji(
+                DiscordEmoji.FromName(context.Client, ":arrows_counterclockwise:"))
+            );
 
-        await context.RespondAsync(embed);
+        var responseBuilder = new DiscordWebhookBuilder()
+            .AddEmbed(embed)
+            .AddComponents(refreshButton);
+        
+        await context.Interaction.EditOriginalResponseAsync(responseBuilder);
     }
 }
