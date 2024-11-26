@@ -58,16 +58,26 @@ partial class TaskCommandGroup
             .AddField("Created At:", Formatter.Timestamp(taskItem.CreatedAt, TimestampFormat.LongDateTime))
             .AddField("Last Updated At:", Formatter.Timestamp(taskItem.LastUpdatedAt, TimestampFormat.LongDateTime));
         
+        var addCommentButton = new DiscordButtonComponent(
+            DiscordButtonStyle.Secondary,
+            $"{taskItem.Id.ToString()}.add-comment",
+            "Add Comment",
+            false,
+            new DiscordComponentEmoji(DiscordEmoji.FromName(context.Client, ":speech_balloon:")));
         
         if (!taskItem.Comments.Any())
         {
-            await context.RespondAsync(embed);
+            var response = new DiscordMessageBuilder()
+                .AddEmbed(embed)
+                .AddComponents(addCommentButton);
+            
+            await context.RespondAsync(response);
             return;
         }
 
         embed.WithFooter("View comments on the following pages");
         
-        List<Page> pages = [new Page { Embed = embed }];
+        List<Page> pages = [new() { Embed = embed }];
 
         foreach (var comment in taskItem.Comments)
         {
@@ -82,6 +92,6 @@ partial class TaskCommandGroup
             pages.Add(new Page { Embed = commentEmbed });
         }
 
-        await context.SendSimplePaginatedMessage(pages);
+        await context.SendSimplePaginatedMessage(pages, [addCommentButton]);
     }
 }

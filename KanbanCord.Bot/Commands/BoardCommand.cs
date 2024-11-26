@@ -31,7 +31,7 @@ public class BoardCommand
         
         var refreshButton = new DiscordButtonComponent(
             DiscordButtonStyle.Secondary,
-            "refresh",
+            "board-refresh",
             "Refresh",
             false,
             new DiscordComponentEmoji(

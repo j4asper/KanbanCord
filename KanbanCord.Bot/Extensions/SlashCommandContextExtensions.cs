@@ -28,7 +28,7 @@ public static class SlashCommandContextExtensions
         
         while (!timedOut)
         {
-            var response = await message.WaitForButtonAsync();
+            var response = await message.WaitForButtonAsync(c => c.Id == forwardBtn.CustomId || c.Id == backBtn.CustomId);
             
             if (response.TimedOut)
             {
