@@ -19,6 +19,7 @@ public static class ServiceCollectionExtensions
     {
         services.AddLogging(x =>
         {
+            x.SetMinimumLevel(LogLevel.Information);
             x.AddSimpleConsole(options =>
             {
                 options.UseUtcTimestamp = true;
