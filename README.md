@@ -12,7 +12,7 @@
 
 [![Invite Bot](https://img.shields.io/badge/Invite%20Bot-7289DA?style=for-the-badge&logo=discord&logoColor=white)](https://discord.com/oauth2/authorize?client_id=1301269207073165444)
 
-![Example 1](.github/images/example-1.png)
+![Example](.github/images/example.png)
 
 ## Table of Contents
 
