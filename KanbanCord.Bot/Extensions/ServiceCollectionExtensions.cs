@@ -64,7 +64,7 @@ public static class ServiceCollectionExtensions
             new CommandsConfiguration
             {
                 RegisterDefaultCommandProcessors = false,
-                UseDefaultCommandErrorHandler = true
+                UseDefaultCommandErrorHandler = false
             })
             .ConfigureEventHandlers(eventHandlingBuilder =>
             {
