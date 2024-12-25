@@ -51,12 +51,12 @@ public static class ServiceCollectionExtensions
         services.AddDiscordClient(EnvironmentHelpers.GetBotToken(), intents)
             .Configure<DiscordConfiguration>(discordConfiguration =>
             {
-                discordConfiguration.GatewayCompressionLevel = GatewayCompressionLevel.None;
                 discordConfiguration.LogUnknownAuditlogs = false;
                 discordConfiguration.LogUnknownEvents = false;
                 discordConfiguration.AlwaysCacheMembers = false;
             })
             .AddInteractivityExtension()
+            .UseZstdCompression()
             .AddCommandsExtension((_, extension) =>
             {
                 extension.AddProcessor(new SlashCommandProcessor(new SlashCommandConfiguration()));
