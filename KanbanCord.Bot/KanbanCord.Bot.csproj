@@ -9,15 +9,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="DSharpPlus" Version="5.0.0-nightly-02426" />
-      <PackageReference Include="DSharpPlus.Commands" Version="5.0.0-nightly-02426" />
-      <PackageReference Include="DSharpPlus.Interactivity" Version="5.0.0-nightly-02426" />
-      <PackageReference Include="J4asper.DSharpPlus.BetterPagination" Version="1.0.4" />
-      <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.0" />
-      <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="9.0.0" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\KanbanCord.Core\KanbanCord.Core.csproj" />
     </ItemGroup>
 
