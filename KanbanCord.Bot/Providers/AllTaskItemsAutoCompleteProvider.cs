@@ -22,6 +22,7 @@ public class AllTaskItemsAutoCompleteProvider : IAutoCompleteProvider
 
         var response = taskItems.GetAutoCompleteStrings();
         
-        return response.Where(x => context.UserInput == null || x.Name.Contains(context.UserInput, StringComparison.OrdinalIgnoreCase));
+        return response.Where(x => context.UserInput == null || x.Name.Contains(context.UserInput, StringComparison.OrdinalIgnoreCase))
+            .Take(20);
     }
 }
