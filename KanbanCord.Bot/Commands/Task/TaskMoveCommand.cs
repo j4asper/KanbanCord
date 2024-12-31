@@ -20,26 +20,23 @@ partial class TaskCommandGroup
         [SlashChoiceProvider<ColumnChoiceProvider>] int to)
     {
         var taskItem = await _taskItemRepository.GetTaskItemByObjectIdOrDefaultAsync(new ObjectId(task));
+
+        var embed = new DiscordEmbedBuilder()
+            .WithDefaultColor();
         
         if (taskItem is null)
         {
-            var notFoundEmbed = new DiscordEmbedBuilder()
-                .WithDefaultColor()
-                .WithDescription(
-                    "The selected task was not found, please try again.");
+            embed.WithDescription("The selected task was not found, please try again.");
             
-            await context.RespondAsync(notFoundEmbed);
+            await context.RespondAsync(embed);
             return;
         }
         
         if (taskItem.Status == (BoardStatus)to)
         {
-            var notFoundEmbed = new DiscordEmbedBuilder()
-                .WithDefaultColor()
-                .WithDescription(
-                    $"The selected task is already in column **{((BoardStatus)to).ToFormattedString()}**.");
+            embed.WithDescription($"The selected task is already in column **{((BoardStatus)to).ToFormattedString()}**.");
             
-            await context.RespondAsync(notFoundEmbed);
+            await context.RespondAsync(embed);
             return;
         }
         
@@ -50,9 +47,7 @@ partial class TaskCommandGroup
         
         await _taskItemRepository.UpdateTaskItemAsync(taskItem);
         
-        var embed = new DiscordEmbedBuilder()
-            .WithDefaultColor()
-            .WithDescription(
+        embed.WithDescription(
                 $"The task \"{taskItem.Title}\" has been moved from **{fromColumn.ToFormattedString()}** to **{((BoardStatus)to).ToFormattedString()}**.");
         
         await context.RespondAsync(embed);

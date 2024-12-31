@@ -18,15 +18,15 @@ partial class TaskCommandGroup
     public async ValueTask TaskArchiveCommand(SlashCommandContext context, [Description("Search for the task to select")] [SlashAutoCompleteProvider<AllTaskItemsAutoCompleteProvider>] string task)
     {
         var taskItem = await _taskItemRepository.GetTaskItemByObjectIdOrDefaultAsync(new ObjectId(task));
+
+        var embed = new DiscordEmbedBuilder()
+            .WithDefaultColor();
         
         if (taskItem is null)
         {
-            var notFoundEmbed = new DiscordEmbedBuilder()
-                .WithDefaultColor()
-                .WithDescription(
-                    "The selected task was not found, please try again.");
+            embed.WithDescription("The selected task was not found, please try again.");
             
-            await context.RespondAsync(notFoundEmbed);
+            await context.RespondAsync(embed);
             return;
         }
         
@@ -39,9 +39,7 @@ partial class TaskCommandGroup
 
         var commands = await context.Client.GetGlobalApplicationCommandsAsync();
         
-        var embed = new DiscordEmbedBuilder()
-            .WithDefaultColor()
-            .WithDescription(
+        embed.WithDescription(
                 $"The task \"{taskItem.Title}\" has been moved from **{fromColumn.ToFormattedString()}** to **{BoardStatus.Archived.ToFormattedString()}**. View it using {commands.GetMention(["archive"])}.");
         
         await context.RespondAsync(embed);

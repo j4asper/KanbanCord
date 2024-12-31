@@ -21,13 +21,13 @@ partial class TaskCommandGroup
     public async ValueTask TaskCommentCommand(SlashCommandContext context, [Description("Search for the task to select")] [SlashAutoCompleteProvider<AllTaskItemsAutoCompleteProvider>] string task)
     {
         var taskItem = await _taskItemRepository.GetTaskItemByObjectIdOrDefaultAsync(new ObjectId(task));
+
+        var embed = new DiscordEmbedBuilder()
+            .WithDefaultColor();
         
         if (taskItem is null)
         {
-            var embed = new DiscordEmbedBuilder()
-                .WithDefaultColor()
-                .WithDescription(
-                    "The selected task was not found, please try again.");
+            embed.WithDescription("The selected task was not found, please try again.");
             
             await context.RespondAsync(embed);
             return;
@@ -64,9 +64,7 @@ partial class TaskCommandGroup
 
             var commands = await context.Client.GetGlobalApplicationCommandsAsync();
             
-            var embed = new DiscordEmbedBuilder()
-                .WithDefaultColor()
-                .WithDescription(
+            embed.WithDescription(
                     $"A comment has been added to task \"{taskItem.Title}\". View it using {commands.GetMention(["task", "view"])}.");
             
             await response.Result.Interaction.CreateResponseAsync(

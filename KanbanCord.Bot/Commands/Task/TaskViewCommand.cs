@@ -22,15 +22,15 @@ partial class TaskCommandGroup
     public async ValueTask TaskViewCommand(SlashCommandContext context, [Description("Search for the task to select")] [SlashAutoCompleteProvider<AllTaskItemsAutoCompleteProvider>] string task)
     {
         var taskItem = await _taskItemRepository.GetTaskItemByObjectIdOrDefaultAsync(new ObjectId(task));
+
+        var embed = new DiscordEmbedBuilder()
+            .WithDefaultColor();
         
         if (taskItem is null)
         {
-            var notFoundEmbed = new DiscordEmbedBuilder()
-                .WithDefaultColor()
-                .WithDescription(
-                    "The selected task was not found, please try again.");
+            embed.WithDescription("The selected task was not found, please try again.");
             
-            await context.RespondAsync(notFoundEmbed);
+            await context.RespondAsync(embed);
             return;
         }
         
@@ -47,8 +47,7 @@ partial class TaskCommandGroup
             _ => ":orange_circle: Medium"
         };
         
-        var embed = new DiscordEmbedBuilder()
-            .WithDefaultColor()
+        embed
             .WithAuthor(author.Username, iconUrl: author.AvatarUrl)
             .AddField("Title:", taskItem.Title)
             .AddField("Description:", taskItem.Description)
