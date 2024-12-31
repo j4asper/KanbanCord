@@ -17,14 +17,19 @@
 ## Table of Contents
 
 <!-- TOC -->
-  * [Setup](#setup)
-    * [Docker](#docker)
-      * [Image](#image)
-      * [Variables](#variables)
-      * [Database](#database)
-    * [Docker Compose](#docker-compose)
-    * [Build from source](#build-from-source)
+* [What is a Kanban Board](#what-is-a-kanban-board)
+* [Setup](#setup)
+  * [Docker](#docker)
+    * [Image](#image)
+    * [Variables](#variables)
+    * [Database](#database)
+  * [Docker Compose](#docker-compose)
+  * [Build from source](#build-from-source)
 <!-- TOC -->
+
+## What is a Kanban Board
+
+A Kanban board is a visual tool used to organize tasks and workflows. It typically consists of columns representing different stages of a process (e.g., "To Do," "In Progress," "Done"). Tasks are represented as cards that can be moved between columns as they progress. The KanbanCord Discord Bot brings this concept to Discord, allowing users to create and manage Kanban boards directly within their server for efficient task management and team collaboration.
 
 ## Setup
 
