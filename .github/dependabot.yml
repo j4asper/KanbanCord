@@ -6,6 +6,14 @@
 version: 2
 updates:
   - package-ecosystem: "nuget" # See documentation for possible values
-    directory: "/KanbanCord" # Location of package manifests
+    directory: "/KanbanCord.Bot" # Location of package manifests
+    schedule:
+      interval: "monthly"
+  - package-ecosystem: "nuget" # See documentation for possible values
+    directory: "/KanbanCord.Core" # Location of package manifests
+    schedule:
+      interval: "monthly"
+  - package-ecosystem: "nuget" # See documentation for possible values
+    directory: "/KanbanCord.Tests" # Location of package manifests
     schedule:
       interval: "monthly"
