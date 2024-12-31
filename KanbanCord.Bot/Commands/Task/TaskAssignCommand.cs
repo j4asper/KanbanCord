@@ -36,11 +36,38 @@ partial class TaskCommandGroup
         
         await _taskItemRepository.UpdateTaskItemAsync(taskItem);
 
+        bool directMessageSentToAssignee;
+
+        try
+        {
+            var assigneeEmbed = new DiscordEmbedBuilder()
+                .WithDefaultColor()
+                .WithAuthor(context.Guild!.Name, iconUrl: context.Guild.IconUrl)
+                .WithTitle("You have been assigned to a Task!")
+                .AddField("Task Name", taskItem.Title)
+                .AddField("Task Description", taskItem.Description);
+            
+            await assignee.SendMessageAsync(assigneeEmbed);
+
+            directMessageSentToAssignee = true;
+        }
+        catch (Exception)
+        {
+            directMessageSentToAssignee = false;
+        }
+
         var embed = new DiscordEmbedBuilder()
             .WithDefaultColor()
             .WithDescription(
                 $"The task \"{taskItem.Title}\" has been assigned to {assignee.Mention}.");
         
-        await context.RespondAsync(embed);
+        var response = new DiscordInteractionResponseBuilder()
+            .AddMention(new UserMention(assignee))
+            .AddEmbed(embed);
+        
+        if (!directMessageSentToAssignee)
+            response.WithContent(assignee.Mention);
+        
+        await context.Interaction.CreateResponseAsync(DiscordInteractionResponseType.ChannelMessageWithSource, response);
     }
 }
