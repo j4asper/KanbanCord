@@ -1,5 +1,6 @@
 using System.ComponentModel;
 using DSharpPlus.Commands;
+using DSharpPlus.Commands.ContextChecks;
 using DSharpPlus.Commands.Processors.SlashCommands;
 using DSharpPlus.Entities;
 using KanbanCord.Bot.Extensions;
@@ -12,6 +13,7 @@ partial class TaskCommandGroup
 {
     [Command("user")]
     [Description("Displays all the tasks assigned to a specified user.")]
+    [RequirePermissions(userPermissions: [], botPermissions: [])]
     public async ValueTask TaskUserCommand(SlashCommandContext context, DiscordUser user)
     {
         var boardItems = await _taskItemRepository.GetAllTaskItemsByGuildIdAsync(context.Guild!.Id);
