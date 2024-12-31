@@ -20,13 +20,13 @@ partial class TaskCommandGroup
     public async ValueTask TaskEditCommand(SlashCommandContext context, [Description("Search for the task to select")] [SlashAutoCompleteProvider<AllTaskItemsAutoCompleteProvider>] string task)
     {
         var taskItem = await _taskItemRepository.GetTaskItemByObjectIdOrDefaultAsync(new ObjectId(task));
+
+        var embed = new DiscordEmbedBuilder()
+            .WithDefaultColor();
         
         if (taskItem is null)
         {
-            var embed = new DiscordEmbedBuilder()
-                .WithDefaultColor()
-                .WithDescription(
-                    "The selected task was not found, please try again.");
+            embed.WithDescription("The selected task was not found, please try again.");
             
             await context.RespondAsync(embed);
             return;
@@ -69,12 +69,13 @@ partial class TaskCommandGroup
 
             var commands = await context.Client.GetGlobalApplicationCommandsAsync();
             
-            var embed = new DiscordEmbedBuilder()
-                .WithDefaultColor()
-                .WithDescription(
+            embed.WithDescription(
                     $"The task \"{taskItem.Title}\" has been edited. View it using {commands.GetMention(["board"])}.");
             
-            await response.Result.Interaction.CreateResponseAsync(DiscordInteractionResponseType.ChannelMessageWithSource, new DiscordInteractionResponseBuilder().AddEmbed(embed));
+            await response.Result.Interaction.CreateResponseAsync(
+                DiscordInteractionResponseType.ChannelMessageWithSource,
+                new DiscordInteractionResponseBuilder()
+                    .AddEmbed(embed));
         }
     }
 }

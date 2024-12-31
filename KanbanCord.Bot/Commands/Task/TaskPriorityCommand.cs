@@ -20,15 +20,15 @@ partial class TaskCommandGroup
         [SlashChoiceProvider<PriorityChoiceProvider>] int priority)
     {
         var taskItem = await _taskItemRepository.GetTaskItemByObjectIdOrDefaultAsync(new ObjectId(task));
+
+        var embed = new DiscordEmbedBuilder()
+            .WithDefaultColor();
         
         if (taskItem is null)
         {
-            var notFoundEmbed = new DiscordEmbedBuilder()
-                .WithDefaultColor()
-                .WithDescription(
-                    "The selected task was not found, please try again.");
+            embed.WithDescription("The selected task was not found, please try again.");
             
-            await context.RespondAsync(notFoundEmbed);
+            await context.RespondAsync(embed);
             return;
         }
         
@@ -50,9 +50,7 @@ partial class TaskCommandGroup
         
         await _taskItemRepository.UpdateTaskItemAsync(taskItem);
         
-        var embed = new DiscordEmbedBuilder()
-            .WithDefaultColor()
-            .WithDescription(
+        embed.WithDescription(
                 $"The priority for task \"{taskItem.Title}\" has been updated from **{fromPriority.ToString()}** to **{((Priority)priority).ToString()}**.");
         
         await context.RespondAsync(embed);
