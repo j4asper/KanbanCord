@@ -8,7 +8,7 @@
   A simple Kanban board, but on Discord. The idea came from <a href="https://github.com/seansylee" target="_blank">seansylee</a> who made <a href="https://github.com/seansylee/kanban-board-bot" target="_blank">kanban-board-bot</a> which is no longer maintained.
 </p>
 
-[![Public Docker Image CI](https://github.com/j4asper/KanbanCord/actions/workflows/Docker-Image-CI.yml/badge.svg)](https://github.com/j4asper/KanbanCord/actions/workflows/Docker-Image-CI.yml)
+[![Publish Docker Image](https://github.com/j4asper/KanbanCord/actions/workflows/build-and-publish-docker-image.yml/badge.svg)](https://github.com/j4asper/KanbanCord/actions/workflows/build-and-publish-docker-image.yml)
 
 [![Invite Bot](https://img.shields.io/badge/Invite%20Bot-7289DA?style=for-the-badge&logo=discord&logoColor=white)](https://discord.com/oauth2/authorize?client_id=1301269207073165444)
 
