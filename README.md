@@ -25,6 +25,9 @@
     * [Database](#database)
   * [Docker Compose](#docker-compose)
   * [Build from source](#build-from-source)
+* [Commands](#commands)
+  * [General Commands](#general-commands)
+  * [Task Management](#task-management)
 <!-- TOC -->
 
 ## What is a Kanban Board
@@ -85,3 +88,70 @@ Now you can run the bot, and add the required environment variables:
 ```console
 docker run -d -e TOKEN=your-bot-token -e MONGODB_CONNECTION_STRING=your-mongodb-connection-string kanbancord
 ```
+
+## Commands
+
+Commands with a star (*) after the name require the user to have the **Manage Messages** permission on the Discord server.
+
+You can also customize the accessibility of the commands in your server settings. To do so, go to **Server Settings** > **Integrations** > **KanbanCord**. Here, you can choose specific commands and restrict them to certain roles or channels as needed.
+
+### General Commands
+
+- `/board`  
+  Displays the Kanban board with all tasks.
+  
+- `/archive`  
+  Displays all archived tasks.
+
+- `/repository`  
+  Get the repository URL and additional information about the bot.
+
+- `/stats`  
+  Displays bot statistics (e.g., task count, active users, etc.).
+
+### Task Management
+
+- `/clear` *  
+  Clears the Kanban board completely, archiving all current tasks.
+
+- `/reset` *  
+  Resets the Kanban board, deleting all current and archived tasks.
+
+- `/task add` *  
+  Add a new task to the backlog.
+
+- `/task edit` *  
+  Edit a task's title and/or description.
+
+- `/task delete` *  
+  Completely deletes a task, bypassing the archive and making it unrecoverable.
+
+- `/task view`  
+  View detailed information about a task, including description, author, and comments.
+
+- `/task start` *  
+  Move a task from the Backlog to In-Progress.
+
+- `/task complete` *  
+  Move a task from In-Progress to Completed.
+
+- `/task archive` *  
+  Archive a task and move it to the archived tasks list.
+
+- `/task move` *  
+  Move a task between columns (e.g., Backlog, In-Progress, Completed).
+
+- `/task assign` *  
+  Assign a task to a specific user.
+
+- `/task me` *  
+  View all tasks assigned to you.
+
+- `/task user`  
+  View all tasks assigned to a specified user.
+
+- `/task priority` *  
+  Set or adjust the priority level of a task.
+
+- `/task comment` *  
+  Add a comment to a task.
