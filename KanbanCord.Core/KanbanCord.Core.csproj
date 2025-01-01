@@ -11,8 +11,8 @@
         <PackageReference Include="MongoDB.Bson" Version="3.1.0" />
         <PackageReference Include="MongoDB.Driver" Version="3.1.0" />
         <PackageReference Include="DSharpPlus.Natives.Zstd" Version="1.5.6.18" />
-        <PackageReference Include="DSharpPlus" Version="5.0.0-nightly-02439" />
-        <PackageReference Include="DSharpPlus.Commands" Version="5.0.0-nightly-02439" />
+        <PackageReference Include="DSharpPlus" Version="5.0.0-nightly-02441" />
+        <PackageReference Include="DSharpPlus.Commands" Version="5.0.0-nightly-02441" />
         <PackageReference Include="DSharpPlus.Interactivity" Version="5.0.0-nightly-02439" />
         <PackageReference Include="J4asper.DSharpPlus.BetterPagination" Version="1.0.4" />
         <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.0" />
