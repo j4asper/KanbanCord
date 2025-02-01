@@ -11,7 +11,7 @@ jobs:
   
   unit_tests:
     name: Unit Tests
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     needs: build_solution
     steps:
       - name: Download build output
