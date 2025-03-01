@@ -8,8 +8,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="MongoDB.Bson" Version="3.1.0" />
-        <PackageReference Include="MongoDB.Driver" Version="3.1.0" />
+        <PackageReference Include="MongoDB.Bson" Version="3.2.1" />
+        <PackageReference Include="MongoDB.Driver" Version="3.2.1" />
         <PackageReference Include="DSharpPlus" Version="5.0.0-nightly-02453" />
         <PackageReference Include="DSharpPlus.Commands" Version="5.0.0-nightly-02446" />
         <PackageReference Include="DSharpPlus.Interactivity" Version="5.0.0-nightly-02446" />
