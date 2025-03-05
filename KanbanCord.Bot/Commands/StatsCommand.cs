@@ -1,10 +1,10 @@
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Reflection;
 using DSharpPlus.Commands;
 using DSharpPlus.Commands.Processors.SlashCommands;
 using DSharpPlus.Entities;
 using KanbanCord.Bot.Extensions;
-using KanbanCord.Core.Helpers;
 
 namespace KanbanCord.Bot.Commands;
 
@@ -14,12 +14,11 @@ public class StatsCommand
     [Description("Displays some stats of the bot.")]
     public async ValueTask ExecuteAsync(SlashCommandContext context)
     {
-        var botVersion = EnvironmentHelpers.GetApplicationVersion();
+        var version = Assembly.GetExecutingAssembly().GetName().Version!;
         
         var guildCount = context.Client.Guilds.Count;
         
-        GC.Collect(GC.MaxGeneration, GCCollectionMode.Aggressive, true, true);
-        var heapMemory = $"{GC.GetTotalMemory(true) / 1024 / 1024:n0} MB";
+        var heapMemory = $"{GC.GetTotalMemory(false) / 1024 / 1024:n0} MB";
 
         using var process  = Process.GetCurrentProcess();
         var uptime = DateTimeOffset.UtcNow.Subtract(process.StartTime);
@@ -35,7 +34,7 @@ public class StatsCommand
             .AddField("Servers:", guildCount.ToString())
             .AddField("Memory Usage:", heapMemory)
             .AddField("Uptime:", $"{uptimeDays} days, {remainingHours} hours")
-            .AddField("Bot Version:", botVersion);
+            .AddField("Bot Version:", $"v{version.Major}.{version.Minor}.{version.Build}");
         
         await context.RespondAsync(embed);
     }
