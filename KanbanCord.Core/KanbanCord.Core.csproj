@@ -13,7 +13,7 @@
         <PackageReference Include="Microsoft.Extensions.Options.DataAnnotations" Version="9.0.2" />
         <PackageReference Include="MongoDB.Bson" Version="3.2.1" />
         <PackageReference Include="MongoDB.Driver" Version="3.2.1" />
-        <PackageReference Include="DSharpPlus" Version="5.0.0-nightly-02461" />
+        <PackageReference Include="DSharpPlus" Version="5.0.0-nightly-02463" />
         <PackageReference Include="DSharpPlus.Commands" Version="5.0.0-nightly-02461" />
         <PackageReference Include="DSharpPlus.Interactivity" Version="5.0.0-nightly-02461" />
         <PackageReference Include="DSharpPlus.Natives.Zstd" Version="1.5.7.19" />
