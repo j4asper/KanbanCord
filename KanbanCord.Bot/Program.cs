@@ -8,14 +8,9 @@ internal class Program
     private static async Task Main()
     {
         var builder = Host.CreateDefaultBuilder();
-
-        builder.UseDefaultServiceProvider(options =>
-        {
-            options.ValidateScopes = true;
-            options.ValidateOnBuild = true;
-        });
         
         builder
+            .UseDefaultServiceProvider()
             .UseConsoleLifetime()
             .AddHostDependencies()
             .UseSerilog();
