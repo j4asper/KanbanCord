@@ -6,9 +6,16 @@ namespace KanbanCord.Bot.EventHandlers;
 
 public class GuildDownloadCompletedEventHandler : IEventHandler<GuildDownloadCompletedEventArgs>
 {
+    private readonly ILogger<GuildDownloadCompletedEventHandler> logger;
+
+    public GuildDownloadCompletedEventHandler(ILogger<GuildDownloadCompletedEventHandler> logger)
+    {
+        this.logger = logger;
+    }
+
     public Task HandleEventAsync(DiscordClient sender, GuildDownloadCompletedEventArgs eventArgs)
     {
-        sender.Logger.LogInformation($"Guild Download Completed: Downloaded {eventArgs.Guilds.Count} guilds.");
+        logger.LogInformation("Guild Download Completed: Downloaded {count} guilds.", eventArgs.Guilds.Count);
 
         return Task.CompletedTask;
     }
