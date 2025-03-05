@@ -3,52 +3,49 @@ using DSharpPlus.Commands;
 using DSharpPlus.Commands.Processors.SlashCommands;
 using DSharpPlus.Extensions;
 using DSharpPlus.Interactivity.Extensions;
+using KanbanCord.Bot.BackgroundServices;
 using KanbanCord.Bot.EventHandlers;
-using KanbanCord.Core.Helpers;
 using KanbanCord.Core.Interfaces;
+using KanbanCord.Core.Options;
 using KanbanCord.Core.Repositories;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using MongoDB.Driver;
 
 namespace KanbanCord.Bot.Extensions;
 
 public static class ServiceCollectionExtensions
 {
-    public static ServiceCollection AddServices(this ServiceCollection services)
+    public static IServiceCollection AddServices(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddLogging(x =>
-        {
-            x.SetMinimumLevel(LogLevel.Information);
-            x.AddSimpleConsole(options =>
-            {
-                options.UseUtcTimestamp = true;
-                options.TimestampFormat = "[MMM dd yyyy - HH:mm:ss UTC] ";
-            });
-        });
+        services.AddOptionsWithValidateOnStart<DatabaseOptions>()
+            .BindConfiguration(DatabaseOptions.Database)
+            .ValidateDataAnnotations();
         
-        services.AddScoped<ITaskItemRepository, TaskItemRepository>();
-        services.AddScoped<ISettingsRepository, SettingsRepository>();
+        services.AddOptionsWithValidateOnStart<DiscordOptions>()
+            .BindConfiguration(DiscordOptions.Discord)
+            .ValidateDataAnnotations();
+        
+        services.AddHostedService<BotBackgroundService>();
+        services.AddHostedService<DatabaseSetupBackgroundService>();
+        
+        services.AddSingleton<ITaskItemRepository, TaskItemRepository>();
+        services.AddSingleton<ISettingsRepository, SettingsRepository>();
 
-        return services;
-    }
-    
-    public static ServiceCollection AddDatabase(this ServiceCollection services)
-    {
-        services.AddScoped<IMongoDatabase>(_ =>
-            new MongoClient(EnvironmentHelpers.GetDatabaseConnectionString())
-                .GetDatabase(EnvironmentHelpers.GetDatabaseName())
+        services.AddSingleton<IMongoDatabase>(_ =>
+            new MongoClient(configuration.GetRequiredSection("Database:ConnectionString").Value)
+                .GetDatabase(configuration.GetRequiredSection("Database:Name").Value)
         );
         
         return services;
     }
     
-    public static ServiceCollection AddDiscordConfiguration(this ServiceCollection services)
+    public static IServiceCollection AddDiscordConfiguration(this IServiceCollection services, IConfiguration configuration)
     {
         const DiscordIntents intents = DiscordIntents.None
                                        | DiscordIntents.Guilds;
         
-        services.AddDiscordClient(EnvironmentHelpers.GetBotToken(), intents)
+        services.AddDiscordClient(configuration.GetRequiredSection("Discord:Token").Value!, intents)
             .Configure<DiscordConfiguration>(discordConfiguration =>
             {
                 discordConfiguration.LogUnknownAuditlogs = false;
@@ -70,6 +67,7 @@ public static class ServiceCollectionExtensions
             .ConfigureEventHandlers(eventHandlingBuilder =>
             {
                 eventHandlingBuilder.AddEventHandlers<GuildDeletedEventHandler>();
+                eventHandlingBuilder.AddEventHandlers<GuildCreatedEventHandler>();
                 eventHandlingBuilder.AddEventHandlers<ComponentInteractionCreatedEventHandler>();
                 eventHandlingBuilder.AddEventHandlers<GuildDownloadCompletedEventHandler>();
             });

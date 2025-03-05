@@ -11,5 +11,9 @@
     <ItemGroup>
       <ProjectReference Include="..\KanbanCord.Core\KanbanCord.Core.csproj" />
     </ItemGroup>
+    
+    <ItemGroup>
+        <None Update="appsettings.json" CopyToOutputDirectory="Always"/>
+    </ItemGroup>
 
 </Project>

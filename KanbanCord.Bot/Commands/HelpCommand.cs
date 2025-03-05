@@ -6,13 +6,21 @@ using DSharpPlus.Entities;
 using DSharpPlus.Interactivity;
 using KanbanCord.Bot.Extensions;
 using KanbanCord.Bot.Helpers;
-using KanbanCord.Core.Helpers;
+using KanbanCord.Core.Options;
+using Microsoft.Extensions.Options;
 
 namespace KanbanCord.Bot.Commands;
 
 public class HelpCommand
 {
     private const string BaseInviteUrl = "https://discord.com/oauth2/authorize?client_id=";
+    private readonly string? supportInvite;
+
+    public HelpCommand(IOptions<DiscordOptions> options)
+    {
+        supportInvite = options.Value.SupportInvite ?? null;
+    }
+    
     
     [Command("help")]
     [Description("Displays all the commands available.")]
@@ -60,8 +68,6 @@ public class HelpCommand
         }
 
         List<DiscordComponent> additionalComponents = [new DiscordLinkButtonComponent(BaseInviteUrl + context.Client.CurrentUser.Id, "Invite")];
-
-        var supportInvite = EnvironmentHelpers.GetSupportServerInvite();
         
         if (supportInvite is not null)
             additionalComponents.Add(new DiscordLinkButtonComponent(supportInvite, "Support"));

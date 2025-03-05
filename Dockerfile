@@ -6,16 +6,14 @@ WORKDIR /KanbanCord
 COPY ["KanbanCord.Bot/", "KanbanCord.Bot/"]
 COPY ["KanbanCord.Core/", "KanbanCord.Core/"]
 
+ARG application_version=Unknown
+
 RUN dotnet restore "KanbanCord.Bot/KanbanCord.Bot.csproj"
 RUN dotnet build "KanbanCord.Bot/KanbanCord.Bot.csproj" -c Release -o /build
-RUN dotnet publish "KanbanCord.Bot/KanbanCord.Bot.csproj" -p:PublishSingleFile=true -r linux-musl-x64 --self-contained -c Release -o /publish
+RUN dotnet publish "KanbanCord.Bot/KanbanCord.Bot.csproj" -p:PublishSingleFile=true -r linux-musl-x64 --self-contained -c Release -o /publish -p:Version=$application_version
 
 
 FROM alpine:latest
-
-ARG application_version=Unknown
-
-ENV APPLICATION_VERSION=$application_version
 
 RUN apk upgrade --no-cache && apk add --no-cache icu-libs
 

@@ -1,6 +1,8 @@
-<p align="center">
-  <img width="150" src=".github/images/logo.png"/>
-</p>
+<a href="https://discord.com/oauth2/authorize?client_id=1301269207073165444">
+  <p align="center">
+    <img width="150" src=".github/images/logo.png"/>
+  </p>
+</a>
 
 <h1 align="center">KanbanCord</h1>
 
@@ -17,17 +19,19 @@
 ## Table of Contents
 
 <!-- TOC -->
-* [What is a Kanban Board](#what-is-a-kanban-board)
-* [Setup](#setup)
-  * [Docker](#docker)
-    * [Image](#image)
-    * [Variables](#variables)
-    * [Database](#database)
-  * [Docker Compose](#docker-compose)
-  * [Build from source](#build-from-source)
-* [Commands](#commands)
-  * [General Commands](#general-commands)
-  * [Task Management](#task-management)
+  * [Table of Contents](#table-of-contents)
+  * [What is a Kanban Board](#what-is-a-kanban-board)
+  * [Setup](#setup)
+    * [Docker](#docker)
+      * [Image](#image)
+      * [Variables](#variables)
+      * [Database](#database)
+    * [Docker Compose](#docker-compose)
+    * [Build from source](#build-from-source)
+  * [Logs](#logs)
+  * [Commands](#commands)
+    * [General Commands](#general-commands)
+    * [Task Management](#task-management)
 <!-- TOC -->
 
 ## What is a Kanban Board
@@ -46,13 +50,12 @@ Docker image for KanbanCord is available on the docker hub here: https://hub.doc
 
 These variables are Environment variables
 
-| Variable                    | Description                                                             | Required | Default value |
-|-----------------------------|-------------------------------------------------------------------------|----------|---------------|
-| `TOKEN`                     | Your discord application token (bot token).                             | Yes      | None          |
-| `MONGODB_CONNECTION_STRING` | MongoDB Connection String eg. `mongodb://localhost:27017`.              | Yes      | None          |
-| `MONGODB_DATABASE_NAME`     | MongoDB Database Name, if you want to change it from the default value. | No       | `KanbanCord`  |
-| `SUPPORT_INVITE`            | Support discord server invite link. Not needed when self hosting.       | No       | None          |
-
+| Variable                     | Description                                                             | Required | Default value |
+|------------------------------|-------------------------------------------------------------------------|----------|---------------|
+| `Discord__Token`             | Your discord application token (bot token).                             | Yes      | None          |
+| `Discord__SupportInvite`     | Support discord server invite link. Not needed when self hosting.       | No       | None          |
+| `Database__ConnectionString` | MongoDB Connection String eg. `mongodb://localhost:27017`.              | Yes      | None          |
+| `Database__Name`             | MongoDB Database Name, if you want to change it from the default value. | No       | `KanbanCord`  |
 
 #### Database
 
@@ -86,8 +89,12 @@ docker build -t kanbancord .
 Now you can run the bot, and add the required environment variables:
 
 ```console
-docker run -d -e TOKEN=your-bot-token -e MONGODB_CONNECTION_STRING=your-mongodb-connection-string kanbancord
+docker run -d -e Discord__Token=your-bot-token -e Database__ConnectionString=your-mongodb-connection-string kanbancord
 ```
+
+## Logs
+
+The bot uses **Serilog** for logging, with the default log file written to `/logs/kanbancord-log.txt`. You can customize the logging settings through the [appsettings.json](KanbanCord.Bot/appsettings.json) file or override them using environment variables that follow the configuration structure. If you're running the bot in a Docker container, you can bind the log file path to the container to easily access and review the logs. For more information on configuring environment variables, check the official [ASP.NET Core Configuration documentation](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/configuration/?view=aspnetcore-9.0#naming-of-environment-variables).
 
 ## Commands
 
