@@ -15,7 +15,7 @@ partial class TaskCommandGroup
 {
     [Command("archive")]
     [Description("Archive a task and have it moved to the list of archived items.")]
-    public async ValueTask TaskArchiveCommand(SlashCommandContext context, [Description("Search for the task to select")] [SlashAutoCompleteProvider<AllTaskItemsAutoCompleteProvider>] string task)
+    public async ValueTask TaskArchiveCommand(SlashCommandContext context, [Description("Search for the task to select")] [SlashAutoCompleteProvider<CompletedTaskItemsAutoCompleteProvider>] string task)
     {
         var taskItem = await _taskItemRepository.GetTaskItemByObjectIdOrDefaultAsync(new ObjectId(task));
 
