@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFramework>net9.0</TargetFramework>
@@ -16,7 +16,7 @@
         <PackageReference Include="DSharpPlus" Version="5.0.0-nightly-02461" />
         <PackageReference Include="DSharpPlus.Commands" Version="5.0.0-nightly-02461" />
         <PackageReference Include="DSharpPlus.Interactivity" Version="5.0.0-nightly-02461" />
-        <PackageReference Include="DSharpPlus.Natives.Zstd" Version="1.5.7.19" />
+        <PackageReference Include="DSharpPlus.Natives.Zstd" Version="1.5.7.21" />
         <PackageReference Include="J4asper.DSharpPlus.BetterPagination" Version="1.0.4" />
         <PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.2" />
         <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="9.0.2" />
