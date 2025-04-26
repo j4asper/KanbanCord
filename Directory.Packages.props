@@ -1,0 +1,35 @@
+<Project>
+    <PropertyGroup>
+        <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageVersion Include="Microsoft.Extensions.DependencyInjection" Version="9.0.2" />
+        <PackageVersion Include="Microsoft.Extensions.Hosting" Version="9.0.2" />
+        <PackageVersion Include="Microsoft.Extensions.Options.DataAnnotations" Version="9.0.2" />
+        <PackageVersion Include="Microsoft.Extensions.Configuration" Version="9.0.2" />
+        <PackageVersion Include="Microsoft.Extensions.Logging.Console" Version="9.0.2" />
+
+        <PackageVersion Include="MongoDB.Bson" Version="3.2.1" />
+        <PackageVersion Include="MongoDB.Driver" Version="3.2.1" />
+        <PackageVersion Include="Mongo2Go" Version="4.1.0" />
+
+        <PackageVersion Include="DSharpPlus" Version="5.0.0-nightly-02461" />
+        <PackageVersion Include="DSharpPlus.Commands" Version="5.0.0-nightly-02461" />
+        <PackageVersion Include="DSharpPlus.Interactivity" Version="5.0.0-nightly-02461" />
+        <PackageVersion Include="DSharpPlus.Natives.Zstd" Version="1.5.7.19" />
+        <PackageVersion Include="J4asper.DSharpPlus.BetterPagination" Version="1.0.4" />
+
+        <PackageVersion Include="Serilog" Version="4.2.0" />
+        <PackageVersion Include="Serilog.Exceptions" Version="8.4.0" />
+        <PackageVersion Include="Serilog.Extensions.Logging" Version="9.0.0" />
+        <PackageVersion Include="Serilog.Settings.Configuration" Version="9.0.0" />
+        <PackageVersion Include="Serilog.Sinks.Console" Version="6.0.0" />
+        <PackageVersion Include="Serilog.Sinks.File" Version="6.0.0" />
+
+        <PackageVersion Include="coverlet.collector" Version="6.0.4" />
+        <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
+        <PackageVersion Include="Moq" Version="4.18.4" />
+        <PackageVersion Include="xunit" Version="2.9.3" />
+        <PackageVersion Include="xunit.runner.visualstudio" Version="3.0.0" />
+    </ItemGroup>
+</Project>

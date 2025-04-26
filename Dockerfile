@@ -5,6 +5,8 @@ WORKDIR /KanbanCord
 
 COPY ["KanbanCord.Bot/", "KanbanCord.Bot/"]
 COPY ["KanbanCord.Core/", "KanbanCord.Core/"]
+COPY ["Directory.Build.props", "Directory.Build.props"]
+COPY ["Directory.Packages.props", "Directory.Packages.props"]
 
 ARG application_version=Unknown
 
