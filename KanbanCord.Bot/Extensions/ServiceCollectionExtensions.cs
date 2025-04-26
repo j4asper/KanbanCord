@@ -8,8 +8,6 @@ using KanbanCord.Bot.EventHandlers;
 using KanbanCord.Core.Interfaces;
 using KanbanCord.Core.Options;
 using KanbanCord.Core.Repositories;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 
@@ -17,7 +15,7 @@ namespace KanbanCord.Bot.Extensions;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection AddServices(this IServiceCollection services)
+    public static IServiceCollection AddHostDependencies(this IServiceCollection services)
     {
         services.AddOptionsWithValidateOnStart<DatabaseOptions>()
             .BindConfiguration(DatabaseOptions.Database)
