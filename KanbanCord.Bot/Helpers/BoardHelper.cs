@@ -27,8 +27,8 @@ public static class BoardHelper
             var inProgressString = await boardItems.GetBoardTaskString(client, BoardStatus.InProgress);
             embed.AddField("In Progress", inProgressString);
         
-            var compltedString = await boardItems.GetBoardTaskString(client, BoardStatus.Completed);
-            embed.AddField("Completed", compltedString);
+            var completedString = await boardItems.GetBoardTaskString(client, BoardStatus.Completed);
+            embed.AddField("Completed", completedString);
         }
         
         return embed;
