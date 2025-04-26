@@ -6,17 +6,17 @@ namespace KanbanCord.Bot.EventHandlers;
 
 public class GuildCreatedEventHandler : IEventHandler<GuildCreatedEventArgs>
 {
-    private readonly ILogger<GuildCreatedEventHandler> logger;
+    private readonly ILogger<GuildCreatedEventHandler> _logger;
 
     public GuildCreatedEventHandler(ILogger<GuildCreatedEventHandler> logger)
     {
-        this.logger = logger;
+        _logger = logger;
     }
 
 
     public Task HandleEventAsync(DiscordClient sender, GuildCreatedEventArgs eventArgs)
     {
-        logger.LogInformation("Joined Guild: {guildName} ({guildId})", eventArgs.Guild.Name, eventArgs.Guild.Id);
+        _logger.LogInformation("Joined Guild: {guildName} ({guildId})", eventArgs.Guild.Name, eventArgs.Guild.Id);
         
         return Task.CompletedTask;
     }

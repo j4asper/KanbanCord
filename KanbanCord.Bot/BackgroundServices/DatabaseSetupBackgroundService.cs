@@ -7,13 +7,13 @@ namespace KanbanCord.Bot.BackgroundServices;
 
 public class DatabaseSetupBackgroundService : BackgroundService
 {
-    private readonly IMongoDatabase database;
-    private readonly ILogger<DatabaseSetupBackgroundService> logger;
+    private readonly IMongoDatabase _database;
+    private readonly ILogger<DatabaseSetupBackgroundService> _logger;
 
     public DatabaseSetupBackgroundService(IMongoDatabase database, ILogger<DatabaseSetupBackgroundService> logger)
     {
-        this.database = database;
-        this.logger = logger;
+        _database = database;
+        _logger = logger;
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -22,7 +22,7 @@ public class DatabaseSetupBackgroundService : BackgroundService
             .Select(x => x.ToString())
             .ToArray();
 
-        var cursor = await database.ListCollectionNamesAsync(cancellationToken: stoppingToken);
+        var cursor = await _database.ListCollectionNamesAsync(cancellationToken: stoppingToken);
         
         var collectionList = await cursor.ToListAsync<string>(cancellationToken: stoppingToken);
 
@@ -33,12 +33,12 @@ public class DatabaseSetupBackgroundService : BackgroundService
             if (collectionList.Contains(collectionName))
                 continue;
             
-            await database.CreateCollectionAsync(collectionName, cancellationToken: stoppingToken);
+            await _database.CreateCollectionAsync(collectionName, cancellationToken: stoppingToken);
             
             createdCollections.Add(collectionName);
         }
         
         if (createdCollections.Count != 0)
-            logger.LogInformation("Created missing mongodb collection(s): {collections}", string.Join(", ", createdCollections));
+            _logger.LogInformation("Created missing mongodb collection(s): {collections}", string.Join(", ", createdCollections));
     }
 }

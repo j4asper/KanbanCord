@@ -9,13 +9,13 @@ public class GuildDeletedEventHandler : IEventHandler<GuildDeletedEventArgs>
 {
     private readonly ISettingsRepository _settingsRepository;
     private readonly ITaskItemRepository _taskItemRepository;
-    private readonly ILogger<GuildDeletedEventHandler> logger;
+    private readonly ILogger<GuildDeletedEventHandler> _logger;
 
     public GuildDeletedEventHandler(ISettingsRepository settingsRepository, ITaskItemRepository taskItemRepository, ILogger<GuildDeletedEventHandler> logger)
     {
         _settingsRepository = settingsRepository;
         _taskItemRepository = taskItemRepository;
-        this.logger = logger;
+        _logger = logger;
     }
 
 
@@ -28,6 +28,6 @@ public class GuildDeletedEventHandler : IEventHandler<GuildDeletedEventArgs>
         
         await _settingsRepository.RemoveAsync(eventArgs.Guild.Id);
         
-        logger.LogInformation("Left Guild: {guildName} ({guildId})", eventArgs.Guild.Name, eventArgs.Guild.Id);
+        _logger.LogInformation("Left Guild: {guildName} ({guildId})", eventArgs.Guild.Name, eventArgs.Guild.Id);
     }
 }
