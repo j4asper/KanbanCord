@@ -10,13 +10,14 @@ using KanbanCord.Core.Options;
 using KanbanCord.Core.Repositories;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 
 namespace KanbanCord.Bot.Extensions;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection AddServices(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddServices(this IServiceCollection services)
     {
         services.AddOptionsWithValidateOnStart<DatabaseOptions>()
             .BindConfiguration(DatabaseOptions.Database)
@@ -32,10 +33,13 @@ public static class ServiceCollectionExtensions
         services.AddSingleton<ITaskItemRepository, TaskItemRepository>();
         services.AddSingleton<ISettingsRepository, SettingsRepository>();
 
-        services.AddSingleton<IMongoDatabase>(_ =>
-            new MongoClient(configuration.GetRequiredSection("Database:ConnectionString").Value)
-                .GetDatabase(configuration.GetRequiredSection("Database:Name").Value)
-        );
+        services.AddSingleton<IMongoDatabase>(sp =>
+        {
+            var options = sp.GetRequiredService<IOptions<DatabaseOptions>>().Value;
+            
+            return new MongoClient(options.ConnectionString)
+                .GetDatabase(options.Name);
+        });
         
         return services;
     }

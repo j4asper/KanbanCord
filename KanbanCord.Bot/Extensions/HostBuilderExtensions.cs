@@ -10,7 +10,7 @@ public static class HostBuilderExtensions
     {
         hostBuilder.ConfigureServices((hostContext, services) =>
         {
-            services.AddServices(hostContext.Configuration);
+            services.AddServices();
             services.AddDiscordConfiguration(hostContext.Configuration);
         });
         
