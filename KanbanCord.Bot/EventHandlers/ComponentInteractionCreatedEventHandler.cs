@@ -5,8 +5,8 @@ using DSharpPlus.Interactivity;
 using KanbanCord.Bot.Extensions;
 using KanbanCord.Bot.Helpers;
 using KanbanCord.Core.Constants;
-using KanbanCord.Core.Interfaces;
 using KanbanCord.Core.Models;
+using KanbanCord.Core.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Bson;
 

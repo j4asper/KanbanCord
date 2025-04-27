@@ -1,7 +1,7 @@
 using DSharpPlus.Commands;
 using DSharpPlus.Commands.ContextChecks;
 using DSharpPlus.Entities;
-using KanbanCord.Core.Interfaces;
+using KanbanCord.Core.Repositories;
 
 namespace KanbanCord.Bot.Commands.Task;
 

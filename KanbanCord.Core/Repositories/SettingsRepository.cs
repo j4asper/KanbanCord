@@ -1,4 +1,3 @@
-using KanbanCord.Core.Interfaces;
 using KanbanCord.Core.Models;
 using MongoDB.Driver;
 
