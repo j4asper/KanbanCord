@@ -20,12 +20,12 @@ partial class TaskCommandGroup
         var modal = new DiscordInteractionResponseBuilder()
             .WithCustomId(Guid.NewGuid().ToString())
             .WithTitle("Add a new Task")
-            .AddComponents(new DiscordTextInputComponent(
+            .AddTextInputComponent(new DiscordTextInputComponent(
                 "Title:",
                 "titleField",
                 "Title of the task",
                 max_length: Limits.TaskTitleMaxLength))
-            .AddComponents(new DiscordTextInputComponent(
+            .AddTextInputComponent(new DiscordTextInputComponent(
                 "Description:",
                 "descriptionField",
                 "Description of the task",

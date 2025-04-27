@@ -6,9 +6,9 @@
     <PackageVersion Include="MongoDB.Bson" Version="3.3.0" />
     <PackageVersion Include="MongoDB.Driver" Version="3.3.0" />
     <PackageVersion Include="Mongo2Go" Version="4.1.0" />
-    <PackageVersion Include="DSharpPlus" Version="5.0.0-nightly-02490" />
-    <PackageVersion Include="DSharpPlus.Commands" Version="5.0.0-nightly-02490" />
-    <PackageVersion Include="DSharpPlus.Interactivity" Version="5.0.0-nightly-02490" />
+    <PackageVersion Include="DSharpPlus" Version="5.0.0-nightly-02497" />
+    <PackageVersion Include="DSharpPlus.Commands" Version="5.0.0-nightly-02497" />
+    <PackageVersion Include="DSharpPlus.Interactivity" Version="5.0.0-nightly-02497" />
     <PackageVersion Include="DSharpPlus.Natives.Zstd" Version="1.5.7.21" />
     <PackageVersion Include="J4asper.DSharpPlus.BetterPagination" Version="1.0.4" />
     <PackageVersion Include="Serilog" Version="4.2.0" />

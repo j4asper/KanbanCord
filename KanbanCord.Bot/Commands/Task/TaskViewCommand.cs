@@ -69,7 +69,7 @@ partial class TaskCommandGroup
         {
             var response = new DiscordMessageBuilder()
                 .AddEmbed(embed)
-                .AddComponents(addCommentButton);
+                .AddActionRowComponent(addCommentButton);
             
             await context.RespondAsync(response);
             return;

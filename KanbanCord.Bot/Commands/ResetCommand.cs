@@ -33,7 +33,7 @@ public class ResetCommand
         
         var responseMessage = new DiscordMessageBuilder()
             .AddEmbed(embed)
-            .AddComponents(clearButton);
+            .AddActionRowComponent(clearButton);
         
         await context.RespondAsync(responseMessage);
         
@@ -64,7 +64,7 @@ public class ResetCommand
             
                 var timedOutMessage = new DiscordMessageBuilder()
                     .AddEmbed(embed)
-                    .AddComponents(clearButton);
+                    .AddActionRowComponent(clearButton);
             
                 await message.ModifyAsync(timedOutMessage);
                 break;

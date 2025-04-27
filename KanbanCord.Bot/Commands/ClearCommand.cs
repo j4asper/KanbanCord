@@ -34,7 +34,7 @@ public class ClearCommand
         
         var responseMessage = new DiscordMessageBuilder()
             .AddEmbed(embed)
-            .AddComponents(clearButton);
+            .AddActionRowComponent(clearButton);
         
         await context.RespondAsync(responseMessage);
         
@@ -72,7 +72,7 @@ public class ClearCommand
             
                 var timedOutMessage = new DiscordMessageBuilder()
                     .AddEmbed(embed)
-                    .AddComponents(clearButton);
+                    .AddActionRowComponent(clearButton);
             
                 await message.ModifyAsync(timedOutMessage);
                 break;

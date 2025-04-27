@@ -23,7 +23,7 @@ public class RepositoryCommand
         
         var response = new DiscordMessageBuilder()
             .AddEmbed(embed)
-            .AddComponents(
+            .AddActionRowComponent(
                 new DiscordLinkButtonComponent(Source.RepositoryUrl, "Github Repository"),
                 new DiscordLinkButtonComponent($"https://discord.com/oauth2/authorize?client_id={context.Client.CurrentUser.Id}", "Invite Bot"));
         

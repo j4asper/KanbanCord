@@ -66,7 +66,7 @@ public class ComponentInteractionCreatedEventHandler  :IEventHandler<ComponentIn
         
         var response = new DiscordInteractionResponseBuilder()
             .AddEmbed(embed)
-            .AddComponents(refreshButton);
+            .AddActionRowComponent(refreshButton);
 
         await eventArgs.Interaction.CreateResponseAsync(DiscordInteractionResponseType.UpdateMessage, response);
     }
@@ -95,7 +95,7 @@ public class ComponentInteractionCreatedEventHandler  :IEventHandler<ComponentIn
         var modal = new DiscordInteractionResponseBuilder()
             .WithCustomId(Guid.NewGuid().ToString())
             .WithTitle("Add a comment to a task")
-            .AddComponents(new DiscordTextInputComponent(
+            .AddTextInputComponent(new DiscordTextInputComponent(
                 "Comment:",
                 "commentField",
                 "Put your comment here",

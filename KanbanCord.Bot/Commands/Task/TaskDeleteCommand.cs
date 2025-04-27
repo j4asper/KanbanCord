@@ -42,7 +42,7 @@ partial class TaskCommandGroup
         
         var responseMessage = new DiscordMessageBuilder()
             .AddEmbed(embed)
-            .AddComponents(deleteButton);
+            .AddActionRowComponent(deleteButton);
         
         await context.RespondAsync(responseMessage);
         
@@ -73,7 +73,7 @@ partial class TaskCommandGroup
             
                 var timedOutMessage = new DiscordMessageBuilder()
                     .AddEmbed(embed)
-                    .AddComponents(deleteButton);
+                    .AddActionRowComponent(deleteButton);
             
                 await message.ModifyAsync(timedOutMessage);
                 break;
