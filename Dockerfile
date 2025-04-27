@@ -8,11 +8,11 @@ COPY ["KanbanCord.Core/", "KanbanCord.Core/"]
 COPY ["Directory.Build.props", "Directory.Build.props"]
 COPY ["Directory.Packages.props", "Directory.Packages.props"]
 
-ARG application_version=Unknown
+ARG application_version=0.0.0
 
 RUN dotnet restore "KanbanCord.Bot/KanbanCord.Bot.csproj"
 RUN dotnet build "KanbanCord.Bot/KanbanCord.Bot.csproj" -c Release -o /build
-RUN dotnet publish "KanbanCord.Bot/KanbanCord.Bot.csproj" -p:PublishSingleFile=true -r linux-musl-x64 --self-contained -c Release -o /publish -p:Version=$application_version
+RUN dotnet publish "KanbanCord.Bot/KanbanCord.Bot.csproj" -r linux-musl-x64 --self-contained -c Release -o /publish -p:Version=$application_version
 
 
 FROM alpine:latest
@@ -24,3 +24,5 @@ WORKDIR /src
 COPY --from=build-env /publish /src
 
 CMD ["./KanbanCord.Bot"]
+
+HEALTHCHECK CMD wget --quiet --tries=1 --spider http://localhost:5000/health || exit 1

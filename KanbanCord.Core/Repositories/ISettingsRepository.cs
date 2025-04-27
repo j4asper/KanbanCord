@@ -1,6 +1,6 @@
 using KanbanCord.Core.Models;
 
-namespace KanbanCord.Core.Interfaces;
+namespace KanbanCord.Core.Repositories;
 
 public interface ISettingsRepository
 {

@@ -1,5 +1,4 @@
 ﻿using KanbanCord.Bot.Extensions;
-using Microsoft.Extensions.Hosting;
 
 namespace KanbanCord.Bot;
 
@@ -7,15 +6,22 @@ internal class Program
 {
     private static async Task Main()
     {
-        var builder = Host.CreateDefaultBuilder();
+        var builder = WebApplication.CreateBuilder();
         
-        builder
+        builder.Host
             .UseDefaultServiceProvider()
-            .UseConsoleLifetime()
-            .AddHostDependencies()
             .UseSerilog();
         
+        builder.Services
+            .AddHostDependencies()
+            .AddDiscordConfiguration(builder.Configuration);
+
+        builder.Services.AddHealthChecks()
+            .AddKanbanCordHealthChecks();
+        
         var app = builder.Build();
+
+        app.UseHealthChecks("/health");
         
         await app.RunAsync();
     }

@@ -5,11 +5,8 @@ using DSharpPlus.Extensions;
 using DSharpPlus.Interactivity.Extensions;
 using KanbanCord.Bot.BackgroundServices;
 using KanbanCord.Bot.EventHandlers;
-using KanbanCord.Core.Interfaces;
 using KanbanCord.Core.Options;
 using KanbanCord.Core.Repositories;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 
@@ -17,7 +14,7 @@ namespace KanbanCord.Bot.Extensions;
 
 public static class ServiceCollectionExtensions
 {
-    public static IServiceCollection AddServices(this IServiceCollection services)
+    public static IServiceCollection AddHostDependencies(this IServiceCollection services)
     {
         services.AddOptionsWithValidateOnStart<DatabaseOptions>()
             .BindConfiguration(DatabaseOptions.Database)
@@ -49,7 +46,8 @@ public static class ServiceCollectionExtensions
         const DiscordIntents intents = DiscordIntents.None
                                        | DiscordIntents.Guilds;
         
-        services.AddDiscordClient(configuration.GetRequiredSection("Discord:Token").Value!, intents)
+        services
+            .AddDiscordClient(configuration.GetRequiredSection("Discord:Token").Value!, intents)
             .Configure<DiscordConfiguration>(discordConfiguration =>
             {
                 discordConfiguration.LogUnknownAuditlogs = false;

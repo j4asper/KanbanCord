@@ -1,7 +1,7 @@
 using KanbanCord.Core.Models;
 using MongoDB.Bson;
 
-namespace KanbanCord.Core.Interfaces;
+namespace KanbanCord.Core.Repositories;
 
 public interface ITaskItemRepository
 {

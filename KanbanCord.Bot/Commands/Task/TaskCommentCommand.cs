@@ -36,7 +36,7 @@ partial class TaskCommandGroup
         var modal = new DiscordInteractionResponseBuilder()
             .WithCustomId(Guid.NewGuid().ToString())
             .WithTitle("Add a comment to a task")
-            .AddComponents(new DiscordTextInputComponent(
+            .AddTextInputComponent(new DiscordTextInputComponent(
                 "Comment:",
                 "commentField",
                 "Put your comment here",

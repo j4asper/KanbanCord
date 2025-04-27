@@ -5,9 +5,8 @@ using DSharpPlus.Interactivity;
 using KanbanCord.Bot.Extensions;
 using KanbanCord.Bot.Helpers;
 using KanbanCord.Core.Constants;
-using KanbanCord.Core.Interfaces;
 using KanbanCord.Core.Models;
-using Microsoft.Extensions.DependencyInjection;
+using KanbanCord.Core.Repositories;
 using MongoDB.Bson;
 
 namespace KanbanCord.Bot.EventHandlers;
@@ -66,7 +65,7 @@ public class ComponentInteractionCreatedEventHandler  :IEventHandler<ComponentIn
         
         var response = new DiscordInteractionResponseBuilder()
             .AddEmbed(embed)
-            .AddComponents(refreshButton);
+            .AddActionRowComponent(refreshButton);
 
         await eventArgs.Interaction.CreateResponseAsync(DiscordInteractionResponseType.UpdateMessage, response);
     }
@@ -95,7 +94,7 @@ public class ComponentInteractionCreatedEventHandler  :IEventHandler<ComponentIn
         var modal = new DiscordInteractionResponseBuilder()
             .WithCustomId(Guid.NewGuid().ToString())
             .WithTitle("Add a comment to a task")
-            .AddComponents(new DiscordTextInputComponent(
+            .AddTextInputComponent(new DiscordTextInputComponent(
                 "Comment:",
                 "commentField",
                 "Put your comment here",

@@ -1,21 +1,17 @@
 using System.Reflection;
 using DSharpPlus;
 using DSharpPlus.Entities;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 namespace KanbanCord.Bot.BackgroundServices;
 
 public class BotBackgroundService : IHostedService
 {
     private readonly ILogger<BotBackgroundService> _logger;
-    private readonly IHostApplicationLifetime _applicationLifetime;
     private readonly DiscordClient _discordClient;
 
-    public BotBackgroundService(ILogger<BotBackgroundService> logger, IHostApplicationLifetime applicationLifetime, DiscordClient discordClient)
+    public BotBackgroundService(ILogger<BotBackgroundService> logger, DiscordClient discordClient)
     {
         _logger = logger;
-        _applicationLifetime = applicationLifetime;
         _discordClient = discordClient;
     }
 

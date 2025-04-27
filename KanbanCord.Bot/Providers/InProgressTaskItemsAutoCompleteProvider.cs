@@ -2,8 +2,8 @@ using DSharpPlus.Commands.Processors.SlashCommands;
 using DSharpPlus.Commands.Processors.SlashCommands.ArgumentModifiers;
 using DSharpPlus.Entities;
 using KanbanCord.Bot.Helpers;
-using KanbanCord.Core.Interfaces;
 using KanbanCord.Core.Models;
+using KanbanCord.Core.Repositories;
 
 namespace KanbanCord.Bot.Providers;
 
