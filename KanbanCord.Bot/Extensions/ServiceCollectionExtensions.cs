@@ -46,7 +46,8 @@ public static class ServiceCollectionExtensions
         const DiscordIntents intents = DiscordIntents.None
                                        | DiscordIntents.Guilds;
         
-        services.AddDiscordClient(configuration.GetRequiredSection("Discord:Token").Value!, intents)
+        services
+            .AddDiscordClient(configuration.GetRequiredSection("Discord:Token").Value!, intents)
             .Configure<DiscordConfiguration>(discordConfiguration =>
             {
                 discordConfiguration.LogUnknownAuditlogs = false;
