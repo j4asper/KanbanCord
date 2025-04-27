@@ -7,7 +7,6 @@ using KanbanCord.Bot.Helpers;
 using KanbanCord.Core.Constants;
 using KanbanCord.Core.Models;
 using KanbanCord.Core.Repositories;
-using Microsoft.Extensions.DependencyInjection;
 using MongoDB.Bson;
 
 namespace KanbanCord.Bot.EventHandlers;

@@ -1,7 +1,6 @@
 using DSharpPlus;
 using DSharpPlus.EventArgs;
 using KanbanCord.Core.Repositories;
-using Microsoft.Extensions.Logging;
 
 namespace KanbanCord.Bot.EventHandlers;
 

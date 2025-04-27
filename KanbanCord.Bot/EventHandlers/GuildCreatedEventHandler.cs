@@ -1,6 +1,5 @@
 using DSharpPlus;
 using DSharpPlus.EventArgs;
-using Microsoft.Extensions.Logging;
 
 namespace KanbanCord.Bot.EventHandlers;
 
