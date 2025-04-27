@@ -17,7 +17,7 @@ RUN dotnet publish "KanbanCord.Bot/KanbanCord.Bot.csproj" -r linux-musl-x64 --se
 
 FROM alpine:latest
 
-RUN apk upgrade --no-cache && apk add --no-cache icu-libs curl
+RUN apk upgrade --no-cache && apk add --no-cache icu-libs
 
 WORKDIR /src
 
@@ -25,4 +25,4 @@ COPY --from=build-env /publish /src
 
 CMD ["./KanbanCord.Bot"]
 
-HEALTHCHECK CMD curl --fail http://localhost:5000/health || exit
+HEALTHCHECK CMD wget --quiet --tries=1 --spider http://localhost:5000/health || exit 1
