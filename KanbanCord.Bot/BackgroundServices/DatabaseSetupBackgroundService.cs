@@ -1,18 +1,16 @@
 using KanbanCord.Core.Models;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using MongoDB.Driver;
 
 namespace KanbanCord.Bot.BackgroundServices;
 
 public class DatabaseSetupBackgroundService : BackgroundService
 {
-    private readonly IMongoDatabase _database;
+    private readonly IServiceScopeFactory _serviceScopeFactory;
     private readonly ILogger<DatabaseSetupBackgroundService> _logger;
 
-    public DatabaseSetupBackgroundService(IMongoDatabase database, ILogger<DatabaseSetupBackgroundService> logger)
+    public DatabaseSetupBackgroundService(IServiceScopeFactory serviceScopeFactory, ILogger<DatabaseSetupBackgroundService> logger)
     {
-        _database = database;
+        _serviceScopeFactory = serviceScopeFactory;
         _logger = logger;
     }
 
@@ -22,7 +20,11 @@ public class DatabaseSetupBackgroundService : BackgroundService
             .Select(x => x.ToString())
             .ToArray();
 
-        var cursor = await _database.ListCollectionNamesAsync(cancellationToken: stoppingToken);
+        var database = _serviceScopeFactory
+            .CreateScope().ServiceProvider
+            .GetRequiredService<IMongoDatabase>();
+        
+        var cursor = await database.ListCollectionNamesAsync(cancellationToken: stoppingToken);
         
         var collectionList = await cursor.ToListAsync<string>(cancellationToken: stoppingToken);
 
@@ -33,7 +35,7 @@ public class DatabaseSetupBackgroundService : BackgroundService
             if (collectionList.Contains(collectionName))
                 continue;
             
-            await _database.CreateCollectionAsync(collectionName, cancellationToken: stoppingToken);
+            await database.CreateCollectionAsync(collectionName, cancellationToken: stoppingToken);
             
             createdCollections.Add(collectionName);
         }

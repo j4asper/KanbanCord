@@ -12,12 +12,17 @@ public class DiscordConnectivityHealthCheck : IHealthCheck
         _discordClient = discordClient;
     }
 
-    public Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken = default)
+    public async Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken = default)
     {
-        var connected = _discordClient.AllShardsConnected;
-        
-        return Task.FromResult(connected
-            ? HealthCheckResult.Healthy()
-            : HealthCheckResult.Unhealthy());
+        try
+        {
+            var connections = await _discordClient.GetCurrentApplicationAsync();
+            
+            return HealthCheckResult.Healthy();
+        }
+        catch (Exception e)
+        {
+            return HealthCheckResult.Unhealthy(exception: e);
+        }
     }
 }

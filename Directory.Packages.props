@@ -10,7 +10,7 @@
     <PackageVersion Include="DSharpPlus.Commands" Version="5.0.0-nightly-02544" />
     <PackageVersion Include="DSharpPlus.Interactivity" Version="5.0.0-nightly-02544" />
     <PackageVersion Include="DSharpPlus.Natives.Zstd" Version="1.5.7.21" />
-    <PackageVersion Include="J4asper.DSharpPlus.BetterPagination" Version="1.0.4" />
+    <PackageVersion Include="J4asper.DSharpPlus.BetterPagination" Version="1.1.0" />
     <PackageVersion Include="Serilog" Version="4.3.0" />
     <PackageVersion Include="Serilog.Exceptions" Version="8.4.0" />
     <PackageVersion Include="Serilog.Extensions.Logging" Version="9.0.2" />

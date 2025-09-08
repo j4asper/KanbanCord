@@ -16,6 +16,41 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection AddHostDependencies(this IServiceCollection services)
     {
+        services
+            .AddServices()
+            .AddOptions()
+            .AddHttpClient()
+            ;
+
+        services.AddScoped<IMongoDatabase>(sp =>
+        {
+            var options = sp.GetRequiredService<IOptions<DatabaseOptions>>().Value;
+            
+            return new MongoClient(options.ConnectionString)
+                .GetDatabase(options.Name);
+        });
+        
+        return services;
+    }
+
+    private static IServiceCollection AddServices(this IServiceCollection services)
+    {
+        services
+            .AddHostedService<BotBackgroundService>()
+            .AddHostedService<DatabaseSetupBackgroundService>()
+            .AddHostedService<UptimeMonitorBackgroundService>()
+            ;
+        
+        services
+            .AddScoped<ITaskItemRepository, TaskItemRepository>()
+            .AddScoped<ISettingsRepository, SettingsRepository>()
+            ;
+        
+        return services;
+    }
+
+    private static IServiceCollection AddOptions(this IServiceCollection services)
+    {
         services.AddOptionsWithValidateOnStart<DatabaseOptions>()
             .BindConfiguration(DatabaseOptions.Database)
             .ValidateDataAnnotations();
@@ -24,20 +59,10 @@ public static class ServiceCollectionExtensions
             .BindConfiguration(DiscordOptions.Discord)
             .ValidateDataAnnotations();
         
-        services.AddHostedService<BotBackgroundService>();
-        services.AddHostedService<DatabaseSetupBackgroundService>();
-        
-        services.AddSingleton<ITaskItemRepository, TaskItemRepository>();
-        services.AddSingleton<ISettingsRepository, SettingsRepository>();
+        services.AddOptionsWithValidateOnStart<UptimeMonitorOptions>()
+            .BindConfiguration(UptimeMonitorOptions.UptimeMonitor)
+            .ValidateDataAnnotations();
 
-        services.AddSingleton<IMongoDatabase>(sp =>
-        {
-            var options = sp.GetRequiredService<IOptions<DatabaseOptions>>().Value;
-            
-            return new MongoClient(options.ConnectionString)
-                .GetDatabase(options.Name);
-        });
-        
         return services;
     }
     
