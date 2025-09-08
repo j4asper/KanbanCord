@@ -50,12 +50,15 @@ Docker image for KanbanCord is available on the docker hub here: https://hub.doc
 
 These variables are Environment variables
 
-| Variable                     | Description                                                             | Required | Default value |
-|------------------------------|-------------------------------------------------------------------------|----------|---------------|
-| `Discord__Token`             | Your discord application token (bot token).                             | Yes      | None          |
-| `Discord__SupportInvite`     | Support discord server invite link. Not needed when self hosting.       | No       | None          |
-| `Database__ConnectionString` | MongoDB Connection String eg. `mongodb://localhost:27017`.              | Yes      | None          |
-| `Database__Name`             | MongoDB Database Name, if you want to change it from the default value. | No       | `KanbanCord`  |
+| Variable                      | Description                                                                                  | Required | Default value |
+|-------------------------------|----------------------------------------------------------------------------------------------|----------|---------------|
+| `Discord__Token`              | Your discord application token (bot token).                                                  | Yes      | None          |
+| `Discord__SupportInvite`      | Support discord server invite link. Not needed when self hosting.                            | No       | None          |
+| `Database__ConnectionString`  | MongoDB Connection String eg. `mongodb://localhost:27017`.                                   | Yes      | None          |
+| `Database__Name`              | MongoDB Database Name, if you want to change it from the default value.                      | No       | `KanbanCord`  |
+| `UptimeMonitor__Enabled`      | Whether to enable the uptime monitor, made for uptime kuma, but may work for other services. | No       | `false`       |
+| `UptimeMonitor__PushUrl`      | The Url to make a request to for the uptime monitor.                                         | No       | None          |
+| `UptimeMonitor__PushInterval` | A TimeSpan interval for making requests to the uptime monitor push url.                      | No       | 1 Minute      |
 
 #### Database
 
