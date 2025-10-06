@@ -14,6 +14,9 @@ jobs:
     name: Build and Publish Bot Docker Image
     runs-on: ubuntu-latest
     needs: test_project
+    env:
+      IMAGE_NAME_DOCKERHUB: ${{ secrets.DOCKER_USERNAME }}/kanbancord
+      IMAGE_NAME_GHCR: ghcr.io/${{ github.repository_owner }}/kanbancord
     steps:
       - uses: actions/checkout@v4
 
@@ -23,11 +26,25 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build Docker image
-        run: docker build -f ./Dockerfile --build-arg application_version=${{ github.ref_name }} -t ${{ secrets.DOCKER_USERNAME }}/kanbancord:${{ github.ref_name }} .
+      - name: Login to GitHub Container Registry
+        run: echo "${{ secrets.CR_PAT }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
-      - name: Push to Registry
+      - name: Build Docker image
         run: |
-          docker push ${{ secrets.DOCKER_USERNAME }}/kanbancord:${{ github.ref_name }}
-          docker tag ${{ secrets.DOCKER_USERNAME }}/kanbancord:${{ github.ref_name }} ${{ secrets.DOCKER_USERNAME }}/kanbancord:latest
-          docker push ${{ secrets.DOCKER_USERNAME }}/kanbancord:latest
+          docker build -f ./Dockerfile \
+            --build-arg application_version=${{ github.ref_name }} \
+            -t $IMAGE_NAME_DOCKERHUB:${{ github.ref_name }} \
+            -t $IMAGE_NAME_DOCKERHUB:latest \
+            -t $IMAGE_NAME_GHCR:${{ github.ref_name }} \
+            -t $IMAGE_NAME_GHCR:latest \
+            .
+
+      - name: Push to Docker Hub
+        run: |
+          docker push $IMAGE_NAME_DOCKERHUB:${{ github.ref_name }}
+          docker push $IMAGE_NAME_DOCKERHUB:latest
+
+      - name: Push to GitHub Container Registry
+        run: |
+          docker push $IMAGE_NAME_GHCR:${{ github.ref_name }}
+          docker push $IMAGE_NAME_GHCR:latest
