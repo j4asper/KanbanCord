@@ -1,0 +1,17 @@
+﻿<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+    <File Path="Dockerfile" />
+    <File Path="README.md" />
+    <File Path="docker-compose.yml" />
+    <File Path=".github\workflows\unit-tests.yml" />
+  </Folder>
+  <Folder Name="/Solution Items/Workflows/">
+    <File Path=".github\workflows\build-and-publish-docker-image.yml" />
+    <File Path=".github\workflows\build-solution.yml" />
+    <File Path=".github\workflows\unit-tests.yml" />
+  </Folder>
+  <Project Path="KanbanCord.Core\KanbanCord.Core.csproj" Type="Classic C#" />
+  <Project Path="KanbanCord.Tests\KanbanCord.Tests.csproj" Type="Classic C#" />
+</Solution>
