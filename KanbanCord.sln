@@ -1,7 +1,5 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KanbanCord.Bot", "KanbanCord.Bot\KanbanCord.Bot.csproj", "{A78B6BE1-D052-4B35-9C90-65660ECCC727}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KanbanCord.Core", "KanbanCord.Core\KanbanCord.Core.csproj", "{6CACA53A-173B-4D17-8DB0-2B627CB0388E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KanbanCord.Tests", "KanbanCord.Tests\KanbanCord.Tests.csproj", "{DBEA21AC-2AB2-497E-AE7A-469BA945047A}"
@@ -29,10 +27,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A78B6BE1-D052-4B35-9C90-65660ECCC727}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A78B6BE1-D052-4B35-9C90-65660ECCC727}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A78B6BE1-D052-4B35-9C90-65660ECCC727}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A78B6BE1-D052-4B35-9C90-65660ECCC727}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6CACA53A-173B-4D17-8DB0-2B627CB0388E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6CACA53A-173B-4D17-8DB0-2B627CB0388E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6CACA53A-173B-4D17-8DB0-2B627CB0388E}.Release|Any CPU.ActiveCfg = Release|Any CPU
