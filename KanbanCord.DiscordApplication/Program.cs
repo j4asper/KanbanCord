@@ -17,4 +17,6 @@ builder.Services
 
 var app = builder.Build();
 
+app.MapHealthChecks("/health");
+
 await app.RunAsync();
