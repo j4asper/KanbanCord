@@ -12,6 +12,8 @@
     <File Path=".github\workflows\build-solution.yml" />
     <File Path=".github\workflows\unit-tests.yml" />
   </Folder>
+  <Project Path="KanbanCord.Aspire.AppHost\KanbanCord.Aspire.AppHost.csproj" Type="Classic C#" />
   <Project Path="KanbanCord.Core\KanbanCord.Core.csproj" Type="Classic C#" />
+  <Project Path="KanbanCord.DiscordApplication\KanbanCord.DiscordApplication.csproj" Type="Classic C#" />
   <Project Path="KanbanCord.Tests\KanbanCord.Tests.csproj" Type="Classic C#" />
 </Solution>

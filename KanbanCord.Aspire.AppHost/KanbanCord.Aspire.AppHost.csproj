@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <Sdk Name="Aspire.AppHost.Sdk" Version="9.5.2"/>
+
+    <PropertyGroup>
+        <!-- Properties inherited from Directory.Build.props -->
+        <OutputType>Exe</OutputType>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Aspire.Hosting.AppHost" />
+        <PackageReference Include="Aspire.Hosting.MongoDB" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\KanbanCord.DiscordApplication\KanbanCord.DiscordApplication.csproj" />
+    </ItemGroup>
+
+</Project>

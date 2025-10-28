@@ -3,27 +3,19 @@
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
   <ItemGroup>
-    <PackageVersion Include="MongoDB.Bson" Version="3.4.3" />
-    <PackageVersion Include="MongoDB.Driver" Version="3.4.3" />
+    <PackageVersion Include="Aspire.Hosting.MongoDB" Version="9.5.2" />
+    <PackageVersion Include="MongoDB.Bson" Version="3.5.0" />
+    <PackageVersion Include="MongoDB.Driver" Version="3.5.0" />
     <PackageVersion Include="Mongo2Go" Version="4.1.0" />
-    <PackageVersion Include="DSharpPlus" Version="5.0.0-nightly-02544" />
-    <PackageVersion Include="DSharpPlus.Commands" Version="5.0.0-nightly-02544" />
-    <PackageVersion Include="DSharpPlus.Interactivity" Version="5.0.0-nightly-02544" />
-    <PackageVersion Include="DSharpPlus.Natives.Zstd" Version="1.5.7.21" />
-    <PackageVersion Include="J4asper.DSharpPlus.BetterPagination" Version="1.1.0" />
+    <PackageVersion Include="NetCord.Hosting.Services" Version="1.0.0-alpha.439" />
+    <PackageVersion Include="Aspire.Hosting.AppHost" Version="9.5.2" />
     <PackageVersion Include="Serilog" Version="4.3.0" />
     <PackageVersion Include="Serilog.Exceptions" Version="8.4.0" />
-    <PackageVersion Include="Serilog.Extensions.Logging" Version="9.0.2" />
-    <PackageVersion Include="Serilog.Settings.Configuration" Version="9.0.0" />
+    <PackageVersion Include="Serilog.AspNetCore" Version="9.0.0" />
     <PackageVersion Include="Serilog.Sinks.Console" Version="6.0.0" />
     <PackageVersion Include="Serilog.Sinks.File" Version="7.0.0" />
-    <PackageVersion Include="coverlet.collector" Version="6.0.4" />
-    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
-    <PackageVersion Include="Moq" Version="4.20.72" />
     <PackageVersion Include="xunit" Version="2.9.3" />
-    <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.4">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageVersion>
+    <PackageVersion Include="xunit.runner.visualstudio" Version="3.1.5" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="18.0.0" />
   </ItemGroup>
 </Project>
