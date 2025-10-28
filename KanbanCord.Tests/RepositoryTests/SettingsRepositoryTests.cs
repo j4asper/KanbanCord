@@ -1,5 +1,5 @@
 using KanbanCord.Core.Models;
-using KanbanCord.Core.Repositories;
+using KanbanCord.DiscordApplication.Repositories;
 using Mongo2Go;
 using MongoDB.Driver;
 
@@ -22,77 +22,81 @@ public class SettingsRepositoryTests : IDisposable
     }
 
     [Fact]
-    public async Task AddAsync_ShouldAddSettings()
+    public async Task GetSettingsByIdOrDefaultAsync_ShouldReturnSettings_WhenSettingExists()
     {
         // Arrange
         var settings = new Settings { GuildId = 123456789, ArchiveAfter = TimeSpan.FromDays(7) };
+        await _repository.CreateOrUpdateSettingsAsync(settings);
 
         // Act
-        await _repository.AddAsync(settings);
-
-        // Assert
-        var result = await _repository.GetByIdOrDefaultAsync(123456789);
-        Assert.NotNull(result);
-        Assert.Equal(settings.GuildId, result.GuildId);
-        Assert.Equal(settings.ArchiveAfter, result.ArchiveAfter);
-    }
-
-    [Fact]
-    public async Task GetByIdOrDefaultAsync_ShouldReturnSettings_WhenExists()
-    {
-        // Arrange
-        var settings = new Settings { GuildId = 123456789, ArchiveAfter = TimeSpan.FromDays(7) };
-        await _repository.AddAsync(settings);
-
-        // Act
-        var result = await _repository.GetByIdOrDefaultAsync(123456789);
+        var result = await _repository.GetSettingsByIdOrDefaultAsync(123456789);
 
         // Assert
         Assert.NotNull(result);
         Assert.Equal(settings.GuildId, result.GuildId);
         Assert.Equal(settings.ArchiveAfter, result.ArchiveAfter);
     }
-
+    
     [Fact]
-    public async Task GetByIdOrDefaultAsync_ShouldReturnNull_WhenNotExists()
+    public async Task GetSettingsByIdOrDefaultAsync_ShouldReturnNull_WhenSettingDoesNotExist()
     {
         // Act
-        var result = await _repository.GetByIdOrDefaultAsync(987654321);
+        var result = await _repository.GetSettingsByIdOrDefaultAsync(987654321);
 
         // Assert
         Assert.Null(result);
     }
-
+    
     [Fact]
-    public async Task UpdateAsync_ShouldUpdateExistingSettings()
+    public async Task CreateOrUpdateSettingsAsync_ShouldCreateSettings_WhenNotAlreadyCreated()
     {
         // Arrange
         var settings = new Settings { GuildId = 123456789, ArchiveAfter = TimeSpan.FromDays(7) };
-        await _repository.AddAsync(settings);
-
-        settings.ArchiveAfter = TimeSpan.FromDays(14);
 
         // Act
-        await _repository.UpdateAsync(settings);
+        await _repository.CreateOrUpdateSettingsAsync(settings);
 
+        var result = await _repository.GetSettingsByIdOrDefaultAsync(123456789);
+        
         // Assert
-        var result = await _repository.GetByIdOrDefaultAsync(123456789);
         Assert.NotNull(result);
-        Assert.Equal(TimeSpan.FromDays(14), result.ArchiveAfter);
+        Assert.Equal(settings.GuildId, result.GuildId);
+        Assert.Equal(settings.ArchiveAfter, result.ArchiveAfter);
+    }
+    
+    [Fact]
+    public async Task CreateOrUpdateSettingsAsync_ShouldUpdateSettings_WhenAlreadyCreated()
+    {
+        // Arrange
+        var originalSettings = new Settings { GuildId = 123456789, ArchiveAfter = TimeSpan.FromDays(7) };
+        var updatedSettings = new Settings { GuildId = originalSettings.GuildId, ArchiveAfter = TimeSpan.FromDays(3) };
+
+        // Act
+        await _repository.CreateOrUpdateSettingsAsync(originalSettings);
+
+        await _repository.CreateOrUpdateSettingsAsync(updatedSettings);
+        
+        var result = await _repository.GetSettingsByIdOrDefaultAsync(123456789);
+        
+        // Assert
+        Assert.NotNull(result);
+        Assert.Equal(updatedSettings.GuildId, result.GuildId);
+        Assert.Equal(updatedSettings.ArchiveAfter, result.ArchiveAfter);
     }
 
     [Fact]
-    public async Task RemoveAsync_ShouldRemoveSettings()
+    public async Task RemoveSettingsAsync_ShouldRemoveSettings_WhenSettingExists()
     {
         // Arrange
         var settings = new Settings { GuildId = 123456789, ArchiveAfter = TimeSpan.FromDays(7) };
-        await _repository.AddAsync(settings);
+        await _repository.CreateOrUpdateSettingsAsync(settings);
 
         // Act
-        await _repository.RemoveAsync(123456789);
+        await _repository.RemoveSettingsAsync(123456789);
 
+        var result = await _repository.GetSettingsByIdOrDefaultAsync(123456789);
+        
         // Assert
-        var result = await _repository.GetByIdOrDefaultAsync(123456789);
         Assert.Null(result);
     }
 

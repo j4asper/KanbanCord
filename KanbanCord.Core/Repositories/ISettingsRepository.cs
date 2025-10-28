@@ -4,11 +4,9 @@ namespace KanbanCord.Core.Repositories;
 
 public interface ISettingsRepository
 {
-    Task<Settings?> GetByIdOrDefaultAsync(ulong guildId);
+    Task<Settings?> GetSettingsByIdOrDefaultAsync(ulong guildId);
     
-    Task AddAsync(Settings settings);
+    Task CreateOrUpdateSettingsAsync(Settings settings);
     
-    Task UpdateAsync(Settings settings);
-    
-    Task RemoveAsync(ulong guildId);
+    Task RemoveSettingsAsync(ulong guildId);
 }

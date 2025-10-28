@@ -1,8 +1,9 @@
 using KanbanCord.Core.Models;
+using KanbanCord.Core.Repositories;
 using MongoDB.Bson;
 using MongoDB.Driver;
 
-namespace KanbanCord.Core.Repositories;
+namespace KanbanCord.DiscordApplication.Repositories;
 
 public class TaskItemRepository : ITaskItemRepository
 {
@@ -27,14 +28,15 @@ public class TaskItemRepository : ITaskItemRepository
         return task;
     }
 
-    public async Task AddTaskItemAsync(TaskItem task)
+    public async Task CreateOrUpdateTaskItemAsync(TaskItem task)
     {
-        await _collection.InsertOneAsync(task);
-    }
+        var filter = Builders<TaskItem>.Filter.Eq(x => x.Id, task.Id);
 
-    public async Task UpdateTaskItemAsync(TaskItem task)
-    {
-        await _collection.ReplaceOneAsync(x => x.Id == task.Id, task);
+        await _collection.ReplaceOneAsync(
+            filter,
+            task,
+            new ReplaceOptions { IsUpsert = true }
+        );
     }
 
     public async Task RemoveTaskItemAsync(TaskItem task)
