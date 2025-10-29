@@ -18,6 +18,7 @@ public static class ServiceCollectionExtensions
             .AddServices()
             .AddOptions()
             .AddDiscordConfiguration()
+            .AddSingleton(_ => TimeProvider.System)
             ;
 
         services.AddScoped<IMongoDatabase>(sp =>
