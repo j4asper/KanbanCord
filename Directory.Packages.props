@@ -7,7 +7,8 @@
     <PackageVersion Include="MongoDB.Bson" Version="3.5.0" />
     <PackageVersion Include="MongoDB.Driver" Version="3.5.0" />
     <PackageVersion Include="Mongo2Go" Version="4.1.0" />
-    <PackageVersion Include="NetCord.Hosting.Services" Version="1.0.0-alpha.439" />
+    <PackageVersion Include="NetCord" Version="1.0.0-alpha.441" />
+    <PackageVersion Include="NetCord.Hosting.Services" Version="1.0.0-alpha.441" />
     <PackageVersion Include="Aspire.Hosting.AppHost" Version="9.5.2" />
     <PackageVersion Include="Serilog" Version="4.3.0" />
     <PackageVersion Include="Serilog.Exceptions" Version="8.4.0" />

@@ -7,6 +7,7 @@
     <ItemGroup>
         <PackageReference Include="MongoDB.Bson" />
         <PackageReference Include="MongoDB.Driver" />
+        <PackageReference Include="NetCord" />
     </ItemGroup>
 
 </Project>
