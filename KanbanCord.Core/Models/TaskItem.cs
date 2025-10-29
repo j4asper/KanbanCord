@@ -4,7 +4,7 @@ namespace KanbanCord.Core.Models;
 
 public class TaskItem
 {
-    public ObjectId Id { get; set; } = new();
+    public ObjectId Id { get; set; }
     
     public required ulong GuildId { get; set; }
     
@@ -24,5 +24,5 @@ public class TaskItem
     
     public BoardStatus Status { get; set; } = BoardStatus.Backlog;
     
-    public Priority? Priority { get; set; } = Models.Priority.Medium;
+    public Priority Priority { get; set; } = Models.Priority.Medium;
 }
