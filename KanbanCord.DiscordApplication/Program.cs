@@ -1,4 +1,5 @@
 using KanbanCord.DiscordApplication.Extensions;
+using NetCord.Hosting.Services;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +17,8 @@ builder.Services
     ;
 
 var app = builder.Build();
+
+app.AddModules(typeof(Program).Assembly);
 
 app.MapHealthChecks("/health");
 
