@@ -1,6 +1,8 @@
 using KanbanCord.Core.Options;
 using KanbanCord.Core.Repositories;
+using KanbanCord.Core.Services;
 using KanbanCord.DiscordApplication.Repositories;
+using KanbanCord.DiscordApplication.Services;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using NetCord;
@@ -16,6 +18,7 @@ public static class ServiceCollectionExtensions
     {
         services
             .AddServices()
+            .AddRepositories()
             .AddOptions()
             .AddDiscordConfiguration()
             .AddSingleton(_ => TimeProvider.System)
@@ -32,17 +35,20 @@ public static class ServiceCollectionExtensions
         return services;
     }
 
-    private static IServiceCollection AddServices(this IServiceCollection services)
+    private static IServiceCollection AddRepositories(this IServiceCollection services)
     {
-        // services
-        //     .AddHostedService<BotBackgroundService>()
-        //     .AddHostedService<DatabaseSetupBackgroundService>()
-        //     .AddHostedService<UptimeMonitorBackgroundService>()
-        //     ;
-        
         services
             .AddScoped<ITaskItemRepository, TaskItemRepository>()
-            // .AddScoped<ISettingsRepository, SettingsRepository>()
+            .AddScoped<ISettingsRepository, SettingsRepository>()
+            ;
+        
+        return services;
+    }
+    
+    private static IServiceCollection AddServices(this IServiceCollection services)
+    {
+        services
+            .AddScoped<ITaskItemService, TaskItemService>()
             ;
         
         return services;
