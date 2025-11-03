@@ -38,7 +38,7 @@ public class TaskItemRepository : ITaskItemRepository
             new ReplaceOptions { IsUpsert = true }
         );
 
-        return result.UpsertedId.AsObjectId;
+        return result.UpsertedId?.AsObjectId ?? task.Id;
     }
 
     public async Task RemoveTaskItemAsync(TaskItem task)

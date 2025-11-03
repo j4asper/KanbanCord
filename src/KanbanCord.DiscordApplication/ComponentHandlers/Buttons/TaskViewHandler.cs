@@ -19,7 +19,7 @@ public class TaskViewHandler : ComponentInteractionModule<ButtonInteractionConte
     }
 
     [ComponentInteraction(InteractionIdConstants.Task.ViewButtonId)]
-    public async Task<InteractionMessageProperties> TaskViewButtonHandler(ObjectId taskId)
+    public async Task<InteractionMessageProperties> InteractionHandler(ObjectId taskId)
     {
         var task = await _taskItemService.GetTaskItemByObjectIdOrDefaultAsync(taskId);
 
@@ -61,7 +61,15 @@ public class TaskViewHandler : ComponentInteractionModule<ButtonInteractionConte
                     new TextDisplayProperties("**Created At:**"),
                     new TextDisplayProperties(new Timestamp(task.CreatedAt, TimestampStyle.LongDateTime).ToString()),
                     new TextDisplayProperties("**Last Updated At:**"),
-                    new TextDisplayProperties(new Timestamp(task.LastUpdatedAt, TimestampStyle.LongDateTime).ToString())
+                    new TextDisplayProperties(new Timestamp(task.LastUpdatedAt, TimestampStyle.LongDateTime).ToString()),
+                    new ComponentSeparatorProperties(),
+                    new ActionRowProperties([
+                        new ButtonProperties(
+                            $"{InteractionIdConstants.TaskComment.AddCommentButtonId}:{task.Id}",
+                            "Add comment",
+                            EmojiProperties.Standard("💬"),
+                            ButtonStyle.Secondary)
+                    ])
                 ])
                 .WithDefaultColor()
             ]);

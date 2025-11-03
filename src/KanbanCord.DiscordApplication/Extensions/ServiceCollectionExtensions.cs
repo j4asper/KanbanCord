@@ -96,7 +96,12 @@ public static class ServiceCollectionExtensions
                     .Add(typeof(ObjectId), new ObjectIdTypeReader<ButtonInteractionContext>())
                     ;
             })
-            .AddComponentInteractions<ModalInteraction, ModalInteractionContext>()
+            .AddComponentInteractions<ModalInteraction, ModalInteractionContext>(x =>
+            {
+                x.TypeReaders
+                    .Add(typeof(ObjectId), new ObjectIdTypeReader<ModalInteractionContext>())
+                    ;
+            })
             ;
         
         return services;

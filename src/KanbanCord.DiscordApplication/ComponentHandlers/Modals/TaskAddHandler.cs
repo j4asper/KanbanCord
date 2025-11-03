@@ -8,17 +8,17 @@ using NetCord.Services.ComponentInteractions;
 
 namespace KanbanCord.DiscordApplication.ComponentHandlers.Modals;
 
-public class TaskAddSubmitHandler : ComponentInteractionModule<ModalInteractionContext>
+public class TaskAddHandler : ComponentInteractionModule<ModalInteractionContext>
 {
     private readonly ITaskItemService _taskItemService;
 
-    public TaskAddSubmitHandler(ITaskItemService taskItemService)
+    public TaskAddHandler(ITaskItemService taskItemService)
     {
         _taskItemService = taskItemService;
     }
     
     [ComponentInteraction(InteractionIdConstants.TaskAdd.ModalId)]
-    public async Task<InteractionMessageProperties> ModalSubmitHandler()
+    public async Task<InteractionMessageProperties> InteractionHandler()
     {
         var textInputs = Context.Components
             .OfType<Label>()
