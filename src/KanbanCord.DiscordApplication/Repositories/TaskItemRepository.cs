@@ -28,15 +28,17 @@ public class TaskItemRepository : ITaskItemRepository
         return task;
     }
 
-    public async Task CreateOrUpdateTaskItemAsync(TaskItem task)
+    public async Task<ObjectId> CreateOrUpdateTaskItemAsync(TaskItem task)
     {
         var filter = Builders<TaskItem>.Filter.Eq(x => x.Id, task.Id);
 
-        await _collection.ReplaceOneAsync(
+        var result = await _collection.ReplaceOneAsync(
             filter,
             task,
             new ReplaceOptions { IsUpsert = true }
         );
+
+        return result.UpsertedId.AsObjectId;
     }
 
     public async Task RemoveTaskItemAsync(TaskItem task)

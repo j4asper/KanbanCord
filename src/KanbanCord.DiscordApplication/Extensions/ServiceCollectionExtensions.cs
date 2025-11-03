@@ -3,12 +3,16 @@ using KanbanCord.Core.Repositories;
 using KanbanCord.Core.Services;
 using KanbanCord.DiscordApplication.Repositories;
 using KanbanCord.DiscordApplication.Services;
+using KanbanCord.DiscordApplication.TypeReaders;
 using Microsoft.Extensions.Options;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using NetCord;
 using NetCord.Gateway;
 using NetCord.Hosting.Gateway;
 using NetCord.Hosting.Services.ApplicationCommands;
+using NetCord.Hosting.Services.ComponentInteractions;
+using NetCord.Services.ComponentInteractions;
 
 namespace KanbanCord.DiscordApplication.Extensions;
 
@@ -83,7 +87,16 @@ public static class ServiceCollectionExtensions
             })
             .AddApplicationCommands()
             .AddShardedGatewayHandlers(typeof(Program).Assembly)
-            // .AddComponentInteractionHandlers()
+            ;
+
+        services
+            .AddComponentInteractions<ButtonInteraction, ButtonInteractionContext>(x =>
+            {
+                x.TypeReaders
+                    .Add(typeof(ObjectId), new ObjectIdTypeReader<ButtonInteractionContext>())
+                    ;
+            })
+            .AddComponentInteractions<ModalInteraction, ModalInteractionContext>()
             ;
         
         return services;

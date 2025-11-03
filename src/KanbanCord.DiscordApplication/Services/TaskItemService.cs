@@ -28,9 +28,11 @@ public class TaskItemService : ITaskItemService
         return task;
     }
 
-    public async Task CreateOrUpdateTaskItemAsync(TaskItem task)
+    public async Task<ObjectId> CreateOrUpdateTaskItemAsync(TaskItem task)
     {
-        await _taskItemRepository.CreateOrUpdateTaskItemAsync(task);
+        var result = await _taskItemRepository.CreateOrUpdateTaskItemAsync(task);
+
+        return result;
     }
 
     public async Task RemoveTaskItemAsync(TaskItem task)

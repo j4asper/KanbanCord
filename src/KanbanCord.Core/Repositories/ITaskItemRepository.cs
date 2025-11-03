@@ -9,7 +9,7 @@ public interface ITaskItemRepository
     
     Task<TaskItem?> GetTaskItemByObjectIdOrDefaultAsync(ObjectId objectId);
     
-    Task CreateOrUpdateTaskItemAsync(TaskItem task);
+    Task<ObjectId> CreateOrUpdateTaskItemAsync(TaskItem task);
     
     Task RemoveTaskItemAsync(TaskItem task);
     
