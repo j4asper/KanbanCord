@@ -111,6 +111,18 @@ public class TaskServiceTests
     }
 
     [Fact]
+    public async Task AddAsync_ShouldStampCreatedAtAndLastUpdatedAtFromTheTimeProvider()
+    {
+        // Act
+        await _service.AddAsync(GuildId, 1, "Fix bug", "Details");
+
+        // Assert
+        var stored = Assert.Single(_repository.Items);
+        Assert.Equal(_time.GetUtcNow().UtcDateTime, stored.CreatedAt);
+        Assert.Equal(_time.GetUtcNow().UtcDateTime, stored.LastUpdatedAt);
+    }
+
+    [Fact]
     public async Task AddAsync_ShouldDefaultToMediumPriority_WhenNoneIsGiven()
     {
         // Act

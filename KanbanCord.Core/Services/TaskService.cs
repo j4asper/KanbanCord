@@ -35,6 +35,8 @@ public class TaskService : ITaskService
 
     public async Task<TaskItem> AddAsync(ulong guildId, ulong authorId, string title, string description, Priority priority = Priority.Medium)
     {
+        var now = _timeProvider.GetUtcNow().UtcDateTime;
+
         var task = new TaskItem
         {
             GuildId = guildId,
@@ -42,6 +44,8 @@ public class TaskService : ITaskService
             Title = RequireText(title, Limits.TaskTitleMaxLength, "title"),
             Description = RequireText(description, Limits.TaskDescriptionMaxLength, "description"),
             Priority = priority,
+            CreatedAt = now,
+            LastUpdatedAt = now,
         };
 
         await _repository.AddTaskItemAsync(task);

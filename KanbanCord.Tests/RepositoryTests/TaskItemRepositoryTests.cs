@@ -32,7 +32,9 @@ namespace KanbanCord.Tests.RepositoryTests
                 GuildId = 123456789,
                 Title = "Test Task",
                 Description = "Test Task Description",
-                AuthorId = 987654321
+                AuthorId = 987654321,
+                CreatedAt = TestTimes.Default,
+                LastUpdatedAt = TestTimes.Default
             };
 
             // Act
@@ -56,14 +58,18 @@ namespace KanbanCord.Tests.RepositoryTests
                 GuildId = 123456789,
                 Title = "Test Task 1",
                 Description = "Description 1",
-                AuthorId = 987654321
+                AuthorId = 987654321,
+                CreatedAt = TestTimes.Default,
+                LastUpdatedAt = TestTimes.Default
             };
             var task2 = new TaskItem
             {
                 GuildId = 123456789,
                 Title = "Test Task 2",
                 Description = "Description 2",
-                AuthorId = 987654322
+                AuthorId = 987654322,
+                CreatedAt = TestTimes.Default,
+                LastUpdatedAt = TestTimes.Default
             };
 
             await _repository.AddTaskItemAsync(task1);
@@ -88,7 +94,9 @@ namespace KanbanCord.Tests.RepositoryTests
                 GuildId = 123456789,
                 Title = "Test Task",
                 Description = "Test Task Description",
-                AuthorId = 987654321
+                AuthorId = 987654321,
+                CreatedAt = TestTimes.Default,
+                LastUpdatedAt = TestTimes.Default
             };
             await _repository.AddTaskItemAsync(task);
 
@@ -120,7 +128,9 @@ namespace KanbanCord.Tests.RepositoryTests
                 GuildId = 123456789,
                 Title = "Test Task",
                 Description = "Test Task Description",
-                AuthorId = 987654321
+                AuthorId = 987654321,
+                CreatedAt = TestTimes.Default,
+                LastUpdatedAt = TestTimes.Default
             };
             await _repository.AddTaskItemAsync(task);
 
@@ -144,7 +154,9 @@ namespace KanbanCord.Tests.RepositoryTests
                 GuildId = 123456789,
                 Title = "Test Task",
                 Description = "Test Task Description",
-                AuthorId = 987654321
+                AuthorId = 987654321,
+                CreatedAt = TestTimes.Default,
+                LastUpdatedAt = TestTimes.Default
             };
             await _repository.AddTaskItemAsync(task);
 
@@ -165,14 +177,18 @@ namespace KanbanCord.Tests.RepositoryTests
                 GuildId = 123456789,
                 Title = "Test Task 1",
                 Description = "Description 1",
-                AuthorId = 987654321
+                AuthorId = 987654321,
+                CreatedAt = TestTimes.Default,
+                LastUpdatedAt = TestTimes.Default
             };
             var task2 = new TaskItem
             {
                 GuildId = 123456789,
                 Title = "Test Task 2",
                 Description = "Description 2",
-                AuthorId = 987654322
+                AuthorId = 987654322,
+                CreatedAt = TestTimes.Default,
+                LastUpdatedAt = TestTimes.Default
             };
 
             await _repository.AddTaskItemAsync(task1);

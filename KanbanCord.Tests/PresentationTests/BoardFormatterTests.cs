@@ -1,13 +1,14 @@
 using KanbanCord.Core.Models;
 using KanbanCord.Core.Services;
 using KanbanCord.DiscordApplication.Presentation;
+using KanbanCord.Tests.Factories;
 
 namespace KanbanCord.Tests.PresentationTests;
 
 public class BoardFormatterTests
 {
     private static BoardEntry Entry(int number, string title = "Task", ulong authorId = 1) =>
-        new(number, new TaskItem { GuildId = 1, Title = title, Description = "d", AuthorId = authorId });
+        new(number, new TaskItem { GuildId = 1, Title = title, Description = "d", AuthorId = authorId, CreatedAt = TestTimes.Default, LastUpdatedAt = TestTimes.Default });
 
     [Fact]
     public void FormatColumn_ShouldRenderPlaceholder_WhenColumnIsEmpty()

@@ -12,9 +12,9 @@ public class TaskItem
     
     public required string Description { get; set; }
     
-    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+    public required DateTime CreatedAt { get; set; }
     
-    public DateTime LastUpdatedAt { get; set; } = DateTime.UtcNow;
+    public required DateTime LastUpdatedAt { get; set; }
     
     public required ulong AuthorId { get; set; }
     

@@ -11,10 +11,12 @@ namespace KanbanCord.DiscordApplication.Commands;
 public class StatsCommand : ApplicationCommandModule<ApplicationCommandContext>
 {
     private readonly ShardedGatewayClient _gatewayClient;
+    private readonly TimeProvider _timeProvider;
 
-    public StatsCommand(ShardedGatewayClient gatewayClient)
+    public StatsCommand(ShardedGatewayClient gatewayClient, TimeProvider timeProvider)
     {
         _gatewayClient = gatewayClient;
+        _timeProvider = timeProvider;
     }
 
     [SlashCommand("stats", "Displays some stats of the bot.", Contexts = [InteractionContextType.Guild])]
@@ -27,7 +29,7 @@ public class StatsCommand : ApplicationCommandModule<ApplicationCommandContext>
         var heapMemory = $"{GC.GetTotalMemory(false) / 1024 / 1024:n0} MB";
 
         using var process = Process.GetCurrentProcess();
-        var uptime = DateTimeOffset.UtcNow - process.StartTime;
+        var uptime = _timeProvider.GetUtcNow() - process.StartTime;
 
         var latency = (int)Context.Client.Latency.TotalMilliseconds;
 

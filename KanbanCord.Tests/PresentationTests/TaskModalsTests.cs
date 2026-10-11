@@ -2,6 +2,7 @@ using KanbanCord.Core.Models;
 using KanbanCord.DiscordApplication.Components;
 using KanbanCord.DiscordApplication.Presentation;
 using NetCord.Rest;
+using KanbanCord.Tests.Factories;
 
 namespace KanbanCord.Tests.PresentationTests;
 
@@ -45,7 +46,7 @@ public class TaskModalsTests
     public void Edit_ShouldOfferPriority_WithTheTasksCurrentPriorityPreselected(Priority current)
     {
         // Arrange
-        var task = new TaskItem { GuildId = 1, Title = "t", Description = "d", AuthorId = 1, Priority = current };
+        var task = new TaskItem { GuildId = 1, Title = "t", Description = "d", AuthorId = 1, Priority = current, CreatedAt = TestTimes.Default, LastUpdatedAt = TestTimes.Default };
 
         // Act
         var menu = PriorityMenu(TaskModals.Edit(task));
@@ -60,7 +61,7 @@ public class TaskModalsTests
     public void Edit_ShouldPreselectMedium_WhenTheTaskHasNoPriority()
     {
         // Arrange
-        var task = new TaskItem { GuildId = 1, Title = "t", Description = "d", AuthorId = 1, Priority = null };
+        var task = new TaskItem { GuildId = 1, Title = "t", Description = "d", AuthorId = 1, Priority = null, CreatedAt = TestTimes.Default, LastUpdatedAt = TestTimes.Default };
 
         // Act
         var menu = PriorityMenu(TaskModals.Edit(task));

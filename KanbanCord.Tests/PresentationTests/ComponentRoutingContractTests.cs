@@ -29,7 +29,7 @@ public class ComponentRoutingContractTests
         // Arrange
         var task = TaskItemFactory.Create();
         for (var i = 1; i <= 3; i++)
-            task.Comments.Add(new Comment { AuthorId = 5, Text = $"Comment number {i}" });
+            task.Comments.Add(new Comment { AuthorId = 5, Text = $"Comment number {i}", CreatedAt = TestTimes.Default });
 
         var expected = HandlerParameterCount(typeof(TaskViewHandlers), InteractionIds.TaskViewPage);
 

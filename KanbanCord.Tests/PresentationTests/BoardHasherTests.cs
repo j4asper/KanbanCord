@@ -1,13 +1,14 @@
 using KanbanCord.Core.Models;
 using KanbanCord.Core.Services;
 using KanbanCord.DiscordApplication.Presentation;
+using KanbanCord.Tests.Factories;
 
 namespace KanbanCord.Tests.PresentationTests;
 
 public class BoardHasherTests
 {
     private static IReadOnlyList<BoardColumn> Board(string title, BoardStatus status = BoardStatus.Backlog, ulong? assignee = null) =>
-        [new BoardColumn(status, [new BoardEntry(1, new TaskItem { GuildId = 1, Title = title, Description = "d", AuthorId = 1, AssigneeId = assignee, LastUpdatedAt = new DateTime(2026, 1, 1, 12, 0, 0, DateTimeKind.Utc) })])];
+        [new BoardColumn(status, [new BoardEntry(1, new TaskItem { GuildId = 1, Title = title, Description = "d", AuthorId = 1, AssigneeId = assignee, LastUpdatedAt = new DateTime(2026, 1, 1, 12, 0, 0, DateTimeKind.Utc), CreatedAt = TestTimes.Default })])];
 
     [Fact]
     public void Hash_ShouldBeStable_ForIdenticalBoards()
