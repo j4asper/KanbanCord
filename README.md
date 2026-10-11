@@ -55,12 +55,14 @@ These variables are Environment variables
 | Variable                      | Description                                                                                  | Required | Default value |
 |-------------------------------|----------------------------------------------------------------------------------------------|----------|---------------|
 | `Discord__Token`              | Your discord application token (bot token).                                                  | Yes      | None          |
-| `KanbanCord__SupportInvite`   | Support discord server invite link. Not needed when self hosting. (Renamed from `Discord__SupportInvite`.) | No       | None          |
+| `KanbanCord__SupportInvite`   | Support discord server invite link. Not needed when self hosting.                            | No       | None          |
 | `Database__ConnectionString`  | MongoDB Connection String eg. `mongodb://localhost:27017`.                                   | Yes      | None          |
 | `Database__Name`              | MongoDB Database Name, if you want to change it from the default value.                      | No       | `KanbanCord`  |
 | `UptimeMonitor__Enabled`      | Whether to enable the uptime monitor, made for uptime kuma, but may work for other services. | No       | `false`       |
 | `UptimeMonitor__PushUrl`      | The Url to make a request to for the uptime monitor.                                         | No       | None          |
 | `UptimeMonitor__PushInterval` | A TimeSpan interval for making requests to the uptime monitor push url.                      | No       | 1 Minute      |
+
+> `KanbanCord__SupportInvite` was previously called `Discord__SupportInvite`. If you set the old name, rename it.
 
 #### Database
 
@@ -99,7 +101,7 @@ docker run -d -e Discord__Token=your-bot-token -e Database__ConnectionString=you
 
 ## Logs
 
-The bot uses **Serilog** for logging, with the default log file written to `/logs/kanbancord-log.txt`. You can customize the logging settings through the [appsettings.json](KanbanCord.DiscordApplication/appsettings.json) file or override them using environment variables that follow the configuration structure. If you're running the bot in a Docker container, you can bind the log file path to the container to easily access and review the logs. For more information on configuring environment variables, check the official [ASP.NET Core Configuration documentation](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/configuration/?view=aspnetcore-9.0#naming-of-environment-variables).
+The bot uses **Serilog** for logging, with the default log file written to `/logs/kanbancord-log.txt`. You can customize the logging settings through the [appsettings.json](KanbanCord.DiscordApplication/appsettings.json) file or override them using environment variables that follow the configuration structure. If you're running the bot in a Docker container, you can bind the log file path to the container to easily access and review the logs. For more information on configuring environment variables, check the official [ASP.NET Core Configuration documentation](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/configuration/?view=aspnetcore-10.0#naming-of-environment-variables).
 
 ## Commands
 
@@ -115,11 +117,14 @@ You can also customize the accessibility of the commands in your server settings
 - `/archive`  
   Displays all archived tasks.
 
+- `/help`  
+  Displays all the commands available.
+
 - `/repository`  
   Get the repository URL and additional information about the bot.
 
 - `/stats`  
-  Displays bot statistics (e.g., task count, active users, etc.).
+  Displays bot statistics: latency, server count, memory usage, uptime and bot version.
 
 ### Task Management
 
@@ -130,10 +135,10 @@ You can also customize the accessibility of the commands in your server settings
   Resets the Kanban board, deleting all current and archived tasks.
 
 - `/task add` *  
-  Add a new task to the backlog.
+  Add a new task to the backlog. A form asks for the title, description and priority (Low, Medium or High).
 
 - `/task edit` *  
-  Edit a task's title and/or description.
+  Edit a task's title, description and/or priority.
 
 - `/task delete` *  
   Completely deletes a task, bypassing the archive and making it unrecoverable.
@@ -156,7 +161,7 @@ You can also customize the accessibility of the commands in your server settings
 - `/task assign` *  
   Assign a task to a specific user.
 
-- `/task me` *  
+- `/task me`  
   View all tasks assigned to you.
 
 - `/task user`  
