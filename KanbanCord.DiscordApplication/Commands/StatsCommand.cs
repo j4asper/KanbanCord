@@ -34,11 +34,11 @@ public class StatsCommand : ApplicationCommandModule<ApplicationCommandContext>
         return MessageFactory.Container(
         [
             new TextDisplayProperties("### KanbanCord Stats"),
-            new TextDisplayProperties($"**Latency:** {(latency == 0 ? "waiting for heartbeat..." : $"{latency} ms")}"),
-            new TextDisplayProperties($"**Servers:** {guildCount}"),
-            new TextDisplayProperties($"**Memory Usage:** {heapMemory}"),
-            new TextDisplayProperties($"**Uptime:** {uptime.Days} days, {uptime.Hours} hours"),
-            new TextDisplayProperties($"**Bot Version:** v{version.Major}.{version.Minor}.{version.Build}"),
+            new TextDisplayProperties($"**Latency:**\n{(latency == 0 ? "waiting for heartbeat..." : $"{latency} ms")}"),
+            new TextDisplayProperties($"**Servers:**\n{guildCount}"),
+            new TextDisplayProperties($"**Memory Usage:**\n{heapMemory}"),
+            new TextDisplayProperties($"**Uptime:**\n{uptime.Days} days, {uptime.Hours} hours"),
+            new TextDisplayProperties($"**Bot Version:**\nv{version.Major}.{version.Minor}.{version.Build}"),
         ]);
     }
 }
