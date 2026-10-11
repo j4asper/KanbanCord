@@ -1,5 +1,6 @@
 using KanbanCord.Core.Models;
 using KanbanCord.Core.Repositories;
+using KanbanCord.Tests.Factories;
 using Mongo2Go;
 using MongoDB.Driver;
 using MongoDB.Bson;
@@ -186,6 +187,109 @@ namespace KanbanCord.Tests.RepositoryTests
 
             Assert.Null(result1);
             Assert.Null(result2);
+        }
+
+        [Fact]
+        public async Task AddTaskItemAsync_ShouldGenerateId_WhenIdIsEmpty()
+        {
+            // Arrange
+            var task = TaskItemFactory.Create();
+            Assert.Equal(ObjectId.Empty, task.Id);
+
+            // Act
+            await _repository.AddTaskItemAsync(task);
+
+            // Assert
+            Assert.NotEqual(ObjectId.Empty, task.Id);
+        }
+
+        [Fact]
+        public async Task AddTaskItemAsync_ShouldPersistEveryField()
+        {
+            // Arrange
+            var task = TaskItemFactory.Create(assigneeId: 555555555555555555);
+            task.Priority = Priority.High;
+            task.Comments.Add(new Comment
+            {
+                AuthorId = 444444444444444444,
+                Text = "A persisted comment",
+                CreatedAt = new DateTime(2026, 2, 1, 8, 30, 0, DateTimeKind.Utc),
+            });
+
+            // Act
+            await _repository.AddTaskItemAsync(task);
+            var result = await _repository.GetTaskItemByObjectIdOrDefaultAsync(task.Id);
+
+            // Assert
+            Assert.NotNull(result);
+            Assert.Equal(TaskItemFactory.DefaultGuildId, result.GuildId);
+            Assert.Equal(task.AuthorId, result.AuthorId);
+            Assert.Equal(555555555555555555UL, result.AssigneeId);
+            Assert.Equal(Priority.High, result.Priority);
+            Assert.Equal(BoardStatus.Backlog, result.Status);
+            Assert.Equal(task.CreatedAt, result.CreatedAt);
+            var comment = Assert.Single(result.Comments);
+            Assert.Equal(444444444444444444UL, comment.AuthorId);
+            Assert.Equal("A persisted comment", comment.Text);
+            Assert.Equal(new DateTime(2026, 2, 1, 8, 30, 0, DateTimeKind.Utc), comment.CreatedAt);
+        }
+
+        [Fact]
+        public async Task GetAllTaskItemsByGuildIdAsync_ShouldReturnEmptyList_WhenGuildHasNoTasks()
+        {
+            // Arrange
+            await _repository.AddTaskItemAsync(TaskItemFactory.Create(guildId: 1));
+
+            // Act
+            var result = await _repository.GetAllTaskItemsByGuildIdAsync(2);
+
+            // Assert
+            Assert.Empty(result);
+        }
+
+        [Fact]
+        public async Task GetAllTaskItemsByGuildIdAsync_ShouldReturnTasksInInsertionOrder()
+        {
+            // Arrange
+            var titles = Enumerable.Range(1, 25).Select(i => $"Task {i}").ToList();
+
+            foreach (var title in titles)
+                await _repository.AddTaskItemAsync(TaskItemFactory.Create(title: title));
+
+            // Act
+            var result = await _repository.GetAllTaskItemsByGuildIdAsync(TaskItemFactory.DefaultGuildId);
+
+            // Assert
+            Assert.Equal(titles, result.Select(x => x.Title));
+        }
+
+        [Fact]
+        public async Task UpdateTaskItemAsync_ShouldNotInsertTask_WhenTaskDoesNotExist()
+        {
+            // Arrange
+            var task = TaskItemFactory.Create();
+            task.Id = ObjectId.GenerateNewId();
+
+            // Act
+            await _repository.UpdateTaskItemAsync(task);
+
+            // Assert
+            Assert.Empty(await _repository.GetAllTaskItemsByGuildIdAsync(task.GuildId));
+        }
+
+        [Fact]
+        public async Task RemoveAllTaskItemsByIdAsync_ShouldNotRemoveTasksOfOtherGuilds()
+        {
+            // Arrange
+            foreach (var task in TaskItemFactory.CreateMany())
+                await _repository.AddTaskItemAsync(task);
+
+            // Act
+            await _repository.RemoveAllTaskItemsByIdAsync(TaskItemFactory.DefaultGuildId);
+
+            // Assert
+            Assert.Empty(await _repository.GetAllTaskItemsByGuildIdAsync(TaskItemFactory.DefaultGuildId));
+            Assert.Single(await _repository.GetAllTaskItemsByGuildIdAsync(1));
         }
 
         public void Dispose()

@@ -55,7 +55,7 @@ These variables are Environment variables
 | Variable                      | Description                                                                                  | Required | Default value |
 |-------------------------------|----------------------------------------------------------------------------------------------|----------|---------------|
 | `Discord__Token`              | Your discord application token (bot token).                                                  | Yes      | None          |
-| `Discord__SupportInvite`      | Support discord server invite link. Not needed when self hosting.                            | No       | None          |
+| `KanbanCord__SupportInvite`   | Support discord server invite link. Not needed when self hosting. (Renamed from `Discord__SupportInvite`.) | No       | None          |
 | `Database__ConnectionString`  | MongoDB Connection String eg. `mongodb://localhost:27017`.                                   | Yes      | None          |
 | `Database__Name`              | MongoDB Database Name, if you want to change it from the default value.                      | No       | `KanbanCord`  |
 | `UptimeMonitor__Enabled`      | Whether to enable the uptime monitor, made for uptime kuma, but may work for other services. | No       | `false`       |
@@ -99,7 +99,7 @@ docker run -d -e Discord__Token=your-bot-token -e Database__ConnectionString=you
 
 ## Logs
 
-The bot uses **Serilog** for logging, with the default log file written to `/logs/kanbancord-log.txt`. You can customize the logging settings through the [appsettings.json](KanbanCord.Bot/appsettings.json) file or override them using environment variables that follow the configuration structure. If you're running the bot in a Docker container, you can bind the log file path to the container to easily access and review the logs. For more information on configuring environment variables, check the official [ASP.NET Core Configuration documentation](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/configuration/?view=aspnetcore-9.0#naming-of-environment-variables).
+The bot uses **Serilog** for logging, with the default log file written to `/logs/kanbancord-log.txt`. You can customize the logging settings through the [appsettings.json](KanbanCord.DiscordApplication/appsettings.json) file or override them using environment variables that follow the configuration structure. If you're running the bot in a Docker container, you can bind the log file path to the container to easily access and review the logs. For more information on configuring environment variables, check the official [ASP.NET Core Configuration documentation](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/configuration/?view=aspnetcore-9.0#naming-of-environment-variables).
 
 ## Commands
 

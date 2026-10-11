@@ -13,7 +13,7 @@
         </PackageReference>
         <PackageReference Include="Microsoft.NET.Test.Sdk" />
         <PackageReference Include="Mongo2Go" />
-        <PackageReference Include="Moq" />
+        <PackageReference Include="NSubstitute" />
         <PackageReference Include="xunit" />
         <PackageReference Include="xunit.runner.visualstudio">
           <PrivateAssets>all</PrivateAssets>
@@ -27,6 +27,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\KanbanCord.Core\KanbanCord.Core.csproj" />
+      <ProjectReference Include="..\KanbanCord.DiscordApplication\KanbanCord.DiscordApplication.csproj" />
     </ItemGroup>
 
 </Project>

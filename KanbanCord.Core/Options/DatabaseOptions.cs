@@ -9,5 +9,6 @@ public class DatabaseOptions
     [Required(AllowEmptyStrings = false)]
     public required string ConnectionString { get; set; }
     
-    public string Name { get; set; } = "KanbanCord";
+    [Required(AllowEmptyStrings = false)]
+    public required string Name { get; set; }
 }

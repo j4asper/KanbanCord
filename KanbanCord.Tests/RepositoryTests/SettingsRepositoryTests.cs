@@ -1,5 +1,6 @@
 using KanbanCord.Core.Models;
 using KanbanCord.Core.Repositories;
+using KanbanCord.Tests.Factories;
 using Mongo2Go;
 using MongoDB.Driver;
 
@@ -94,6 +95,50 @@ public class SettingsRepositoryTests : IDisposable
         // Assert
         var result = await _repository.GetByIdOrDefaultAsync(123456789);
         Assert.Null(result);
+    }
+
+    [Fact]
+    public async Task AddAsync_ShouldPersistNullArchiveAfter()
+    {
+        // Arrange
+        var settings = SettingsFactory.Create();
+
+        // Act
+        await _repository.AddAsync(settings);
+        var result = await _repository.GetByIdOrDefaultAsync(settings.GuildId);
+
+        // Assert
+        Assert.NotNull(result);
+        Assert.Null(result.ArchiveAfter);
+    }
+
+    [Fact]
+    public async Task GetByIdOrDefaultAsync_ShouldReturnOnlyTheRequestedGuild()
+    {
+        // Arrange
+        foreach (var settings in SettingsFactory.CreateMany())
+            await _repository.AddAsync(settings);
+
+        // Act
+        var result = await _repository.GetByIdOrDefaultAsync(3);
+
+        // Assert
+        Assert.NotNull(result);
+        Assert.Equal(3UL, result.GuildId);
+        Assert.Equal(TimeSpan.FromDays(30), result.ArchiveAfter);
+    }
+
+    [Fact]
+    public async Task RemoveAsync_ShouldNotThrowOrAffectOthers_WhenSettingsDoNotExist()
+    {
+        // Arrange
+        await _repository.AddAsync(SettingsFactory.Create(guildId: 1));
+
+        // Act
+        await _repository.RemoveAsync(999);
+
+        // Assert
+        Assert.NotNull(await _repository.GetByIdOrDefaultAsync(1));
     }
 
     public void Dispose()
